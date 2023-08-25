@@ -8,6 +8,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        wiggle: {
+          '0%': { transform: 'translate(-80%) rotate(30deg)' },
+          '50%': { transform: 'translate(0%)' },
+        }
+      },
+      animation: {
+        wiggle: 'wiggle 1s',
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
