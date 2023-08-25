@@ -1,4 +1,4 @@
-export interface Todos {
+export interface Todo {
   title: string;
   description: string;
   isFinished: boolean;
