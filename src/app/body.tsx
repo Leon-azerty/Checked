@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import { Todo } from './todos.types';
 import Title from './title';
 import Card from '../components/card';
-import { todo } from 'node:test';
+import { BodyProps } from './body.props';
+import { useState, useEffect } from 'react';
+import { Todo } from './todos.types';
 
-export default function Body() {
+export default function Body(props: BodyProps) {
   const [todos, setTodos] = useState<Todo[]>([]);
 
   const fetchData = async () => {
@@ -24,6 +24,6 @@ export default function Body() {
   }, []);
   return <div className='flex-col bg-white w-full'>
     <Title />
-    {todos.length > 0 && todos.map((e, i) => <Card todo={e} id={i} key={i} />)}
+    {todos.length > 0 && todos.map((e, i) => <Card todo={e} id={i} key={i} isFavoriteTodosVisible={props.isFavoriteTodosVisible} />)}
   </div>
 }

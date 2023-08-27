@@ -20,12 +20,14 @@ export default function Create(props: CreateProps) {
         {
           "title": title,
           "description": description,
-          "isFinished": false
+          "isFinished": false,
+          "isFavorite": false,
         }
       ),
     });
     console.log(res);
   };
+
   return <div className="pt-4 animate-wiggle">
     <div className='flex justify-end pr-4' onClick={() => { props.setCreate(false) }}>
       <IconContext.Provider value={{ size: '32' }}>
