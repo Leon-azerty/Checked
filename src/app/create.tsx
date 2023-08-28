@@ -1,12 +1,17 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { IconContext } from "react-icons";
 import { CreateProps } from './create.props';
+import { TodosContext } from './todosContext';
 
 export default function Create(props: CreateProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
+  const context = useContext(TodosContext);
+  if (!context) {
+    throw new Error('useTodosContext must be used within a TodosProvider');
+  }
+  const [todos, setTodos] = context;
 
   const createTodo = async () => {
     console.log('click');
@@ -26,6 +31,11 @@ export default function Create(props: CreateProps) {
       ),
     });
     console.log(res);
+    if (!res) return console.log("error whit request")
+    setTodos([...todos, { title: title, description: description, isFinished: false, isFavorite: false }]);
+    setTitle("");
+    setDescription("");
+    props.setCreate(false);
   };
 
   return <div className="pt-4 animate-wiggle">

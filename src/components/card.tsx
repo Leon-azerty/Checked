@@ -5,11 +5,16 @@ import { AiFillCheckSquare, AiTwotoneCheckSquare } from "react-icons/ai";
 import { BsStarFill } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import { useContext, useState } from "react";
-import { TodosContext } from "@/app/TodosContext";
+import { TodosContext } from "@/app/todosContext";
 
 export default function Card(props: CardProps) {
   const [isFinished, setIsFinished] = useState(props.todo.isFinished);
   const [isFavorite, setIsFavorite] = useState(props.todo.isFavorite);
+  const context = useContext(TodosContext);
+  if (!context) {
+    throw new Error('useTodosContext must be used within a TodosProvider');
+  }
+  const [todos, setTodos] = context;
 
   const handleTodoState = async () => {
     const title = props.todo.title;
@@ -43,6 +48,10 @@ export default function Card(props: CardProps) {
     res.ok ? console.log("ok") : console.log("not ok");
     const data = await res.json();
     console.log(data);
+    // la ligne update quand on delete la todo
+    // il faudrait mettre d'abord une anim pour montrer qu'on delete
+    // puis seulement quand l'anim est finit on delete
+    // setTodos(todos.filter((e, i) => i != props.id));
   }
 
   const handleTodoFavorite = async () => {
