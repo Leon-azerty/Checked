@@ -6,10 +6,12 @@ import { BsStarFill } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import { useContext, useState } from "react";
 import { TodosContext } from "@/app/todosContext";
+import "./card.css"
 
 export default function Card(props: CardProps) {
   const [isFinished, setIsFinished] = useState(props.todo.isFinished);
   const [isFavorite, setIsFavorite] = useState(props.todo.isFavorite);
+  const [isUpdate, setIsUpdate] = useState(false);
   const context = useContext(TodosContext);
   if (!context) {
     throw new Error('useTodosContext must be used within a TodosProvider');
@@ -72,9 +74,21 @@ export default function Card(props: CardProps) {
     setIsFavorite(!isFavorite);
   }
 
+  const UpdateTodo = () => {
+    console.log("update")
+    setIsUpdate(true);
+  }
+
+  const LostFocus = () => {
+    // vérifier qu'il n'y pas de changement avec la version précédente
+    // (la version avant qu'on clique dessus)
+    setIsUpdate(false)
+  }
+
   if (props.isFavoriteTodosVisible && !isFavorite) return (<></>);
   return <div className="w-full" key={props.id}>
-    <div className="rounded-3xl p-6 m-6 border-[#D9D9D9] border-solid border-4 flex flex-col">
+    <div id={`card-${props.id}`} className={` ${isFinished ? "border-blue-500 transition-border-colors duration-500" : ""} rounded-3xl p-6 m-6 border-[#D9D9D9] border-solid border-4 flex flex-col hover:pl-4 transition-all ease-in duration-500 animate-wiggle border-gradient-left-to-right target:border-green-500`}>
+      {/*     */}
       <div className="flex flex-row-reverse">
         <div className="w-36 border-[#D9D9D9] border-solid border-l-2 flex flex-col justify-between items-center" >
           <IconContext.Provider value={{ size: '26', color: '#7E7E7E' }}>
@@ -86,17 +100,20 @@ export default function Card(props: CardProps) {
             </div>
           </IconContext.Provider>
         </div>
-        <div className="pr-4" onClick={() => { handleTodoFavorite() }}>
+        <a href={`#card-${props.id}`} className="pr-4" onClick={() => { handleTodoFavorite() }}>
           <IconContext.Provider value={{ size: '26', color: isFavorite ? '#FFC700' : "#7E7E7E" }}>
             <BsStarFill />
           </IconContext.Provider>
-        </div>
-        <div className="w-full">
+        </a>
+        <div className="w-full hover:pl-4 duration-300">
           <p className="text-3xl font-bold">♦ {props.todo.title}</p>
-          <p>{props.todo.description}</p>
+          {isUpdate ? <textarea className="w-full" onClick={UpdateTodo} onBlur={LostFocus} autoFocus defaultValue={props.todo.description}></textarea> : <p className="w-full" onClick={UpdateTodo}>{props.todo.description}</p>}
+          <div className="flex flex-row-reverse">
+            {isUpdate && <button className="text-white bg-gradient-to-r from-black to-gray-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">update</button>}
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </div >
 
 }

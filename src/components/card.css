@@ -1,0 +1,11 @@
+.border-gradient-left-to-right {
+    background-size: 200% 200%;
+    background-image: linear-gradient(to right, white 50%, rgb(34 197 94) 50%);
+    -webkit-transition: background-position 1s;
+    -moz-transition: background-position 1s;
+    transition: background-position 1s;
+}
+
+.border-gradient-left-to-right:target {
+    background-position: -100% 0%;
+}
