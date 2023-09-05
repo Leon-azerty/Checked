@@ -11,6 +11,7 @@ import "./card.css"
 export default function Card(props: CardProps) {
   const [isFinished, setIsFinished] = useState(props.todo.isFinished);
   const [isFavorite, setIsFavorite] = useState(props.todo.isFavorite);
+  const [isDeleted, setIsDeleted] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
   const context = useContext(TodosContext);
   if (!context) {
@@ -39,6 +40,7 @@ export default function Card(props: CardProps) {
   }
 
   const handleDeleteTodo = async () => {
+    setIsDeleted(true);
     console.log("delete todo");
     const res = await fetch(`http://localhost:8080/todo/${props.id}`, {
       method: "DELETE",
@@ -87,17 +89,19 @@ export default function Card(props: CardProps) {
 
   if (props.isFavoriteTodosVisible && !isFavorite) return (<></>);
   return <div className="w-full" key={props.id}>
-    <div id={`card-${props.id}`} className={` ${isFinished ? "border-blue-500 transition-border-colors duration-500" : ""} rounded-3xl p-6 m-6 border-[#D9D9D9] border-solid border-4 flex flex-col hover:pl-4 transition-all ease-in duration-500 animate-wiggle border-gradient-left-to-right target:border-green-500`}>
-      {/*     */}
+    {/* border-blue-500 transition-border-colors duration-500 */}
+    <div id={`card-${props.id}`} className={` ${isFinished ? "background-gradient-left-to-right border-[#22c55e]" : ""} ${isFavorite ? `border-[#FFC700]` : ``} ${isDeleted ? `background-gradient-left-to-right-deleted` : ``} rounded-3xl p-6 m-6 border-[#D9D9D9] border-solid border-4 flex flex-col hover:pl-4 transition-all ease-in duration-500 animate-wiggle`}>
       <div className="flex flex-row-reverse">
         <div className="w-36 border-[#D9D9D9] border-solid border-l-2 flex flex-col justify-between items-center" >
           <IconContext.Provider value={{ size: '26', color: '#7E7E7E' }}>
-            <div onClick={() => handleTodoState()}>
+            <a onClick={() => handleTodoState()} href={`#card-${props.id}`}>
               {isFinished ? <AiFillCheckSquare /> : <AiTwotoneCheckSquare />}
-            </div>
-            <div onClick={() => { handleDeleteTodo() }}>
+            </a>
+          </IconContext.Provider>
+          <IconContext.Provider value={{ size: '26', color: isDeleted ? 'black' : '#7E7E7E' }}>
+            <a onClick={() => { handleDeleteTodo() }} href={`#card-${props.id}`}>
               <RiDeleteBin6Line />
-            </div>
+            </a>
           </IconContext.Provider>
         </div>
         <a href={`#card-${props.id}`} className="pr-4" onClick={() => { handleTodoFavorite() }}>
