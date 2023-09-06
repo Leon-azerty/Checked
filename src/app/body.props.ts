@@ -1,3 +1,4 @@
 export interface BodyProps {
-  isFavoriteTodosVisible: boolean;
+  tab: string;
+  setTab: (tab: string) => void;
 }

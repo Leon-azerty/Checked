@@ -1,4 +1,4 @@
 export interface MenuProps {
-  isFavoriteTodosVisible: boolean;
-  setIsFavoriteTodosVisible: (create: boolean) => void;
+  tab: string;
+  setTab: (create: string) => void;
 }

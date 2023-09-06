@@ -7,8 +7,8 @@ import { TodosContext } from './todosContext';
 
 
 export default function Home() {
-  const [isFavoriteTodos, setIsFavoriteTodos] = useState<boolean>(false);
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [tab, setTab] = useState<string>('');
 
   const fetchData = async () => {
     console.log('fetch');
@@ -28,8 +28,8 @@ export default function Home() {
   return (
     <main className='w-screen h-screen flex'>
       <TodosContext.Provider value={[todos, setTodos]}>
-        <Menu isFavoriteTodosVisible={isFavoriteTodos} setIsFavoriteTodosVisible={setIsFavoriteTodos} />
-        <Body isFavoriteTodosVisible={isFavoriteTodos} />
+        <Menu tab={tab} setTab={setTab} />
+        <Body tab={tab} setTab={setTab} />
       </TodosContext.Provider>
     </main>
   )

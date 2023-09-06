@@ -3,4 +3,6 @@ export interface Todo {
   description: string;
   isFinished: boolean;
   isFavorite: boolean;
+  isDeleted: boolean;
+  tags: string[];
 }

@@ -11,7 +11,7 @@ import "./card.css"
 export default function Card(props: CardProps) {
   const [isFinished, setIsFinished] = useState(props.todo.isFinished);
   const [isFavorite, setIsFavorite] = useState(props.todo.isFavorite);
-  const [isDeleted, setIsDeleted] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(props.todo.isDeleted);
   const [isUpdate, setIsUpdate] = useState(false);
   const context = useContext(TodosContext);
   if (!context) {
@@ -87,7 +87,10 @@ export default function Card(props: CardProps) {
     setIsUpdate(false)
   }
 
-  if (props.isFavoriteTodosVisible && !isFavorite) return (<></>);
+  if (props.tab == "listFavorite" && !isFavorite) return (<></>);
+  if (props.tab == "listChecked" && !isFinished) return (<></>);
+  if (props.tab == "listUnchecked" && isFinished) return (<></>);
+  if (props.tab == "listDeleted" && !isDeleted) return (<></>);
   return <div className="w-full" key={props.id}>
     {/* border-blue-500 transition-border-colors duration-500 */}
     <div id={`card-${props.id}`} className={` ${isFinished ? "background-gradient-left-to-right border-[#22c55e]" : ""} ${isFavorite ? `border-[#FFC700]` : ``} ${isDeleted ? `background-gradient-left-to-right-deleted` : ``} rounded-3xl p-6 m-6 border-[#D9D9D9] border-solid border-4 flex flex-col hover:pl-4 transition-all ease-in duration-500 animate-wiggle`}>

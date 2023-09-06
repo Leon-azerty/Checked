@@ -5,4 +5,5 @@ export interface ButtonProps {
   onClick: MouseEventHandler<HTMLButtonElement>;
   icon: any;
   iconColor: string;
+  className?: string;
 }
