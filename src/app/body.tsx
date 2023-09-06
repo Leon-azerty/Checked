@@ -12,7 +12,7 @@ export default function Body(props: BodyProps) {
   }
   const [todos, setTodos] = context;
 
-  return <div className='flex-col bg-white w-full'>
+  return <div className='flex-col bg-white w-full h-full min-h-screen max-w-screen'>
     <Title />
     {props.tab == "create" && <Create setTab={props.setTab} />}
     {todos.length > 0 && todos.map((e, i) => <Card todo={e} id={i} key={i} tab={props.tab} />)}

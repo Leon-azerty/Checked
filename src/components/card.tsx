@@ -91,36 +91,43 @@ export default function Card(props: CardProps) {
   if (props.tab == "listChecked" && !isFinished) return (<></>);
   if (props.tab == "listUnchecked" && isFinished) return (<></>);
   if (props.tab == "listDeleted" && !isDeleted) return (<></>);
-  return <div className="w-full" key={props.id}>
-    {/* border-blue-500 transition-border-colors duration-500 */}
-    <div id={`card-${props.id}`} className={` ${isFinished ? "background-gradient-left-to-right border-[#22c55e]" : ""} ${isFavorite ? `border-[#FFC700]` : ``} ${isDeleted ? `background-gradient-left-to-right-deleted` : ``} rounded-3xl p-6 m-6 border-[#D9D9D9] border-solid border-4 flex flex-col hover:pl-4 transition-all ease-in duration-500 animate-wiggle`}>
-      <div className="flex flex-row-reverse">
-        <div className="w-36 border-[#D9D9D9] border-solid border-l-2 flex flex-col justify-between items-center" >
-          <IconContext.Provider value={{ size: '26', color: '#7E7E7E' }}>
-            <a onClick={() => handleTodoState()} href={`#card-${props.id}`}>
-              {isFinished ? <AiFillCheckSquare /> : <AiTwotoneCheckSquare />}
-            </a>
-          </IconContext.Provider>
-          <IconContext.Provider value={{ size: '26', color: isDeleted ? 'black' : '#7E7E7E' }}>
-            <a onClick={() => { handleDeleteTodo() }} href={`#card-${props.id}`}>
-              <RiDeleteBin6Line />
-            </a>
-          </IconContext.Provider>
-        </div>
-        <a href={`#card-${props.id}`} className="pr-4" onClick={() => { handleTodoFavorite() }}>
-          <IconContext.Provider value={{ size: '26', color: isFavorite ? '#FFC700' : "#7E7E7E" }}>
-            <BsStarFill />
-          </IconContext.Provider>
-        </a>
-        <div className="w-full hover:pl-4 duration-300">
-          <p className="text-3xl font-bold">♦ {props.todo.title}</p>
-          {isUpdate ? <textarea className="w-full" onClick={UpdateTodo} onBlur={LostFocus} autoFocus defaultValue={props.todo.description}></textarea> : <p className="w-full" onClick={UpdateTodo}>{props.todo.description}</p>}
-          <div className="flex flex-row-reverse">
-            {isUpdate && <button className="text-white bg-gradient-to-r from-black to-gray-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">update</button>}
-          </div>
+  return <div id={`card-${props.id}`} className={` 
+  rounded-3xl p-6 m-6 border-[#D9D9D9] border-solid border-4 flex flex-col hover:pl-4 
+  transition-all ease-in duration-500 animate-wiggle
+  ${isFinished ? "background-gradient-left-to-right border-[#22c55e]" : ""} 
+  ${isFavorite ? `border-[#FFC700]` : ``} 
+  ${isDeleted ? `background-gradient-left-to-right-deleted` : ``} 
+  `}>
+    <div className="flex flex-row-reverse">
+      <div className="w-36 border-[#D9D9D9] border-solid border-l-2 flex flex-col 
+      justify-between items-center" >
+        <IconContext.Provider value={{ size: '26', color: '#7E7E7E' }}>
+          <a onClick={() => handleTodoState()} href={`#card-${props.id}`}>
+            {isFinished ? <AiFillCheckSquare /> : <AiTwotoneCheckSquare />}
+          </a>
+        </IconContext.Provider>
+        <IconContext.Provider value={{ size: '26', color: isDeleted ? 'black' : '#7E7E7E' }}>
+          <a onClick={() => { handleDeleteTodo() }} href={`#card-${props.id}`}>
+            <RiDeleteBin6Line />
+          </a>
+        </IconContext.Provider>
+      </div>
+      <a href={`#card-${props.id}`} className="pr-4" onClick={() => { handleTodoFavorite() }}>
+        <IconContext.Provider value={{ size: '26', color: isFavorite ? '#FFC700' : "#7E7E7E" }}>
+          <BsStarFill />
+        </IconContext.Provider>
+      </a>
+      <div className="w-full hover:pl-4 duration-300">
+        <p className="text-3xl font-bold">♦ {props.todo.title}</p>
+        {isUpdate ? <textarea className="w-full" onClick={UpdateTodo} onBlur={LostFocus} autoFocus defaultValue={props.todo.description}></textarea> : <p className="w-full" onClick={UpdateTodo}>{props.todo.description}</p>}
+        <div className="flex flex-row-reverse">
+          {isUpdate && <button className="text-white bg-gradient-to-r from-black 
+          to-gray-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none 
+          focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 
+          py-2.5 text-center mr-2 mb-2">update</button>}
         </div>
       </div>
     </div>
-  </div >
+  </div>
 
 }

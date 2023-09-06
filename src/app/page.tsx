@@ -26,7 +26,7 @@ export default function Home() {
     fetchData();
   }, []);
   return (
-    <main className='w-screen h-screen flex'>
+    <main className='w-screen h-full min-h-screen flex'>
       <TodosContext.Provider value={[todos, setTodos]}>
         <Menu tab={tab} setTab={setTab} />
         <Body tab={tab} setTab={setTab} />
