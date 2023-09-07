@@ -102,7 +102,7 @@ export default function Card(props: CardProps) {
   if (props.tab == "listDeleted" && !isDeleted) return (<></>);
   return <div id={`card-${props.id}`} className={` 
   rounded-3xl p-6 m-6 border-[#D9D9D9] border-solid border-4 flex flex-col hover:pl-4 
-  transition-all ease-in duration-500 animate-wiggle
+  transition-all ease-in duration-500 animate-wiggle hover:scale-y-110
   ${isFinished ? "background-gradient-left-to-right border-[#22c55e]" : ""} 
   ${isFavorite ? `border-[#FFC700]` : ``} 
   ${isDeleted ? `background-gradient-left-to-right-deleted` : ``} 

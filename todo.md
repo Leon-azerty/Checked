@@ -5,7 +5,7 @@ Figma :
 https://www.figma.com/file/YgsyWGXx98cCWqy7wFNUWB/Untitled?type=design&node-id=0-1&mode=design&t=zEgidPlRBo9PkHxC-0
 
 Body :
-- [ ] loader tant qu'on a pas charger les todos
+- [x] loader tant qu'on a pas charger les todos
 
 Card:
 - [x] afficher l'état de la todo (finish/not finish) via l'icon
@@ -22,16 +22,14 @@ Card:
   - est ce que le markdown est pas déja pris en compte de base ? https://nextjs.org/blog/markdown
 - [ ] pouvoir ajouter une image de garde
 - [ ] pouvoir ajouter une image dans le texte
-- [ ] on:hover d'une card d'une todo la mettre en avant (zoom, changer border color ...)  
-  - Comment faire le zoom ?
-  - Border color + sombre/noir ?
+- [x] on:hover d'une card d'une todo la mettre en avant (zoom)
 - [ ] animation de l'étoile, la grossir, la faire tourner sur elle même comme les aiguilles d'une montre ou alors comme une pièce qu'on fait tourner sur une table.
 - [ ] quand on check ou delete une todo, la couleur verte/rouge slide sur la card.
 
 Menu :
 - [x] animation quand on clique sur create todo pour faire 
 apparaitre le formulaire 
-- [ ] filtrer par si c'est finit/non finit
+- [x] filtrer par si c'est finit/non finit
 
 Trash:
 - [ ] mettre les todos dans une corbeille lors de la supression d'une todo
