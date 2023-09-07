@@ -1,23 +1,28 @@
-import { CardProps } from "../app/card.props";
+import { CardProps } from "./card.props";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { AiFillCheckSquare, AiTwotoneCheckSquare } from "react-icons/ai";
-// import { AiTwotoneCheckSquare } from "react-icons/gr";
+import { AiFillCheckSquare, AiTwotoneCheckSquare, AiFillPlusCircle } from "react-icons/ai";
 import { BsStarFill } from "react-icons/bs";
 import { IconContext } from "react-icons";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { TodosContext } from "@/app/todosContext";
 import "./card.css"
+import Tag from "./tag";
+import { TagTypes } from "@/app/tag.types";
+import { useHover } from 'usehooks-ts';
 
 export default function Card(props: CardProps) {
   const [isFinished, setIsFinished] = useState(props.todo.isFinished);
   const [isFavorite, setIsFavorite] = useState(props.todo.isFavorite);
   const [isDeleted, setIsDeleted] = useState(props.todo.isDeleted);
   const [isUpdate, setIsUpdate] = useState(false);
+  const [tags, setTags] = useState<TagTypes[]>(props.todo.tags);
   const context = useContext(TodosContext);
   if (!context) {
     throw new Error('useTodosContext must be used within a TodosProvider');
   }
   const [todos, setTodos] = context;
+  const hoverRef = useRef(null)
+  const isHover = useHover(hoverRef)
 
   const handleTodoState = async () => {
     const title = props.todo.title;
@@ -87,6 +92,10 @@ export default function Card(props: CardProps) {
     setIsUpdate(false)
   }
 
+  const removeTag = (name: string) => {
+    setTags(tags.filter(elem => elem.name !== name))
+  }
+
   if (props.tab == "listFavorite" && !isFavorite) return (<></>);
   if (props.tab == "listChecked" && !isFinished) return (<></>);
   if (props.tab == "listUnchecked" && isFinished) return (<></>);
@@ -117,8 +126,17 @@ export default function Card(props: CardProps) {
           <BsStarFill />
         </IconContext.Provider>
       </a>
-      <div className="w-full hover:pl-4 duration-300">
-        <p className="text-3xl font-bold">♦ {props.todo.title}</p>
+      <div ref={hoverRef} className="w-full hover:pl-4 duration-300">
+        <div className="flex items-center">
+          <p className="text-3xl font-bold">♦ {props.todo.title}</p>
+          {tags.length > 0 && tags.map((e, i) => <Tag key={i} name={e.name} colorProps={e.color} removeTag={removeTag} />)}
+          <IconContext.Provider value={{ size: '26', color: "#7E7E7E" }}>
+            <div onClick={() => { console.log("ajout d'un tag WIP") }}>
+              {isHover && <AiFillPlusCircle />}
+            </div>
+          </IconContext.Provider>
+        </div>
+
         {isUpdate ? <textarea className="w-full" onClick={UpdateTodo} onBlur={LostFocus} autoFocus defaultValue={props.todo.description}></textarea> : <p className="w-full" onClick={UpdateTodo}>{props.todo.description}</p>}
         <div className="flex flex-row-reverse">
           {isUpdate && <button className="text-white bg-gradient-to-r from-black 

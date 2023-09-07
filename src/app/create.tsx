@@ -4,6 +4,7 @@ import { IconContext } from "react-icons";
 import { CreateProps } from './create.props';
 import { TodosContext } from './todosContext';
 import Tag from '@/components/tag';
+import { Wheel } from '@uiw/react-color';
 
 export default function Create(props: CreateProps) {
   const [title, setTitle] = useState("");
@@ -11,6 +12,8 @@ export default function Create(props: CreateProps) {
   const [tag, setTag] = useState<string>("");
   const [tags, setTags] = useState<string[]>([]);
   const context = useContext(TodosContext);
+  const [hex, setHex] = useState("#fff");
+  let hexa = hex;
 
   if (!context) {
     throw new Error('useTodosContext must be used within a TodosProvider');
@@ -78,7 +81,12 @@ export default function Create(props: CreateProps) {
       from-black to-gray-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none 
       focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 
       text-center  mr-4">Add Tags</button>
-      {tags.length > 0 && tags.map((e, i) => <Tag key={e} name={e} color="bg-[#D9D9]" removeTag={() => { removeTag(e) }} />)}
+      <Wheel color={hex}
+        onChange={(color) => {
+          setHex(color.hex);
+          hexa = color.hex;
+        }} />
+      {tags.length > 0 && tags.map((e, i) => <Tag key={e} name={e} colorProps={hexa} removeTag={() => { removeTag(e) }} />)}
     </div>
 
     <label htmlFor="description" className="pt-4 ml-4 block mb-2 text-sm font-medium 

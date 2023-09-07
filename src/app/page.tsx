@@ -17,14 +17,13 @@ export default function Home() {
       mode: "cors",
     });
     const data = await res.json();
-    console.log(data);
     setTodos(data);
-    todos.map((e, i) => console.log("var = " + i));
   }
 
   useEffect(() => {
     fetchData();
   }, []);
+
   return (
     <main className='w-screen h-full min-h-screen flex'>
       <TodosContext.Provider value={[todos, setTodos]}>
