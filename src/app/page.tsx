@@ -4,7 +4,7 @@ import Body from './body';
 import { useEffect, useState } from 'react';
 import { Todo } from './todos.types';
 import { TodosContext } from './todosContext';
-
+import { supabase } from '@/SupabaseClient';
 
 export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -13,12 +13,23 @@ export default function Home() {
 
   const fetchData = async () => {
     setIsLoading(true);
-    const res = await fetch('http://localhost:8080/todo', {
-      method: "GET",
-      mode: "cors",
-    });
-    const data = await res.json();
-    setTodos(data);
+    await supabase.auth.signInWithPassword({ email: 'monadresse@gmail.com', password: 'monpass' });
+    const { data, error } = await supabase.from('todo').select('*');
+    console.log(data);
+    if (error) console.log(error);
+    // const res = await fetch('http://localhost:8080/todo', {
+    //   method: "GET",
+    //   mode: "cors",
+    // });
+    // const tmp = await res.json();
+    // setTodos(tmp);
+    let tmp: Todo[] = [];
+    for (let i = 0; i < data!.length; i++) {
+      let todo: Todo = { title: data![i].name, description: data![i].description, isDeleted: data![i].isDeleted, isFinished: data![i].isFinished, isFavorite: data![i].isFavorite, tags: data![i].tags };
+      tmp.push(todo);
+      console.log(todo);
+    }
+    setTodos(tmp);
     setIsLoading(false);
   }
 
