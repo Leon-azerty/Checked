@@ -4,7 +4,7 @@ import { IconContext } from "react-icons";
 import { CreateProps } from './create.props';
 import { TodosContext } from './todosContext';
 import Tag from '@/components/tag';
-import { Wheel } from '@uiw/react-color';
+import { HexColorPicker } from "react-colorful";
 
 export default function Create(props: CreateProps) {
   const [title, setTitle] = useState("");
@@ -12,8 +12,8 @@ export default function Create(props: CreateProps) {
   const [tag, setTag] = useState<string>("");
   const [tags, setTags] = useState<string[]>([]);
   const context = useContext(TodosContext);
-  const [hex, setHex] = useState("#fff");
-  let hexa = hex;
+  const [color, setColor] = useState("#aabbcc");
+  let hexa = color;
 
   if (!context) {
     throw new Error('useTodosContext must be used within a TodosProvider');
@@ -81,11 +81,7 @@ export default function Create(props: CreateProps) {
       from-black to-gray-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none 
       focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 
       text-center  mr-4">Add Tags</button>
-      <Wheel color={hex}
-        onChange={(color) => {
-          setHex(color.hex);
-          hexa = color.hex;
-        }} />
+      <HexColorPicker color={color} onChange={setColor} />;
       {tags.length > 0 && tags.map((e, i) => <Tag key={e} name={e} colorProps={hexa} removeTag={() => { removeTag(e) }} />)}
     </div>
 

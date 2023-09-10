@@ -82,3 +82,8 @@ Avoir des todos partagés entre les comptes :
   - [ ] pouvoir mettre une date dans son calendrier 
   - [ ] pouvoir spécifier quel user à cette tâche dans le calendrier. 
   - [ ] pouvoir cocher une case "Apparaitre/Sync dans mon/mes calendrier(s)" ? (Google agenda, Apple Agenda)
+
+
+Nom:
+Checked, Organizer, Organized, Check it, Do it Check it, Remember, Remembered
+-> je suis parti sur Checked
