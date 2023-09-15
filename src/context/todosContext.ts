@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, ReactNode, Dispatch, SetStateAction } from 'react';
 
-import { Todo } from './todos.types';
+import { Todo } from '../app/todos.types';
 
 type TodosContextType = [Todo[], Dispatch<SetStateAction<Todo[]>>];
 

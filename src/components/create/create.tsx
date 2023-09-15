@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { IconContext } from "react-icons";
 import { CreateProps } from './create.props';
-import { TodosContext } from './todosContext';
+import { TodosContext } from '../../context/todosContext';
 import Tag from '@/components/tag/tag';
 import { HexColorPicker } from "react-colorful";
 import { supabase } from '@/SupabaseClient';

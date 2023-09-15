@@ -1,5 +1,5 @@
 import { supabase } from "@/SupabaseClient";
-import { Todo } from '../app/todos.types';
+import { Todo } from '../dto/todos.types';
 
 export const getAllTodos = async () => {
   const { data, error } = await supabase.from('todo').select(`*`);

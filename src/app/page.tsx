@@ -3,11 +3,11 @@ import Menu from '@/app/menu';
 import Body from './body';
 import { useEffect, useState } from 'react';
 import { Todo } from './todos.types';
-import { TodosContext } from './todosContext';
+import { TodosContext } from '../context/todosContext';
 import { supabase } from '@/SupabaseClient';
 import { getAllTodos } from '@/Supabase/todos';
-import { TagTypes } from './tag.types';
-import { TagsContext } from './tagsContext';
+import { TagTypes } from '../dto/tag.types';
+import { TagsContext } from '../context/tagsContext';
 
 export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([]);
