@@ -7,4 +7,5 @@ export interface Todo {
   isFinished: boolean;
   isFavorite: boolean;
   isDeleted: boolean;
+  tags: TagTypes[];
 }

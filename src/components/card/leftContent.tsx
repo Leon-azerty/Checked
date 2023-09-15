@@ -3,29 +3,29 @@ import { Spinner } from "../loader/spinner";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { IconContext } from "react-icons";
 import Tag from "../tag/tag";
-import { useEffect, useState, useRef, useContext } from "react";
-import { TagTypes } from "@/app/tag.types";
+import { useRef, useContext, useState } from "react";
 import { useHover } from 'usehooks-ts';
 import { TagsContext } from "@/app/tagsContext";
 
 export function LeftContent(props: LeftContentProps) {
   const hoverRef = useRef(null)
   const isHover = useHover(hoverRef)
-  const tagsContext = useContext(TagsContext);
-  console.log("tagsContext", tagsContext)
-  if (!tagsContext) {
-    throw new Error('useTodosContext must be used within a TagsProvider');
+  const [tags, setTags] = useState(props.todo.tags);
+
+  const removeTag = (name: string) => {
+    console.log("removeTag", name);
+    props.todo.tags = tags.filter(e => e.name !== name);
+    console.log("props.todo.tags", props.todo.tags);
+    setTags(props.todo.tags);
+    setTags(props.todo.tags);
   }
 
-
   return <div className="w-full hover:pl-4 duration-300">
-    <div className="flex items-center">
+    <div ref={hoverRef} className="flex items-center">
       <p className="text-3xl font-bold">♦ {props.todo.title}</p>
-      {tagsContext[0] == null && <Spinner />}
-      {tagsContext[0].map((e, i) => <Tag key={i} name={e.name} colorProps={e.color} />)}
-      {/* {tagsContext[0].map((e, i) => <p key={i}>{e.name}</p>)} */}
+      {tags.map((e, i) => <Tag key={i} name={e.name} color={e.color} removeTag={removeTag} />)}
       <IconContext.Provider value={{ size: '26', color: "#7E7E7E" }}>
-        <div ref={hoverRef} onClick={() => { console.log("ajout d'un tag WIP") }}>
+        <div onClick={() => { console.log("ajout d'un tag WIP") }}>
           {isHover && <AiFillPlusCircle />}
         </div>
       </IconContext.Provider>

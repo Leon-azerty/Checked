@@ -5,6 +5,5 @@ export interface LeftContentProps {
   todo: Todo;
   isUpdate: boolean;
   UpdateTodo: () => void;
-  // removeTag: (name: string) => void;
   LostFocus: () => void;
 }
