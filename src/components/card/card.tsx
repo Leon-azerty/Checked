@@ -20,40 +20,30 @@ export default function Card(props: CardProps) {
     setIsFinished(!isFinished);
   }
 
-  const handleDeleteTodo = async () => {
-    setIsDeleted(true);
-    console.log("delete todo");
-    const res = await fetch(`http://localhost:8080/todo/${props.id}`, {
-      method: "DELETE",
-      mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({}),
-    });
-    console.log(res);
-    res.ok ? console.log("ok") : console.log("not ok");
-    const data = await res.json();
+  const deleteTodoTag = async () => {
+    let { data, error } = await supabase.from('todo_tag')
+      .delete().eq('todoId', props.todo.id);
+    if (error) return console.log(error);
     console.log(data);
+  }
+
+  const addTodoInTrash = async () => {
+    setIsDeleted(true);
+    // await deleteTodoTag();
+    const { data, error } = await supabase.from('todo')
+      .update({ isDeleted: true }).eq('id', props.todo.id);
+    if (error) return console.log(error);
+
     // la ligne update quand on delete la todo
     // il faudrait mettre d'abord une anim pour montrer qu'on delete
     // puis seulement quand l'anim est finit on delete
     // setTodos(todos.filter((e, i) => i != props.id));
   }
 
-  const handleTodoFavorite = async () => {
-    const title = props.todo.title;
-    const description = props.todo.description;
-    const res = await fetch(`http://localhost:8080/todo/${props.id}`, {
-      method: "PATCH",
-      mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "title": title,
-        "description": description,
-        "isFinished": isFinished,
-        "isFavorite": !isFavorite,
-      }),
-
-    });
+  const addTodoInFavorite = async () => {
+    const { data, error } = await supabase.from('todo').update({
+      isFavorite: true
+    }).eq('id', props.todo.id);
     setIsFavorite(!isFavorite);
   }
 
@@ -85,10 +75,10 @@ export default function Card(props: CardProps) {
   ${isDeleted ? `background-gradient-left-to-right-deleted` : ``} 
   `}>
     <div className="flex flex-row-reverse">
-      <RightCard handleDeleteTodo={handleDeleteTodo}
+      <RightCard handleDeleteTodo={addTodoInTrash}
         handleTodoState={handleTodoState} id={props.id}
         isDeleted={isDeleted} isFinished={isFinished} />
-      <Star handleTodoFavorite={handleTodoFavorite} id={props.id} isFavorite={isFavorite} />
+      <Star handleTodoFavorite={addTodoInFavorite} id={props.id} isFavorite={isFavorite} />
       <LeftContent
         todo={props.todo}
         LostFocus={LostFocus}

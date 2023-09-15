@@ -5,6 +5,7 @@ import { CreateProps } from './create.props';
 import { TodosContext } from './todosContext';
 import Tag from '@/components/tag/tag';
 import { HexColorPicker } from "react-colorful";
+import { supabase } from '@/SupabaseClient';
 
 export default function Create(props: CreateProps) {
   const [title, setTitle] = useState("");
@@ -24,21 +25,16 @@ export default function Create(props: CreateProps) {
     console.log('click');
     if (title == "" || description == "") return console.log('empty');
     // mettre un message d'erreur
-    const res = await fetch('http://localhost:8080/todo', {
-      method: "POST",
-      mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(
-        {
-          "title": title,
-          "description": description,
-          "isFinished": false,
-          "isFavorite": false,
-        }
-      ),
-    });
-    console.log(res);
-    if (!res) return console.log("error whit request")
+    const id = (await supabase.auth.getUser()).data.user?.id;
+    const { data, error } = await supabase.from('todo').insert({
+      name: title,
+      description,
+      isFinished: false,
+      isFavorite: false,
+      isDeleted: false,
+      authorId: id,
+    })
+    if (error) return console.log(error);
     setTodos([...todos, {
       title: title, description: description, isFinished: false,
       isFavorite: false, isDeleted: false, id: todos.length + 1, tags: []
