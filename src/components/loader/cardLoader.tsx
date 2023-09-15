@@ -1,6 +1,6 @@
 
 export default function CardLoader({ }: {}) {
-  return <>
+  return <div className="flex justify-center items-center">
     <div role="status" className="space-y-8 animate-pulse md:space-y-0 md:space-x-8 md:flex md:items-center">
       <div className="flex items-center justify-center w-full h-48 bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
         <svg className="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
@@ -17,6 +17,6 @@ export default function CardLoader({ }: {}) {
       </div>
       <span className="sr-only">Loading...</span>
     </div>
-  </>
+  </div>
 
 }

@@ -87,3 +87,8 @@ Avoir des todos partagés entre les comptes :
 Nom:
 Checked, Organizer, Organized, Check it, Do it Check it, Remember, Remembered
 -> je suis parti sur Checked
+
+
+Pouvoir répeter une tâche tout les X temps
+
+pouvoir mettre les anniverssaires de sus proches et prévenir quand la date arrive

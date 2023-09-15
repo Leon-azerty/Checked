@@ -3,7 +3,7 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { IconContext } from "react-icons";
 import { CreateProps } from './create.props';
 import { TodosContext } from './todosContext';
-import Tag from '@/components/tag';
+import Tag from '@/components/tag/tag';
 import { HexColorPicker } from "react-colorful";
 
 export default function Create(props: CreateProps) {

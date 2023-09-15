@@ -1,7 +1,7 @@
 import { AiOutlinePlusCircle, AiFillStar, AiFillCheckSquare, AiTwotoneCheckSquare } from "react-icons/ai";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { BsListNested } from 'react-icons/bs';
-import IconButton from '../components/iconButton';
+import IconButton from '../components/iconButton/iconButton';
 import { MenuProps } from './menu.props';
 
 

@@ -1,10 +1,11 @@
 import Title from './title';
-import Card from '../components/card';
+import Card from '../components/card/card';
 import { BodyProps } from './body.props';
 import { useContext } from 'react';
 import { TodosContext } from './todosContext';
 import Create from './create';
-import CardLoader from '@/components/cardLoader';
+import CardLoader from '@/components/loader/cardLoader';
+import { TagsContext } from './tagsContext';
 
 export default function Body(props: BodyProps) {
   const context = useContext(TodosContext);
