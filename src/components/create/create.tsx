@@ -13,7 +13,7 @@ export default function Create(props: CreateProps) {
   const [tag, setTag] = useState<string>("");
   const [tags, setTags] = useState<string[]>([]);
   const context = useContext(TodosContext);
-  const [color, setColor] = useState("#aabbcc");
+  const [color, setColor] = useState("#D9D9D9");
   let hexa = color;
 
   if (!context) {
