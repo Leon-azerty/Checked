@@ -1,7 +1,6 @@
 import { CardProps } from "./card.props";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./card.css"
-import { TagTypes } from "@/app/tag.types";
 import { LeftContent } from "./leftContent";
 import { RightCard } from "./rightCard";
 import { Star } from "./star";
@@ -14,22 +13,10 @@ export default function Card(props: CardProps) {
   const [isUpdate, setIsUpdate] = useState(false);
 
   const handleTodoState = async () => {
-    const title = props.todo.title;
-    const description = props.todo.description;
-    const res = await fetch(`http://localhost:8080/todo/${props.id}`, {
-      method: "PATCH",
-      mode: "cors",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "title": title,
-        "description": description,
-        "isFinished": !isFinished,
-        "isFavorite": isFavorite,
-      }),
-    });
-    if (!res.ok) return console.log("not ok");
-    const data = await res.json();
-    console.log(data);
+    const { data, error } = await supabase.from('todo').update({
+      isFinished: !isFinished
+    }).eq('id', props.todo.id);
+    if (error) return console.log(error);
     setIsFinished(!isFinished);
   }
 
