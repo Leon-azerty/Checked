@@ -1,4 +1,4 @@
-import { Todo } from "@/app/todos.types";
+import { Todo } from "@/dto/todos.types";
 
 export interface LeftContentProps {
   todo: Todo;

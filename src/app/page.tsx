@@ -2,18 +2,20 @@
 import Menu from '@/app/menu';
 import Body from './body';
 import { useEffect, useState } from 'react';
-import { Todo } from './todos.types';
+import { Todo } from '../dto/todos.types';
 import { TodosContext } from '../context/todosContext';
 import { supabase } from '@/SupabaseClient';
 import { getAllTodos } from '@/Supabase/todos';
 import { TagTypes } from '../dto/tag.types';
 import { TagsContext } from '../context/tagsContext';
+import { TodosToDeleteContext } from '@/context/todoToDeleteContext';
 
 export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [tab, setTab] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [tags, setTags] = useState<TagTypes[]>([]);
+  const [todosToDelete, setTodosToDelete] = useState<Todo[]>([]);
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -66,8 +68,10 @@ export default function Home() {
     <main className='w-screen h-full min-h-screen flex'>
       <TodosContext.Provider value={[todos, setTodos]}>
         <TagsContext.Provider value={[tags, setTags]}>
-          <Menu tab={tab} setTab={setTab} />
-          <Body tab={tab} setTab={setTab} isLoading={isLoading} />
+          <TodosToDeleteContext.Provider value={[todosToDelete, setTodosToDelete]}>
+            <Menu tab={tab} setTab={setTab} />
+            <Body tab={tab} setTab={setTab} isLoading={isLoading} />
+          </TodosToDeleteContext.Provider>
         </TagsContext.Provider>
       </TodosContext.Provider>
     </main>

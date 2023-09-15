@@ -1,16 +1,24 @@
 import { CardProps } from "./card.props";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./card.css"
 import { LeftContent } from "./leftContent";
 import { RightCard } from "./rightCard";
 import { Star } from "./star";
 import { supabase } from "@/SupabaseClient";
+import { TodosToDeleteContext } from "@/context/todoToDeleteContext";
 
 export default function Card(props: CardProps) {
   const [isFinished, setIsFinished] = useState(props.todo.isFinished);
   const [isFavorite, setIsFavorite] = useState(props.todo.isFavorite);
   const [isDeleted, setIsDeleted] = useState(props.todo.isDeleted);
   const [isUpdate, setIsUpdate] = useState(false);
+
+  const context = useContext(TodosToDeleteContext);
+  if (!context) {
+    console.error("context is null");
+    return <></>
+  }
+  const [todosToDeleteContext, setTodosToDeleteContext] = context;
 
   const handleTodoState = async () => {
     const { data, error } = await supabase.from('todo').update({
@@ -20,16 +28,8 @@ export default function Card(props: CardProps) {
     setIsFinished(!isFinished);
   }
 
-  const deleteTodoTag = async () => {
-    let { data, error } = await supabase.from('todo_tag')
-      .delete().eq('todoId', props.todo.id);
-    if (error) return console.log(error);
-    console.log(data);
-  }
-
   const addTodoInTrash = async () => {
     setIsDeleted(true);
-    // await deleteTodoTag();
     const { data, error } = await supabase.from('todo')
       .update({ isDeleted: true }).eq('id', props.todo.id);
     if (error) return console.log(error);
@@ -58,11 +58,18 @@ export default function Card(props: CardProps) {
     setIsUpdate(false)
   }
 
+  const addTodoToDelete = () => {
+    console.log("props.id", props.todo)
+    todosToDeleteContext.includes(props.todo) ?
+      console.log("already in") :
+      setTodosToDeleteContext([...todosToDeleteContext, props.todo]);
+  }
+
   if (props.tab == "listFavorite" && !isFavorite) return (<></>);
   if (props.tab == "listChecked" && !isFinished) return (<></>);
   if (props.tab == "listUnchecked" && isFinished) return (<></>);
   if (props.tab == "listDeleted" && !isDeleted) return (<></>);
-  return <div id={`card-${props.id}`} className={` 
+  return <div id={`card-${props.id}`} onClick={addTodoToDelete} className={` 
   rounded-3xl p-6 m-6 border-[#D9D9D9] border-solid border-4 flex flex-col hover:pl-4 
   transition-all ease-in duration-500 animate-wiggle hover:scale-y-110
   ${isFinished ? "background-gradient-left-to-right border-[#22c55e]" : ""} 

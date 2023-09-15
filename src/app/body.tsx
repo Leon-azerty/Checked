@@ -1,10 +1,11 @@
 import Title from '../components/title/title';
 import Card from '../components/card/card';
 import { BodyProps } from './body.props';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { TodosContext } from '../context/todosContext';
 import Create from '../components/create/create';
 import CardLoader from '@/components/loader/cardLoader';
+import DeleteBar from '@/components/deleteBar/deleteBar';
 
 export default function Body(props: BodyProps) {
   const context = useContext(TodosContext);
@@ -17,6 +18,7 @@ export default function Body(props: BodyProps) {
     <Title />
     {props.tab == "create" && <Create setTab={props.setTab} />}
     {props.isLoading && <CardLoader />}
-    {todos.length > 0 && todos.map((e, i) => <Card todo={e} id={i} key={i} tab={props.tab} />)}
+    {props.tab == "listDeleted" && <DeleteBar />}
+    {todos.length > 0 && todos.map((e, i) => <Card todo={e} id={i} key={e.id} tab={props.tab} />)}
   </div>
 }

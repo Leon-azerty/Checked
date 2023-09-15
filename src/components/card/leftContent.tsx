@@ -5,7 +5,7 @@ import Tag from "../tag/tag";
 import { useRef, useState } from "react";
 import { useHover } from 'usehooks-ts';
 import { supabase } from "@/SupabaseClient";
-import { TagTypes } from "@/app/tag.types";
+import { TagTypes } from "@/dto/tag.types";
 
 export function LeftContent(props: LeftContentProps) {
   const hoverRef = useRef(null)
