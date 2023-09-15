@@ -6,24 +6,29 @@ import Tag from "../tag/tag";
 import { useRef, useContext, useState } from "react";
 import { useHover } from 'usehooks-ts';
 import { TagsContext } from "@/app/tagsContext";
+import { supabase } from "@/SupabaseClient";
+import { TagTypes } from "@/app/tag.types";
 
 export function LeftContent(props: LeftContentProps) {
   const hoverRef = useRef(null)
   const isHover = useHover(hoverRef)
   const [tags, setTags] = useState(props.todo.tags);
 
-  const removeTag = (name: string) => {
-    console.log("removeTag", name);
-    props.todo.tags = tags.filter(e => e.name !== name);
-    console.log("props.todo.tags", props.todo.tags);
+  const removeTag = async (tag: TagTypes) => {
+    props.todo.tags = tags.filter(e => e.name !== tag.name);
     setTags(props.todo.tags);
-    setTags(props.todo.tags);
+    const { data, error } = await supabase.from('todo_tag')
+      .delete()
+      .eq('tagId', tag.id)
+      .eq('todoId', props.todo.id);
+    if (error) return console.log(error);
+    console.log("data", data);
   }
 
   return <div className="w-full hover:pl-4 duration-300">
     <div ref={hoverRef} className="flex items-center">
       <p className="text-3xl font-bold">♦ {props.todo.title}</p>
-      {tags.map((e, i) => <Tag key={i} name={e.name} color={e.color} removeTag={removeTag} />)}
+      {tags.map((e, i) => <Tag key={i} tag={e} removeTag={removeTag} />)}
       <IconContext.Provider value={{ size: '26', color: "#7E7E7E" }}>
         <div onClick={() => { console.log("ajout d'un tag WIP") }}>
           {isHover && <AiFillPlusCircle />}

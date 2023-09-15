@@ -1,6 +1,6 @@
+import { TagTypes } from "@/app/tag.types";
 
 export interface TagProps {
-  name: string;
-  color: string;
-  removeTag: (name: string) => void;
+  tag: TagTypes;
+  removeTag: (tag: TagTypes) => void;
 }

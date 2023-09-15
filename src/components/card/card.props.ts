@@ -1,4 +1,4 @@
-import { Todo } from "../app/todos.types";
+import { Todo } from "../../app/todos.types";
 
 export interface CardProps {
   todo: Todo;
