@@ -78,7 +78,7 @@ export default function Create(props: CreateProps) {
       focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 
       text-center  mr-4">Add Tags</button>
       <HexColorPicker color={color} onChange={setColor} />;
-      {tags.length > 0 && tags.map((e, i) => <Tag key={e} name={e} color={hexa} removeTag={() => { removeTag(e) }} />)}
+      {tags.length > 0 && tags.map((e, i) => <Tag key={e} tag={{ name: e, color: color, id: -1 }} removeTag={() => { removeTag(e) }} />)}
     </div>
 
     <label htmlFor="description" className="pt-4 ml-4 block mb-2 text-sm font-medium 

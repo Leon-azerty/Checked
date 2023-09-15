@@ -1,4 +1,3 @@
-import { IconContext } from "react-icons";
 import { ButtonProps } from './button.props';
 
 export default function Button(props: ButtonProps) {

@@ -58,11 +58,6 @@ export default function Card(props: CardProps) {
     setIsUpdate(false)
   }
 
-  // const removeTag = (name: string) => {
-  //   setTags(tags.filter(elem => elem.name !== name))
-  // }
-
-
   if (props.tab == "listFavorite" && !isFavorite) return (<></>);
   if (props.tab == "listChecked" && !isFinished) return (<></>);
   if (props.tab == "listUnchecked" && isFinished) return (<></>);

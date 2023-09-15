@@ -1,11 +1,9 @@
 import { LeftContentProps } from "./leftContent.props"
-import { Spinner } from "../loader/spinner";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { IconContext } from "react-icons";
 import Tag from "../tag/tag";
-import { useRef, useContext, useState } from "react";
+import { useRef, useState } from "react";
 import { useHover } from 'usehooks-ts';
-import { TagsContext } from "@/app/tagsContext";
 import { supabase } from "@/SupabaseClient";
 import { TagTypes } from "@/app/tag.types";
 

@@ -21,26 +21,19 @@ export default function Home() {
     await supabase.auth.signInWithPassword({ email: 'monadresse@gmail.com', password: 'monpass' });
     //
     const allTodos: Todo[] = await getAllTodos();
-    console.log('fetchData', allTodos);
-
-
 
     for (let i = 0; i < allTodos.length; i++) {
       const tagIds = await getTagIds(allTodos[i].id);
-      console.log("tagIds", tagIds);
       let tmp: TagTypes[] = []
       for (const tagId of tagIds) {
         const tag: TagTypes[] = await getTag(tagId);
-        console.log("tagId :", tagId, " tag", tag);
         tmp.push(...tag)
       }
       allTodos[i].tags = tmp;
-      // console.log("todo", todo);
     }
     console.log("allTodos", allTodos);
     setTodos(allTodos);
     setIsLoading(false);
-    // setTags(tmp);
   }
 
   useEffect(() => {
@@ -57,7 +50,6 @@ export default function Home() {
     for (const tag of data) {
       tagsIds.push(tag.tagId);
     }
-    // console.log("todosId", todosId, "tagsIds", tagsIds);
     return tagsIds;
   }
 

@@ -1,33 +1,5 @@
 import { supabase } from "@/SupabaseClient";
 import { Todo } from '../app/todos.types';
-import { TagTypes } from "@/app/tag.types";
-
-async function selectTodos() {
-  const { data, error } = await supabase
-    .from('todo').select(`*`);
-  if (error) {
-    console.error(error);
-    return []
-  }
-  const todosId: String[] = [];
-  for (const todo of data) {
-    todosId.push(todo.id);
-  }
-  return todosId;
-}
-
-// const todosIds = await selectTodos();
-// for (const id of todosIds) {
-//   const tagIds = await getTagIds(id);
-//   const tags: TagTypes[] = [];
-//   for (const tagId of tagIds) {
-//     const tag = await getTag(tagId)
-//     tags.push(tag)
-//   }
-//   console.log("tags", tags);
-// }
-
-
 
 export const getAllTodos = async () => {
   const { data, error } = await supabase.from('todo').select(`*`);
@@ -43,7 +15,8 @@ export const getAllTodos = async () => {
       description: data![i].description,
       isDeleted: data![i].isDeleted,
       isFinished: data![i].isFinished,
-      isFavorite: data![i].isFavorite
+      isFavorite: data![i].isFavorite,
+      tags: []
     };
     tmp.push(todo);
   }

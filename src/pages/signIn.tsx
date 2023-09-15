@@ -1,6 +1,6 @@
 import { supabase } from '@/SupabaseClient'
 import '../app/globals.css'
-import Button from '@/components/button'
+import Button from '@/components/button/button'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
@@ -33,7 +33,6 @@ export default function SignIn() {
       console.log("error", error)
     }
   }
-
 
   return (
     <div className="flex flex-col h-screen w-screen">

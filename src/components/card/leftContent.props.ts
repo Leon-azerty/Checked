@@ -1,4 +1,3 @@
-import { TagTypes } from "@/app/tag.types";
 import { Todo } from "@/app/todos.types";
 
 export interface LeftContentProps {
