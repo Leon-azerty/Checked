@@ -1,7 +1,7 @@
 import Title from '../components/title/title';
 import Card from '../components/card/card';
 import { BodyProps } from './body.props';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { TodosContext } from '../context/todosContext';
 import Create from '../components/create/create';
 import CardLoader from '@/components/loader/cardLoader';

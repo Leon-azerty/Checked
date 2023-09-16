@@ -11,7 +11,6 @@ export default function Card(props: CardProps) {
   const [isFinished, setIsFinished] = useState(props.todo.isFinished);
   const [isFavorite, setIsFavorite] = useState(props.todo.isFavorite);
   const [isDeleted, setIsDeleted] = useState(props.todo.isDeleted);
-  const [isUpdate, setIsUpdate] = useState(false);
 
   const context = useContext(TodosToDeleteContext);
   if (!context) {
@@ -47,21 +46,8 @@ export default function Card(props: CardProps) {
     setIsFavorite(!isFavorite);
   }
 
-  const UpdateTodo = () => {
-    console.log("update")
-    setIsUpdate(true);
-  }
-
-  const LostFocus = () => {
-    // vérifier qu'il n'y pas de changement avec la version précédente
-    // (la version avant qu'on clique dessus)
-    setIsUpdate(false)
-  }
-
   const addTodoToDelete = () => {
-    console.log("props.id", props.todo)
-    todosToDeleteContext.includes(props.todo) ?
-      console.log("already in") :
+    if (todosToDeleteContext.includes(props.todo))
       setTodosToDeleteContext([...todosToDeleteContext, props.todo]);
   }
 
@@ -83,9 +69,6 @@ export default function Card(props: CardProps) {
       <Star handleTodoFavorite={addTodoInFavorite} id={props.id} isFavorite={isFavorite} />
       <LeftContent
         todo={props.todo}
-        LostFocus={LostFocus}
-        UpdateTodo={UpdateTodo}
-        isUpdate={isUpdate}
       />
     </div>
   </div>
