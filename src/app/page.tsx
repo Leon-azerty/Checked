@@ -9,6 +9,7 @@ import { getAllTodos } from '@/Supabase/todos';
 import { TagTypes } from '../dto/tag.types';
 import { TagsContext } from '../context/tagsContext';
 import { TodosToDeleteContext } from '@/context/todoToDeleteContext';
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -16,12 +17,17 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [tags, setTags] = useState<TagTypes[]>([]);
   const [todosToDelete, setTodosToDelete] = useState<Todo[]>([]);
+  const router = useRouter()
 
   const fetchData = async () => {
+    const { data, error } = await supabase.auth.getSession()
+    if (error) {
+      console.log("error", error)
+    }
+    console.log("data", data)
+    // router.push('/signIn');
+
     setIsLoading(true);
-    // A SUP 
-    await supabase.auth.signInWithPassword({ email: 'monadresse@gmail.com', password: 'monpass' });
-    //
     const allTodos: Todo[] = await getAllTodos();
 
     for (let i = 0; i < allTodos.length; i++) {

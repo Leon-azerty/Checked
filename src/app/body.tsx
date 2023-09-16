@@ -6,6 +6,9 @@ import { TodosContext } from '../context/todosContext';
 import Create from '../components/create/create';
 import CardLoader from '@/components/loader/cardLoader';
 import DeleteBar from '@/components/deleteBar/deleteBar';
+import { RiLogoutBoxRLine } from 'react-icons/ri';
+import IconButton from '@/components/iconButton/iconButton';
+import { supabase } from '@/SupabaseClient';
 
 export default function Body(props: BodyProps) {
   const context = useContext(TodosContext);
@@ -14,8 +17,26 @@ export default function Body(props: BodyProps) {
   }
   const [todos,] = context;
 
+  const logOut = async () => {
+    console.log("log out WIP")
+    // const { error } = await supabase.auth.signOut();
+    // if (error) {
+    //   console.log(error);
+    // }
+  }
+
   return <div className='flex-col bg-white w-full h-full min-h-screen max-w-screen'>
-    <Title />
+    <div className='flex'>
+      <div className='w-full'>
+        <Title />
+      </div>
+      <div className='w-20'>
+        <IconButton icon={<RiLogoutBoxRLine />} text=''
+          onClick={logOut} iconColor='black'
+        />
+      </div>
+    </div>
+
     {props.tab == "create" && <Create setTab={props.setTab} />}
     {props.isLoading && <CardLoader />}
     {props.tab == "listDeleted" && <DeleteBar />}
