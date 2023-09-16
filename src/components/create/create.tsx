@@ -6,25 +6,22 @@ import { TodosContext } from '../../context/todosContext';
 import Tag from '@/components/tag/tag';
 import { HexColorPicker } from "react-colorful";
 import { supabase } from '@/SupabaseClient';
+import { TagTypes } from '@/dto/tag.types';
 
 export default function Create(props: CreateProps) {
+  const context = useContext(TodosContext);
+  const [tags, setTags] = useState<TagTypes[]>([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [tag, setTag] = useState<string>("");
-  const [tags, setTags] = useState<string[]>([]);
-  const context = useContext(TodosContext);
-  const [color, setColor] = useState("#D9D9D9");
-  let hexa = color;
+  const [tagName, setTagName] = useState<string>("");
+  const [color, setColor] = useState<string>("#D9D9D9");
 
   if (!context) {
     throw new Error('useTodosContext must be used within a TodosProvider');
   }
   const [todos, setTodos] = context;
 
-  const createTodo = async () => {
-    console.log('click');
-    if (title == "" || description == "") return console.log('empty');
-    // mettre un message d'erreur
+  const insertTodo = async () => {
     const id = (await supabase.auth.getUser()).data.user?.id;
     const { data, error } = await supabase.from('todo').insert({
       name: title,
@@ -33,24 +30,51 @@ export default function Create(props: CreateProps) {
       isFavorite: false,
       isDeleted: false,
       authorId: id,
-    })
+    }).select('id');
     if (error) return console.log(error);
+    return data[0].id;
+  }
+
+  const insertTodoTag = async (todoId: number, tagId: number) => {
+    const { data, error } = await supabase.from('todo_tag').insert({
+      todoId: todoId,
+      tagId: tagId,
+    })
+    if (error) return console.log(error)
+    console.log(data);
+
+  }
+
+  const createTodo = async () => {
+    console.log('click');
+    if (title == "" || description == "") return console.log('empty');
+    // mettre un message d'erreur
+    const todoId = await insertTodo();
+    //ajouter dans la table todo_tag
+    for (const tag of tags) {
+      insertTodoTag(todoId, tag.id);
+    }
     setTodos([...todos, {
       title: title, description: description, isFinished: false,
-      isFavorite: false, isDeleted: false, id: todos.length + 1, tags: []
+      isFavorite: false, isDeleted: false, id: todoId, tags: tags
     }]);
     setTitle("");
     setDescription("");
     props.setTab("");
   };
 
-  const addTags = () => {
-    setTags([...tags, tag]);
-    setTag("");
+  const addTag = async () => {
+    const { data, error } = await supabase.from('tag').insert({
+      name: tagName,
+      color: color,
+    }).select('id');
+    if (error) return console.log(error);
+    setTags([...tags, { id: data[0].id, name: tagName, color: color }]);
+    setTagName("");
   }
 
-  const removeTag = (name: string) => {
-    setTags(tags.filter(e => e !== name));
+  const removeTag = (tag: TagTypes) => {
+    setTags(tags.filter(e => e !== tag));
   }
 
   return <div className="pt-4 animate-wiggle">
@@ -68,17 +92,17 @@ export default function Create(props: CreateProps) {
     <label htmlFor="tags" className="pt-4 ml-4 block mb-2 text-sm font-medium text-gray-900 
     dark:text-white">Tags</label>
     <div className='flex items-center'>
-      <textarea id="tags" rows={1} onChange={(e) => setTag(e.target.value)} className="resize-none
+      <textarea id="tags" rows={1} onChange={(e) => setTagName(e.target.value)} className="resize-none
       block p-2.5 mr-4 w-64 text-sm text-gray-900 bg-gray-50 description-lg focus:ring-blue-500 
       focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
       dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-md
-      " placeholder="Tags" value={tag}></textarea>
-      <button type="button" onClick={addTags} className="w-28 text-white bg-gradient-to-r 
+      " placeholder="Tags" value={tagName}></textarea>
+      <button type="button" onClick={addTag} className="w-28 text-white bg-gradient-to-r 
       from-black to-gray-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none 
       focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 
       text-center  mr-4">Add Tags</button>
-      <HexColorPicker color={color} onChange={setColor} />;
-      {tags.length > 0 && tags.map((e, i) => <Tag key={e} tag={{ name: e, color: hexa, id: -1 }} removeTag={() => { removeTag(e) }} />)}
+      <HexColorPicker color={color} onChange={setColor} />
+      {tags.length > 0 && tags.map((e, i) => <Tag key={e.name} tag={e} removeTag={() => { removeTag(e) }} />)}
     </div>
 
     <label htmlFor="description" className="pt-4 ml-4 block mb-2 text-sm font-medium 
