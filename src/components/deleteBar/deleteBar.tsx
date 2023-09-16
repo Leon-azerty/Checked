@@ -1,10 +1,10 @@
 import Button from "../button/button";
 import { supabase } from "@/SupabaseClient";
-import { DeleteBarProps } from "./deleteBar.props";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { TodosToDeleteContext } from "@/context/todoToDeleteContext";
 import TodosToDelete from "../todosToDelete/todosToDelete";
 import { TodosContext } from "@/context/todosContext";
+import { Todo } from "@/dto/todos.types";
 
 export default function DeleteBar() {
   const todosToDeleteContext = useContext(TodosToDeleteContext);
@@ -21,27 +21,26 @@ export default function DeleteBar() {
   }
   const [todos, setTodos] = todosContext;
 
-  const deleteTodoTag = async () => {
-    console.log("deleteTodoTag todos", todosToDelete);
-    for (const todo of todosToDelete) {
-      let { data, error } = await supabase.from('todo_tag')
-        .delete().eq('todoId', todo.id);
-      if (error) return console.log(error);
-      console.log(data);
-    }
+  const deleteTodoTags = async (todo: Todo) => {
+    let { data, error } = await supabase.from('todo_tag')
+      .delete().eq('todoId', todo.id);
+    if (error) return console.log(error);
   }
 
-  const deleteTodo = async () => {
-    await deleteTodoTag();
-    console.log("deleteTodo");
+  const deleteTodo = async (todoId: number) => {
+    const { data, error } = await supabase.from('todo').delete()
+      .eq('id', todoId);
+    if (error) return console.log(error);
+  }
+
+  const removeTodo = async () => {
+    let newTodos = todos;
     for (const todo of todosToDelete) {
-      console.log(todo.id);
-      const { data, error } = await supabase.from('todo').delete()
-        .eq('id', todo.id);
-      if (error) return console.log(error);
-      console.log(data);
-      const tmp = todos.filter(e => e.id !== todo.id);
-      setTodos(tmp);
+      await deleteTodoTags(todo);
+      await deleteTodo(todo.id).then(() => {
+        newTodos = newTodos.filter(e => e.id !== todo.id);
+        setTodos(newTodos);
+      })
     }
     setTodosToDelete([]);
   }
@@ -51,6 +50,6 @@ export default function DeleteBar() {
       {todosToDelete.map((e, i) => <TodosToDelete key={i} name={e.title} />)}
     </div>
     <div></div>
-    <Button text='Delete' onClick={deleteTodo} />
+    <Button text='Delete' onClick={removeTodo} />
   </div>
 }
