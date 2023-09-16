@@ -47,7 +47,7 @@ export default function Card(props: CardProps) {
   }
 
   const addTodoToDelete = () => {
-    if (todosToDeleteContext.includes(props.todo))
+    if (!todosToDeleteContext.includes(props.todo))
       setTodosToDeleteContext([...todosToDeleteContext, props.todo]);
   }
 

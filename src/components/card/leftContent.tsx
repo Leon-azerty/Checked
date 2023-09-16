@@ -13,6 +13,7 @@ export function LeftContent(props: LeftContentProps) {
   const isHover = useHover(hoverRef)
   const [tags, setTags] = useState(props.todo.tags);
   const [isUpdating, setIsUpdating] = useState(false);
+  const isDebug = true;
 
   const removeTag = async (tag: TagTypes) => {
     props.todo.tags = tags.filter(e => e.name !== tag.name);
@@ -40,11 +41,13 @@ export function LeftContent(props: LeftContentProps) {
     <div ref={hoverRef} className="flex items-center">
       <p className="text-3xl font-bold">♦ {props.todo.title}</p>
       {tags.map((e, i) => <Tag key={i} tag={e} removeTag={removeTag} />)}
-      <IconContext.Provider value={{ size: '26', color: "#7E7E7E" }}>
-        <div onClick={() => { console.log("ajout d'un tag WIP") }}>
-          {isHover && <AiFillPlusCircle />}
-        </div>
-      </IconContext.Provider>
+      {!isDebug &&
+        <IconContext.Provider value={{ size: '26', color: "#7E7E7E" }}>
+          <div onClick={() => { console.log("ajout d'un tag WIP") }}>
+            {isHover && <AiFillPlusCircle />}
+          </div>
+        </IconContext.Provider>
+      }
     </div>
 
     {isUpdating ?
