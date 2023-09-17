@@ -1,6 +1,6 @@
 'use client';
-import Menu from '@/app/menu';
-import Body from './body';
+import Menu from '@/components/menu/menu';
+import Body from '@/components/body/body';
 import { useEffect, useState } from 'react';
 import { Todo } from '../dto/todos.types';
 import { TodosContext } from '../context/todosContext';
