@@ -1,9 +1,9 @@
 import { AiOutlinePlusCircle, AiFillStar, AiFillCheckSquare, AiTwotoneCheckSquare } from "react-icons/ai";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { BsListNested } from 'react-icons/bs';
-import IconButton from '../components/iconButton/iconButton';
 import { MenuProps } from './menu.props';
-import { gray_700, starYellow } from "./colors";
+import { gray_700, starYellow } from "../../const/colors";
+import IconButton from "../iconButton/iconButton";
 
 
 export default function Menu(props: MenuProps) {
