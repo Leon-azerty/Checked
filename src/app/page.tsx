@@ -30,10 +30,10 @@ export default function Home() {
     const allTodos: Todo[] = await getAllTodos();
 
     for (let i = 0; i < allTodos.length; i++) {
-      const tagIds = await getTagIds(allTodos[i].id);
+      const tag_ids = await getTag_ids(allTodos[i].id);
       let tmp: TagTypes[] = []
-      for (const tagId of tagIds) {
-        const tag: TagTypes[] = await getTag(tagId);
+      for (const tag_id of tag_ids) {
+        const tag: TagTypes[] = await getTag(tag_id);
         tmp.push(...tag)
       }
       allTodos[i].tags = tmp;
@@ -47,7 +47,7 @@ export default function Home() {
     fetchData();
   }, []);
 
-  async function getTagIds(todosId: number) {
+  async function getTag_ids(todosId: number) {
     const tagsIds: String[] = [];
     const { data, error } = await supabase.from('todo_tag').select(`tag_id`).eq('todo_id', todosId)
     if (error) {
@@ -60,8 +60,8 @@ export default function Home() {
     return tagsIds;
   }
 
-  async function getTag(tagId: String) {
-    const { data, error } = await supabase.from('tag').select(`*`).eq('id', tagId)
+  async function getTag(tag_id: String) {
+    const { data, error } = await supabase.from('tag').select(`*`).eq('id', tag_id)
     if (error) {
       console.error("error", error);
       return []

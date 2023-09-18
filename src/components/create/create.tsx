@@ -35,10 +35,10 @@ export default function Create(props: CreateProps) {
     return data[0].id;
   }
 
-  const insertTodoTag = async (todoId: number, tagId: number) => {
+  const insertTodoTag = async (todo_id: number, tag_id: number) => {
     const { data, error } = await supabase.from('todo_tag').insert({
-      todoId: todoId,
-      tagId: tagId,
+      todo_id: todo_id,
+      tag_id: tag_id,
     })
     if (error) return console.log(error)
     console.log(data);
@@ -49,14 +49,14 @@ export default function Create(props: CreateProps) {
     console.log('click');
     if (title == "" || description == "") return console.log('empty');
     // mettre un message d'erreur
-    const todoId = await insertTodo();
+    const todo_id = await insertTodo();
     //ajouter dans la table todo_tag
     for (const tag of tags) {
-      insertTodoTag(todoId, tag.id);
+      insertTodoTag(todo_id, tag.id);
     }
     setTodos([...todos, {
       title: title, description: description, is_finished: false,
-      is_favorite: false, is_deleted: false, id: todoId, tags: tags
+      is_favorite: false, is_deleted: false, id: todo_id, tags: tags
     }]);
     setTitle("");
     setDescription("");

@@ -23,13 +23,13 @@ export default function DeleteBar() {
 
   const deleteTodoTags = async (todo: Todo) => {
     let { data, error } = await supabase.from('todo_tag')
-      .delete().eq('todoId', todo.id);
+      .delete().eq('todo_id', todo.id);
     if (error) return console.log(error);
   }
 
-  const deleteTodo = async (todoId: number) => {
+  const deleteTodo = async (todo_id: number) => {
     const { data, error } = await supabase.from('todo').delete()
-      .eq('id', todoId);
+      .eq('id', todo_id);
     if (error) return console.log(error);
   }
 

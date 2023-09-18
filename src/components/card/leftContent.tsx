@@ -20,8 +20,8 @@ export function LeftContent(props: LeftContentProps) {
     setTags(props.todo.tags);
     const { data, error } = await supabase.from('todo_tag')
       .delete()
-      .eq('tagId', tag.id)
-      .eq('todoId', props.todo.id);
+      .eq('tag_id', tag.id)
+      .eq('todo_id', props.todo.id);
     if (error) return console.log(error);
     console.log("data", data);
   }
