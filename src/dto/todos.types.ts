@@ -4,8 +4,8 @@ export interface Todo {
   id: number;
   title: string;
   description: string;
-  isFinished: boolean;
-  isFavorite: boolean;
-  isDeleted: boolean;
+  is_finished: boolean;
+  is_favorite: boolean;
+  is_deleted: boolean;
   tags: TagTypes[];
 }

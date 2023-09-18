@@ -1,5 +1,5 @@
 export interface StarProps {
   id: number
   handleTodoFavorite: () => void
-  isFavorite: boolean
+  is_favorite: boolean
 }

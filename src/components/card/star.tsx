@@ -7,7 +7,7 @@ export function Star(props: StarProps) {
     onClick={() => { props.handleTodoFavorite() }}>
     <IconContext.Provider value={{
       size: '26',
-      color: props.isFavorite ? '#FFC700' : "#7E7E7E"
+      color: props.is_favorite ? '#FFC700' : "#7E7E7E"
     }}>
       <BsStarFill />
     </IconContext.Provider>

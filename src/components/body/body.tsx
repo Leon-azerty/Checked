@@ -9,8 +9,10 @@ import DeleteBar from '@/components/deleteBar/deleteBar';
 import { RiLogoutBoxRLine } from 'react-icons/ri';
 import IconButton from '@/components/iconButton/iconButton';
 import { supabase } from '@/SupabaseClient';
+import { useRouter } from 'next/navigation'
 
 export default function Body(props: BodyProps) {
+  const router = useRouter()
   const context = useContext(TodosContext);
   if (!context) {
     throw new Error('useTodosContext must be used within a TodosProvider');
@@ -19,10 +21,12 @@ export default function Body(props: BodyProps) {
 
   const logOut = async () => {
     console.log("log out WIP")
-    // const { error } = await supabase.auth.signOut();
-    // if (error) {
-    //   console.log(error);
-    // }
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.log(error);
+    } else {
+      router.refresh();
+    }
   }
 
   return <div className='flex-col bg-white w-full h-full min-h-screen max-w-screen'>

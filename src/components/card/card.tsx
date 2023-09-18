@@ -8,9 +8,9 @@ import { supabase } from "@/SupabaseClient";
 import { TodosToDeleteContext } from "@/context/todoToDeleteContext";
 
 export default function Card(props: CardProps) {
-  const [isFinished, setIsFinished] = useState(props.todo.isFinished);
-  const [isFavorite, setIsFavorite] = useState(props.todo.isFavorite);
-  const [isDeleted, setIsDeleted] = useState(props.todo.isDeleted);
+  const [is_finished, setIs_finished] = useState(props.todo.is_finished);
+  const [is_favorite, setIs_favorite] = useState(props.todo.is_favorite);
+  const [is_deleted, setIs_deleted] = useState(props.todo.is_deleted);
 
   const context = useContext(TodosToDeleteContext);
   if (!context) {
@@ -21,16 +21,16 @@ export default function Card(props: CardProps) {
 
   const handleTodoState = async () => {
     const { data, error } = await supabase.from('todo').update({
-      isFinished: !isFinished
+      is_finished: !is_finished
     }).eq('id', props.todo.id);
     if (error) return console.log(error);
-    setIsFinished(!isFinished);
+    setIs_finished(!is_finished);
   }
 
   const addTodoInTrash = async () => {
-    setIsDeleted(true);
+    setIs_deleted(true);
     const { data, error } = await supabase.from('todo')
-      .update({ isDeleted: true }).eq('id', props.todo.id);
+      .update({ is_deleted: true }).eq('id', props.todo.id);
     if (error) return console.log(error);
 
     // la ligne update quand on delete la todo
@@ -41,9 +41,9 @@ export default function Card(props: CardProps) {
 
   const addTodoInFavorite = async () => {
     const { data, error } = await supabase.from('todo').update({
-      isFavorite: true
+      is_favorite: true
     }).eq('id', props.todo.id);
-    setIsFavorite(!isFavorite);
+    setIs_favorite(!is_favorite);
   }
 
   const addTodoToDelete = () => {
@@ -51,22 +51,22 @@ export default function Card(props: CardProps) {
       setTodosToDeleteContext([...todosToDeleteContext, props.todo]);
   }
 
-  if (props.tab == "listFavorite" && !isFavorite) return (<></>);
-  if (props.tab == "listChecked" && !isFinished) return (<></>);
-  if (props.tab == "listUnchecked" && isFinished) return (<></>);
-  if (props.tab == "listDeleted" && !isDeleted) return (<></>);
+  if (props.tab == "listFavorite" && !is_favorite) return (<></>);
+  if (props.tab == "listChecked" && !is_finished) return (<></>);
+  if (props.tab == "listUnchecked" && is_finished) return (<></>);
+  if (props.tab == "listDeleted" && !is_deleted) return (<></>);
   return <div id={`card-${props.id}`} onClick={addTodoToDelete} className={` 
   rounded-3xl p-6 m-6 border-[#D9D9D9] border-solid border-4 flex flex-col hover:pl-4 
   transition-all ease-in duration-500 animate-wiggle hover:scale-y-110
-  ${isFinished ? "background-gradient-left-to-right border-[#22c55e]" : ""} 
-  ${isFavorite ? `border-[#FFC700]` : ``} 
-  ${isDeleted ? `background-gradient-left-to-right-deleted` : ``} 
+  ${is_finished ? "background-gradient-left-to-right border-[#22c55e]" : ""} 
+  ${is_favorite ? `border-[#FFC700]` : ``} 
+  ${is_deleted ? `background-gradient-left-to-right-deleted` : ``} 
   `}>
     <div className="flex flex-row-reverse">
       <RightCard handleDeleteTodo={addTodoInTrash}
         handleTodoState={handleTodoState} id={props.id}
-        isDeleted={isDeleted} isFinished={isFinished} />
-      <Star handleTodoFavorite={addTodoInFavorite} id={props.id} isFavorite={isFavorite} />
+        is_deleted={is_deleted} is_finished={is_finished} />
+      <Star handleTodoFavorite={addTodoInFavorite} id={props.id} is_favorite={is_favorite} />
       <LeftContent
         todo={props.todo}
       />

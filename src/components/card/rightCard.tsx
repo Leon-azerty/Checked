@@ -8,10 +8,10 @@ export function RightCard(props: RightContentProps) {
   justify-between items-center" >
     <IconContext.Provider value={{ size: '26', color: '#7E7E7E' }}>
       <a onClick={() => props.handleTodoState()} href={`#card-${props.id}`}>
-        {props.isFinished ? <AiFillCheckSquare /> : <AiTwotoneCheckSquare />}
+        {props.is_finished ? <AiFillCheckSquare /> : <AiTwotoneCheckSquare />}
       </a>
     </IconContext.Provider>
-    <IconContext.Provider value={{ size: '26', color: props.isDeleted ? 'black' : '#7E7E7E' }}>
+    <IconContext.Provider value={{ size: '26', color: props.is_deleted ? 'black' : '#7E7E7E' }}>
       <a onClick={() => { props.handleDeleteTodo() }} href={`#card-${props.id}`}>
         <RiDeleteBin6Line />
       </a>

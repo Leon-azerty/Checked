@@ -13,9 +13,9 @@ export const getAllTodos = async () => {
       id: data[i].id,
       title: data![i].name,
       description: data![i].description,
-      isDeleted: data![i].isDeleted,
-      isFinished: data![i].isFinished,
-      isFavorite: data![i].isFavorite,
+      is_deleted: data![i].is_deleted,
+      is_finished: data![i].is_finished,
+      is_favorite: data![i].is_favorite,
       tags: []
     };
     tmp.push(todo);

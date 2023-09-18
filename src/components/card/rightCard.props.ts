@@ -1,7 +1,7 @@
 export interface RightContentProps {
-  isFinished: boolean
+  is_finished: boolean
   handleTodoState: () => void
-  isDeleted: boolean
+  is_deleted: boolean
   id: number
   handleDeleteTodo: () => void
 }

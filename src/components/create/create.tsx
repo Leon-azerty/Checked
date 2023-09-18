@@ -26,9 +26,9 @@ export default function Create(props: CreateProps) {
     const { data, error } = await supabase.from('todo').insert({
       name: title,
       description,
-      isFinished: false,
-      isFavorite: false,
-      isDeleted: false,
+      is_finished: false,
+      is_favorite: false,
+      is_deleted: false,
       authorId: id,
     }).select('id');
     if (error) return console.log(error);
@@ -55,8 +55,8 @@ export default function Create(props: CreateProps) {
       insertTodoTag(todoId, tag.id);
     }
     setTodos([...todos, {
-      title: title, description: description, isFinished: false,
-      isFavorite: false, isDeleted: false, id: todoId, tags: tags
+      title: title, description: description, is_finished: false,
+      is_favorite: false, is_deleted: false, id: todoId, tags: tags
     }]);
     setTitle("");
     setDescription("");
