@@ -21,11 +21,10 @@ export default function Home() {
 
   const fetchData = async () => {
     const { data, error } = await supabase.auth.getSession()
-    if (error) {
-      console.log("error", error)
+    console.log("route = /", error, "data", data)
+    if (data.session === null) {
+      router.push('/login');
     }
-    console.log("data", data)
-    // router.push('/signIn');
 
     setIsLoading(true);
     const allTodos: Todo[] = await getAllTodos();
@@ -50,13 +49,13 @@ export default function Home() {
 
   async function getTagIds(todosId: number) {
     const tagsIds: String[] = [];
-    const { data, error } = await supabase.from('todo_tag').select(`tagId`).eq('todoId', todosId)
+    const { data, error } = await supabase.from('todo_tag').select(`tag_id`).eq('todo_id', todosId)
     if (error) {
       console.error("error", error);
       return []
     }
     for (const tag of data) {
-      tagsIds.push(tag.tagId);
+      tagsIds.push(tag.tag_id);
     }
     return tagsIds;
   }

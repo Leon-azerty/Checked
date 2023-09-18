@@ -11,13 +11,10 @@ export default function Login() {
   const router = useRouter()
 
   const SignIn = async ({ email, password }: { email: string, password: string }) => {
-    console.log("WIP sign in")
     const { data, error } = await supabase.auth.signInWithPassword({ email, password, })
-    console.log(data, error);
-    if (!error) {
-      console.log("no error")
+    console.log("route = /login", "data", data, "error", error)
+    if (data !== null)
       router.push('/');
-    }
   }
 
   const SignUp = async ({ email, password }: { email: string, password: string }) => {
@@ -27,12 +24,7 @@ export default function Login() {
       console.log("no error")
       router.push('/');
     }
-    if (data) {
-      console.log("data", data)
-    }
-    if (error) {
-      console.log("error", error)
-    }
+    console.log("data", data, "error", error)
   }
 
   return (
