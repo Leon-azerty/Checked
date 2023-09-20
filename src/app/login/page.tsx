@@ -1,39 +1,35 @@
 'use client'
-import { supabase } from '@/SupabaseClient'
+import Image from 'next/image'
 import '../globals.css'
-import Button from '@/components/button/button'
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import Form from './form'
+import Header from './header'
+import Title from './title'
+import MenuTitle from './menuTitle'
+import MenuDesc from './menuDesc'
+import Footer from './footer'
+import "./scrollbar.css"
 
 export default function Login() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const router = useRouter()
-
-  const SignIn = async ({ email, password }: { email: string, password: string }) => {
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password, })
-    console.log("route = /login", "data", data, "error", error)
-    if (data !== null)
-      router.push('/');
-  }
-
-  const SignUp = async ({ email, password }: { email: string, password: string }) => {
-    console.log("WIP sign up")
-    const { data, error } = await supabase.auth.signUp({ email, password })
-    if (!error) {
-      console.log("no error")
-      router.push('/');
-    }
-    console.log("data", data, "error", error)
-  }
-
   return (
-    <div className="flex flex-col h-screen w-screen">
-      <p>Page to sign in</p>
-      <input type="text" placeholder="email" onChange={(e) => { setEmail(e.target.value) }} />
-      <input type="text" placeholder="password" onChange={(e) => { setPassword(e.target.value) }} />
-      <Button text="Sign in" onClick={() => { SignIn({ email, password }) }} />
-      <Button text="Sign up" onClick={() => { SignUp({ email, password }) }} />
+    <div className='no-scrollbar overflow-y-auto'>
+      <div className="flex flex-col w-screen bg-white">
+        <Header />
+        <div className='flex flex-col justify-center'>
+          <Title />
+          <div className='flex justify-around'>
+            <Image src="/todos.png" width="700" height="700" alt="todos" />
+            <Form />
+          </div>
+          <MenuTitle />
+          <div className='flex justify-around'>
+            <div className='flex justify-end'>
+              <Image src="/menu.png" width="200" height="200" alt="menu" />
+            </div>
+            <MenuDesc />
+          </div>
+        </div>
+        <Footer />
+      </div>
     </div>
   )
 }

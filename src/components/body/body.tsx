@@ -20,12 +20,11 @@ export default function Body(props: BodyProps) {
   const [todos,] = context;
 
   const logOut = async () => {
-    console.log("log out WIP")
     const { error } = await supabase.auth.signOut();
     if (error) {
       console.log(error);
     } else {
-      router.refresh();
+      router.push('/login');
     }
   }
 
