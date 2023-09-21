@@ -3,6 +3,7 @@ import Form from './form'
 import Image from 'next/image'
 
 export default function LargeContent() {
+  if (typeof window === 'undefined') return <></>;
   const windowSize = { width: window.innerWidth, height: window.innerHeight };
 
   if (windowSize.width < 1024) {
