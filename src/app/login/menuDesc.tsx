@@ -1,5 +1,5 @@
 export default function MenuDesc() {
-  return <div className="flex flex-col w-7/12 text-xl ml-14">
+  return <div className="flex flex-col w-10/12 md:w-7/12 text-xl md:ml-14">
     <p >Simplify your life with SimpleTasks&apos; intuitive menu for todo sorting.
       With just a few clicks, you can effortlessly organize your tasks based
       on multiple criteria:

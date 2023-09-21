@@ -1,13 +1,13 @@
 'use client'
 import Image from 'next/image'
 import '../globals.css'
-import Form from './form'
 import Header from './header'
 import Title from './title'
 import MenuTitle from './menuTitle'
 import MenuDesc from './menuDesc'
 import Footer from './footer'
 import "./scrollbar.css"
+import LargeContent from './largeContent'
 
 export default function Login() {
   return (
@@ -16,12 +16,9 @@ export default function Login() {
         <Header />
         <div className='flex flex-col justify-center'>
           <Title />
-          <div className='flex justify-around'>
-            <Image className='animate-tinyBounce' src="/todos.png" width="700" height="700" alt="todos" />
-            <Form />
-          </div>
+          <LargeContent />
           <MenuTitle />
-          <div className='flex justify-center'>
+          <div className='flex flex-col md:flex-row items-center justify-center'>
             <Image src="/menu.png" width="200" height="200" alt="menu" />
             <MenuDesc />
           </div>

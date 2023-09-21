@@ -25,7 +25,7 @@ export default function Form() {
     }
     console.log("data", data, "error", error)
   }
-  return <div className="flex flex-col w-5/12 justify-around items-center">
+  return <div className="flex flex-col w-10/12 md:w-5/12 justify-around items-center">
 
     <div className="flex flex-col items-center">
       <Input htmlFor="email" label="Email" placeholder="johndoe@gmail.com" onchange={(e) => { setEmail(e.target.value) }} />
@@ -35,7 +35,7 @@ export default function Form() {
         <Button text="Sign up" onClick={() => { SignUp({ email, password }) }} />
       </div>
     </div>
-    <div className="w-10/12 flex justify-center">
+    <div className=" w-full md:w-10/12 flex justify-center">
       <div className="text-xl w-full">
         <p>
           Take control of your daily tasks and boost your productivity.

@@ -4,6 +4,7 @@ https://zapier.com/blog/best-todo-list-apps/
 Figma :
 https://www.figma.com/file/YgsyWGXx98cCWqy7wFNUWB/Untitled?type=design&node-id=0-1&mode=design&t=zEgidPlRBo9PkHxC-0
 
+- [ ] faire responsive 
 Body :
 - [x] loader tant qu'on a pas charger les todos
 
