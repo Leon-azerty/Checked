@@ -28,8 +28,8 @@ export default function Form() {
   return <div className="flex flex-col w-10/12 md:w-5/12 justify-around items-center">
 
     <div className="flex flex-col items-center">
-      <Input htmlFor="email" label="Email" placeholder="johndoe@gmail.com" onchange={(e) => { setEmail(e.target.value) }} />
-      <Input htmlFor="password" label="Password" placeholder="*******" onchange={(e) => { setPassword(e.target.value) }} />
+      <Input type="text" htmlFor="email" label="Email" placeholder="johndoe@gmail.com" onchange={(e) => { setEmail(e.target.value) }} />
+      <Input type="password" htmlFor="password" label="Password" placeholder="*******" onchange={(e) => { setPassword(e.target.value) }} />
       <div className="flex justify-around mt-4">
         <Button text="Sign in" onClick={() => { SignIn({ email, password }) }} />
         <Button text="Sign up" onClick={() => { SignUp({ email, password }) }} />

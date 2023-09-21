@@ -12,7 +12,7 @@ import { Suspense } from 'react';
 
 export default function Login() {
   return (
-    <div className='no-scrollbar overflow-y-auto'>
+    <div className='no-scrollbar overflow-y-auto text-black'>
       <div className="flex flex-col w-screen bg-white">
         <Header />
         <div className='flex flex-col justify-center'>

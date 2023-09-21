@@ -70,7 +70,7 @@ export default function Home() {
   }
 
   return (
-    <main className='w-screen h-full min-h-screen flex'>
+    <main className='w-screen h-full min-h-screen flex text-black'>
       <TodosContext.Provider value={[todos, setTodos]}>
         <TagsContext.Provider value={[tags, setTags]}>
           <TodosToDeleteContext.Provider value={[todosToDelete, setTodosToDelete]}>
