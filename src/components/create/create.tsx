@@ -29,7 +29,7 @@ export default function Create(props: CreateProps) {
       is_finished: false,
       is_favorite: false,
       is_deleted: false,
-      authorId: id,
+      author_id: id,
     }).select('id');
     if (error) return console.log(error);
     return data[0].id;
