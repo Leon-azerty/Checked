@@ -21,10 +21,8 @@ export default function Login() {
             <Form />
           </div>
           <MenuTitle />
-          <div className='flex justify-around'>
-            <div className='flex justify-end'>
-              <Image src="/menu.png" width="200" height="200" alt="menu" />
-            </div>
+          <div className='flex justify-center'>
+            <Image src="/menu.png" width="200" height="200" alt="menu" />
             <MenuDesc />
           </div>
         </div>

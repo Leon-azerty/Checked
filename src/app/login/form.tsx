@@ -35,8 +35,8 @@ export default function Form() {
         <Button text="Sign up" onClick={() => { SignUp({ email, password }) }} />
       </div>
     </div>
-    <div className="w-8/12 flex justify-center">
-      <div className="text-xl w-10/12">
+    <div className="w-10/12 flex justify-center">
+      <div className="text-xl w-full">
         <p>
           Take control of your daily tasks and boost your productivity.
         </p>
