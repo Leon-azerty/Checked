@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import Image from 'next/image'
 import '../globals.css'
 import Header from './header'
@@ -8,6 +8,7 @@ import MenuDesc from './menuDesc'
 import Footer from './footer'
 import "./scrollbar.css"
 import LargeContent from './largeContent'
+import { Suspense } from 'react';
 
 export default function Login() {
   return (
@@ -16,7 +17,9 @@ export default function Login() {
         <Header />
         <div className='flex flex-col justify-center'>
           <Title />
-          <LargeContent />
+          <Suspense fallback={<div>Loading...</div>}>
+            <LargeContent />
+          </Suspense>
           <MenuTitle />
           <div className='flex flex-col md:flex-row items-center justify-center'>
             <Image src="/menu.png" width="200" height="200" alt="menu" />
