@@ -17,7 +17,7 @@ export default function Login() {
         <div className='flex flex-col justify-center'>
           <Title />
           <div className='flex justify-around'>
-            <Image src="/todos.png" width="700" height="700" alt="todos" />
+            <Image className='animate-tinyBounce' src="/todos.png" width="700" height="700" alt="todos" />
             <Form />
           </div>
           <MenuTitle />
