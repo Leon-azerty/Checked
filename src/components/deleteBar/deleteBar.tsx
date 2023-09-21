@@ -8,13 +8,13 @@ import { Todo } from "@/dto/todos.types";
 
 export default function DeleteBar() {
   const todosToDeleteContext = useContext(TodosToDeleteContext);
+  const todosContext = useContext(TodosContext);
   if (!todosToDeleteContext) {
     console.error("todosToDeleteContext is null");
     return <></>
   }
   const [todosToDelete, setTodosToDelete] = todosToDeleteContext;
 
-  const todosContext = useContext(TodosContext);
   if (!todosContext) {
     console.error("todosToDeleteContext is null");
     return <></>

@@ -1,4 +1,4 @@
-import { TagTypes } from "@/app/tag.types";
+import { TagTypes } from "../../dto/tag.types";
 
 export interface TagProps {
   tag: TagTypes;
