@@ -17,7 +17,6 @@ export default function Form() {
   }
 
   const SignUp = async ({ email, password }: { email: string, password: string }) => {
-    console.log("WIP sign up")
     const { data, error } = await supabase.auth.signUp({ email, password })
     if (!error) {
       console.log("no error")
