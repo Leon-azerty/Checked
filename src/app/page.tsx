@@ -4,12 +4,12 @@ import Body from '@/components/body/body';
 import { useEffect, useState } from 'react';
 import { Todo } from '../dto/todos.types';
 import { TodosContext } from '../context/todosContext';
-import { supabase } from '@/SupabaseClient';
 import { getAllTodos } from '@/Supabase/todos';
 import { TagTypes } from '../dto/tag.types';
 import { TagsContext } from '../context/tagsContext';
 import { TodosToDeleteContext } from '@/context/todoToDeleteContext';
 import { useRouter } from 'next/navigation'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
 export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -18,15 +18,16 @@ export default function Home() {
   const [tags, setTags] = useState<TagTypes[]>([]);
   const [todosToDelete, setTodosToDelete] = useState<Todo[]>([]);
   const router = useRouter()
+  const supabase = createClientComponentClient();
 
   const fetchData = async () => {
+    setIsLoading(true);
     const { data, error } = await supabase.auth.getSession()
     console.log("route = /", error, "data", data)
     if (data.session === null) {
       router.push('/login');
     }
 
-    setIsLoading(true);
     const allTodos: Todo[] = await getAllTodos();
 
     for (let i = 0; i < allTodos.length; i++) {

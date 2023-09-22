@@ -1,5 +1,5 @@
 import Button from "@/components/button/button"
-import { supabase } from '@/SupabaseClient'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Input from "./input/input"
@@ -8,6 +8,7 @@ export default function Form() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const router = useRouter()
+  const supabase = createClientComponentClient();
 
   const SignIn = async ({ email, password }: { email: string, password: string }) => {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password, })

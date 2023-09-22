@@ -5,7 +5,6 @@ import { MenuProps } from './menu.props';
 import { gray_700, starYellow } from "../../const/colors";
 import IconButton from "../iconButton/iconButton";
 
-
 export default function Menu(props: MenuProps) {
 
   const handleCreateTodo = () => {

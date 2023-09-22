@@ -5,8 +5,8 @@ import { CreateProps } from './create.props';
 import { TodosContext } from '../../context/todosContext';
 import Tag from '@/components/tag/tag';
 import { HexColorPicker } from "react-colorful";
-import { supabase } from '@/SupabaseClient';
 import { TagTypes } from '@/dto/tag.types';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
 export default function Create(props: CreateProps) {
   const context = useContext(TodosContext);
@@ -15,6 +15,7 @@ export default function Create(props: CreateProps) {
   const [description, setDescription] = useState("");
   const [tagName, setTagName] = useState<string>("");
   const [color, setColor] = useState<string>("#D9D9D9");
+  const supabase = createClientComponentClient();
 
   if (!context) {
     throw new Error('useTodosContext must be used within a TodosProvider');
