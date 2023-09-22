@@ -4,7 +4,7 @@ import { IconContext } from "react-icons";
 import Tag from "../tag/tag";
 import { useRef, useState } from "react";
 import { useHover } from 'usehooks-ts';
-import { supabase } from "@/SupabaseClient";
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { TagTypes } from "@/dto/tag.types";
 import Button from "../button/button";
 
@@ -14,6 +14,7 @@ export function LeftContent(props: LeftContentProps) {
   const [tags, setTags] = useState(props.todo.tags);
   const [isUpdating, setIsUpdating] = useState(false);
   const isDebug = true;
+  const supabase = createClientComponentClient();
 
   const removeTag = async (tag: TagTypes) => {
     props.todo.tags = tags.filter(e => e.name !== tag.name);

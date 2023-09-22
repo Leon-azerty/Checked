@@ -8,12 +8,14 @@ import CardLoader from '@/components/loader/cardLoader';
 import DeleteBar from '@/components/deleteBar/deleteBar';
 import { RiLogoutBoxRLine } from 'react-icons/ri';
 import IconButton from '@/components/iconButton/iconButton';
-import { supabase } from '@/SupabaseClient';
 import { useRouter } from 'next/navigation'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
 export default function Body(props: BodyProps) {
   const router = useRouter()
   const context = useContext(TodosContext);
+  const supabase = createClientComponentClient();
+
   if (!context) {
     throw new Error('useTodosContext must be used within a TodosProvider');
   }
@@ -24,6 +26,7 @@ export default function Body(props: BodyProps) {
     if (error) {
       console.log(error);
     } else {
+      console.log("redirect to login")
       router.push('/login');
     }
   }

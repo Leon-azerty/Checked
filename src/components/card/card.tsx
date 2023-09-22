@@ -4,13 +4,14 @@ import "./card.css"
 import { LeftContent } from "./leftContent";
 import { RightCard } from "./rightCard";
 import { Star } from "./star";
-import { supabase } from "@/SupabaseClient";
 import { TodosToDeleteContext } from "@/context/todoToDeleteContext";
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
 export default function Card(props: CardProps) {
   const [is_finished, setIs_finished] = useState(props.todo.is_finished);
   const [is_favorite, setIs_favorite] = useState(props.todo.is_favorite);
   const [is_deleted, setIs_deleted] = useState(props.todo.is_deleted);
+  const supabase = createClientComponentClient();
 
   const context = useContext(TodosToDeleteContext);
   if (!context) {
@@ -41,9 +42,12 @@ export default function Card(props: CardProps) {
 
   const addTodoInFavorite = async () => {
     const { data, error } = await supabase.from('todo').update({
-      is_favorite: true
+      is_favorite: !is_favorite
     }).eq('id', props.todo.id);
-    setIs_favorite(!is_favorite);
+    if (error) {
+      return console.log("error ", error);
+      setIs_favorite(!is_favorite);
+    }
   }
 
   const addTodoToDelete = () => {

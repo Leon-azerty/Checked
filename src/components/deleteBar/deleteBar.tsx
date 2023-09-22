@@ -1,5 +1,5 @@
 import Button from "../button/button";
-import { supabase } from "@/SupabaseClient";
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useContext } from "react";
 import { TodosToDeleteContext } from "@/context/todoToDeleteContext";
 import TodosToDelete from "../todosToDelete/todosToDelete";
@@ -9,6 +9,8 @@ import { Todo } from "@/dto/todos.types";
 export default function DeleteBar() {
   const todosToDeleteContext = useContext(TodosToDeleteContext);
   const todosContext = useContext(TodosContext);
+  const supabase = createClientComponentClient();
+
   if (!todosToDeleteContext) {
     console.error("todosToDeleteContext is null");
     return <></>
