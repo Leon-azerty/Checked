@@ -46,8 +46,8 @@ export default function Card(props: CardProps) {
     }).eq('id', props.todo.id);
     if (error) {
       return console.log("error ", error);
-      setIs_favorite(!is_favorite);
     }
+    setIs_favorite(!is_favorite);
   }
 
   const addTodoToDelete = () => {
