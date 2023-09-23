@@ -20,35 +20,6 @@ export default function Home() {
   const router = useRouter()
   const supabase = createClientComponentClient();
 
-  const fillTodoWithTag = async (allTodos: Todo[]) => {
-    for (let i = 0; i < allTodos.length; i++) {
-      const tag_ids = await getTag_ids(allTodos[i].id);
-      let tagsForTodo: TagTypes[] = []
-      for (const tag_id of tag_ids) {
-        const tag = await getTag(tag_id);
-        tagsForTodo.push(tag)
-      }
-      allTodos[i].tags = tagsForTodo;
-    }
-    setTodos(allTodos);
-  }
-
-  const getMenuTags = async (allTodos: Todo[]) => {
-    let nameTodo: String[] = [];
-    let res = [];
-    for (let i = 0; i < allTodos.length; i++) {
-      const tag_ids = await getTag_ids(allTodos[i].id);
-      for (const tag_id of tag_ids) {
-        const tag = await getTag(tag_id);
-        if (!nameTodo.includes(tag.name)) {
-          res.push(tag);
-          nameTodo.push(tag.name);
-        }
-      }
-    }
-    setTags(res);
-  }
-
   const userIsLogged = async () => {
     const { data, error } = await supabase.auth.getSession()
     if (data.session === null) {
@@ -60,11 +31,38 @@ export default function Home() {
     userIsLogged();
   },);
 
+  const fillTodoWithTag = async (tag_ids: String[]) => {
+    let tagsForTodo: TagTypes[] = []
+    for (const tag_id of tag_ids) {
+      const tag = await getTag(tag_id);
+      tagsForTodo.push(tag)
+    }
+    return tagsForTodo;
+  }
+
+  const getMenuTags = async (tag_ids: String[], res: TagTypes[], nameTodo: String[]) => {
+    for (const tag_id of tag_ids) {
+      const tag = await getTag(tag_id);
+      if (!nameTodo.includes(tag.name)) {
+        res.push(tag);
+        nameTodo.push(tag.name);
+      }
+    }
+    return res;
+  }
+
   const fetchData = async () => {
     setIsLoading(true);
     const allTodos: Todo[] = await getAllTodos();
-    await fillTodoWithTag(allTodos);
-    await getMenuTags(allTodos);
+    let nameTodo: String[] = [];
+    let res: TagTypes[] = [];
+    for (let i = 0; i < allTodos.length; i++) {
+      const tag_ids = await getTag_ids(allTodos[i].id);
+      allTodos[i].tags = await fillTodoWithTag(tag_ids);
+      res = await getMenuTags(tag_ids, res, nameTodo);
+    }
+    setTags(res);
+    setTodos(allTodos);
     setIsLoading(false);
   }
 
