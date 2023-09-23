@@ -25,8 +25,8 @@ export default function Home() {
       const tag_ids = await getTag_ids(allTodos[i].id);
       let tagsForTodo: TagTypes[] = []
       for (const tag_id of tag_ids) {
-        const tag: TagTypes[] = await getTag(tag_id);
-        tagsForTodo.push(...tag)
+        const tag = await getTag(tag_id);
+        tagsForTodo.push(tag)
       }
       allTodos[i].tags = tagsForTodo;
     }
@@ -34,19 +34,19 @@ export default function Home() {
   }
 
   const getMenuTags = async (allTodos: Todo[]) => {
-    let tagsForMenu: TagTypes[] = [];
+    let nameTodo: String[] = [];
+    let res = [];
     for (let i = 0; i < allTodos.length; i++) {
       const tag_ids = await getTag_ids(allTodos[i].id);
       for (const tag_id of tag_ids) {
-        const tag: TagTypes[] = await getTag(tag_id);
-        for (const t of tag) {
-          if (!tagsForMenu.includes(t)) {
-            tagsForMenu.push(t);
-          }
+        const tag = await getTag(tag_id);
+        if (!nameTodo.includes(tag.name)) {
+          res.push(tag);
+          nameTodo.push(tag.name);
         }
       }
     }
-    setTags(tagsForMenu);
+    setTags(res);
   }
 
   const userIsLogged = async () => {
@@ -63,8 +63,8 @@ export default function Home() {
   const fetchData = async () => {
     setIsLoading(true);
     const allTodos: Todo[] = await getAllTodos();
-    await getMenuTags(allTodos);
     await fillTodoWithTag(allTodos);
+    await getMenuTags(allTodos);
     setIsLoading(false);
   }
 
@@ -89,9 +89,9 @@ export default function Home() {
     const { data, error } = await supabase.from('tag').select(`*`).eq('id', tag_id)
     if (error) {
       console.error("error", error);
-      return []
+      return {}
     }
-    return data;
+    return data[0];
   }
 
   return (

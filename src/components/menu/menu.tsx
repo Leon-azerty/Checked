@@ -4,7 +4,7 @@ import { BsListNested } from 'react-icons/bs';
 import { MenuProps } from './menu.props';
 import { gray_700, starYellow } from "../../const/colors";
 import IconButton from "../iconButton/iconButton";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { TagsContext } from '../../context/tagsContext';
 import TagMenu from "../tagMenu/tagMenu";
 
