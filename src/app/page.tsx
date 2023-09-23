@@ -20,36 +20,51 @@ export default function Home() {
   const router = useRouter()
   const supabase = createClientComponentClient();
 
-  const fetchData = async () => {
-    setIsLoading(true);
-    const { data, error } = await supabase.auth.getSession()
-    if (data.session === null) {
-      router.push('/login');
-    }
-
-    const allTodos: Todo[] = await getAllTodos();
-
-    ///// Refactor c'est pas lisible la
-    let tagsForMenu: TagTypes[] = [];
+  const fillTodoWithTag = async (allTodos: Todo[]) => {
     for (let i = 0; i < allTodos.length; i++) {
       const tag_ids = await getTag_ids(allTodos[i].id);
       let tagsForTodo: TagTypes[] = []
       for (const tag_id of tag_ids) {
         const tag: TagTypes[] = await getTag(tag_id);
         tagsForTodo.push(...tag)
-
-
-        for (const t of tag) {
-          if (tagsForMenu.indexOf(t) == -1) {
-            tagsForMenu.push(t);
-          }
-        }
-        setTags(tagsForMenu);
       }
       allTodos[i].tags = tagsForTodo;
     }
-    /////
     setTodos(allTodos);
+  }
+
+  const getMenuTags = async (allTodos: Todo[]) => {
+    let tagsForMenu: TagTypes[] = [];
+    for (let i = 0; i < allTodos.length; i++) {
+      const tag_ids = await getTag_ids(allTodos[i].id);
+      for (const tag_id of tag_ids) {
+        const tag: TagTypes[] = await getTag(tag_id);
+        for (const t of tag) {
+          if (!tagsForMenu.includes(t)) {
+            tagsForMenu.push(t);
+          }
+        }
+      }
+    }
+    setTags(tagsForMenu);
+  }
+
+  const userIsLogged = async () => {
+    const { data, error } = await supabase.auth.getSession()
+    if (data.session === null) {
+      router.push('/login');
+    }
+  }
+
+  useEffect(() => {
+    userIsLogged();
+  },);
+
+  const fetchData = async () => {
+    setIsLoading(true);
+    const allTodos: Todo[] = await getAllTodos();
+    await getMenuTags(allTodos);
+    await fillTodoWithTag(allTodos);
     setIsLoading(false);
   }
 

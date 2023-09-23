@@ -6,9 +6,7 @@ import { gray_700, starYellow } from "../../const/colors";
 import IconButton from "../iconButton/iconButton";
 import { useContext } from "react";
 import { TagsContext } from '../../context/tagsContext';
-import Tag from "../tag/tag";
 import TagMenu from "../tagMenu/tagMenu";
-import { TagTypes } from "@/dto/tag.types";
 
 export default function Menu(props: MenuProps) {
   const tagsContext = useContext(TagsContext);
@@ -16,7 +14,6 @@ export default function Menu(props: MenuProps) {
     throw new Error('todosContext must be used within a TodosProvider');
   }
   const [tags, setTags] = tagsContext;
-  console.log("tags", tags);
 
   const handleCreateTodo = () => {
     props.setTab('create');
