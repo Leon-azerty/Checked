@@ -19,6 +19,7 @@ export default function Form() {
 
   const SignUp = async ({ email, password }: { email: string, password: string }) => {
     const { data, error } = await supabase.auth.signUp({ email, password })
+    alert("Please check your email to confirm your account");
     if (!error) {
       console.log("no error")
       router.push('/');
@@ -36,7 +37,7 @@ export default function Form() {
       </div>
     </div>
     <div className=" w-full md:w-10/12 flex justify-center">
-      <div className="text-xl w-full">
+      <div className="text-xl w-full ">
         <p>
           Take control of your daily tasks and boost your productivity.
         </p>

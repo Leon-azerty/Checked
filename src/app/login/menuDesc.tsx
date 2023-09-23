@@ -1,6 +1,6 @@
 export default function MenuDesc() {
   return <div className="flex flex-col w-10/12 md:w-7/12 text-xl md:ml-14">
-    <p >Simplify your life with SimpleTasks&apos; intuitive menu for todo sorting.
+    <p >Simplify your life with Checked&apos; intuitive menu for todo sorting.
       With just a few clicks, you can effortlessly organize your tasks based
       on multiple criteria:
     </p>
@@ -14,7 +14,7 @@ export default function MenuDesc() {
     <br />
     <p >Our sorting menu empowers you to tailor your task view, ensuring you
       have full control and clarity in your todo journey. Stay organized,
-      stay efficient, and stay on top of your tasks with SimpleTasks.
+      stay efficient, and stay on top of your tasks with Checked.
     </p>
   </div>
 }

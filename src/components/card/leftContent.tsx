@@ -40,7 +40,7 @@ export function LeftContent(props: LeftContentProps) {
 
   return <div className="w-full hover:pl-4 duration-300">
     <div ref={hoverRef} className="flex items-center">
-      <p className="text-3xl font-bold">♦ {props.todo.title}</p>
+      <p className="text-3xl font-bold">{props.todo.title}</p>
       {tags.map((e, i) => <Tag key={i} tag={e} removeTag={removeTag} />)}
       {!isDebug &&
         <IconContext.Provider value={{ size: '26', color: "#7E7E7E" }}>

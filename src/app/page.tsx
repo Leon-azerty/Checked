@@ -3,10 +3,10 @@ import Menu from '@/components/menu/menu';
 import Body from '@/components/body/body';
 import { useEffect, useState } from 'react';
 import { Todo } from '../dto/todos.types';
+import { TagsContext } from '../context/tagsContext';
 import { TodosContext } from '../context/todosContext';
 import { getAllTodos } from '@/Supabase/todos';
 import { TagTypes } from '../dto/tag.types';
-import { TagsContext } from '../context/tagsContext';
 import { TodosToDeleteContext } from '@/context/todoToDeleteContext';
 import { useRouter } from 'next/navigation'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
@@ -23,23 +23,32 @@ export default function Home() {
   const fetchData = async () => {
     setIsLoading(true);
     const { data, error } = await supabase.auth.getSession()
-    console.log("route = /", error, "data", data)
     if (data.session === null) {
       router.push('/login');
     }
 
     const allTodos: Todo[] = await getAllTodos();
 
+    ///// Refactor c'est pas lisible la
+    let tagsForMenu: TagTypes[] = [];
     for (let i = 0; i < allTodos.length; i++) {
       const tag_ids = await getTag_ids(allTodos[i].id);
-      let tmp: TagTypes[] = []
+      let tagsForTodo: TagTypes[] = []
       for (const tag_id of tag_ids) {
         const tag: TagTypes[] = await getTag(tag_id);
-        tmp.push(...tag)
+        tagsForTodo.push(...tag)
+
+
+        for (const t of tag) {
+          if (tagsForMenu.indexOf(t) == -1) {
+            tagsForMenu.push(t);
+          }
+        }
+        setTags(tagsForMenu);
       }
-      allTodos[i].tags = tmp;
+      allTodos[i].tags = tagsForTodo;
     }
-    console.log("allTodos", allTodos);
+    /////
     setTodos(allTodos);
     setIsLoading(false);
   }
