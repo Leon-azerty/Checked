@@ -1,7 +1,7 @@
 export interface InputProps {
-  htmlFor: string;
-  label: string;
-  placeholder: string;
-  type: string;
+  htmlFor: String;
+  label: String;
+  placeholder: String;
+  type: String;
   onchange: (e: any) => void;
 }

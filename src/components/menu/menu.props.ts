@@ -1,4 +1,6 @@
 export interface MenuProps {
-  tab: string;
-  setTab: (create: string) => void;
+  tab: String;
+  setTab: (create: String) => void;
+  filter: String[];
+  setFilter: (filter: String[]) => void;
 }

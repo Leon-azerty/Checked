@@ -13,8 +13,8 @@ export default function Create(props: CreateProps) {
   const [tags, setTags] = useState<TagTypes[]>([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [tagName, setTagName] = useState<string>("");
-  const [color, setColor] = useState<string>("#D9D9D9");
+  const [tagName, setTagName] = useState<String>("");
+  const [color, setColor] = useState<String>("#D9D9D9");
   const supabase = createClientComponentClient();
 
   if (!context) {

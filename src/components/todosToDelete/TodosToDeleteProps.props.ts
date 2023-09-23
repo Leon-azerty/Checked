@@ -1,3 +1,3 @@
 export interface TodosToDeleteProps {
-  name: string;
+  name: String;
 }

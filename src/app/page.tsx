@@ -13,7 +13,8 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
 export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [tab, setTab] = useState<string>('');
+  const [tab, setTab] = useState<String>('');
+  const [filter, setFilter] = useState<String[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [tags, setTags] = useState<TagTypes[]>([]);
   const [todosToDelete, setTodosToDelete] = useState<Todo[]>([]);
@@ -97,8 +98,8 @@ export default function Home() {
       <TodosContext.Provider value={[todos, setTodos]}>
         <TagsContext.Provider value={[tags, setTags]}>
           <TodosToDeleteContext.Provider value={[todosToDelete, setTodosToDelete]}>
-            <Menu tab={tab} setTab={setTab} />
-            <Body tab={tab} setTab={setTab} isLoading={isLoading} />
+            <Menu tab={tab} setTab={setTab} filter={filter} setFilter={setFilter} />
+            <Body tab={tab} setTab={setTab} isLoading={isLoading} filter={filter} />
           </TodosToDeleteContext.Provider>
         </TagsContext.Provider>
       </TodosContext.Provider>

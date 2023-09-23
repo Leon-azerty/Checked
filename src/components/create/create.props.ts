@@ -1,3 +1,3 @@
 export interface CreateProps {
-  setTab: (create: string) => void;
+  setTab: (create: String) => void;
 }

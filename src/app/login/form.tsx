@@ -10,14 +10,14 @@ export default function Form() {
   const router = useRouter()
   const supabase = createClientComponentClient();
 
-  const SignIn = async ({ email, password }: { email: string, password: string }) => {
+  const SignIn = async ({ email, password }: { email: String, password: String }) => {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password, })
     console.log("route = /login", "data", data, "error", error)
     if (data !== null)
       router.push('/');
   }
 
-  const SignUp = async ({ email, password }: { email: string, password: string }) => {
+  const SignUp = async ({ email, password }: { email: String, password: String }) => {
     const { data, error } = await supabase.auth.signUp({ email, password })
     alert("Please check your email to confirm your account");
     if (!error) {

@@ -10,6 +10,7 @@ import { RiLogoutBoxRLine } from 'react-icons/ri';
 import IconButton from '@/components/iconButton/iconButton';
 import { useRouter } from 'next/navigation'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { Todo } from '@/dto/todos.types';
 
 export default function Body(props: BodyProps) {
   const router = useRouter()
@@ -20,6 +21,25 @@ export default function Body(props: BodyProps) {
     throw new Error('useTodosContext must be used within a TodosProvider');
   }
   const [todos,] = context;
+  let todosFiltered: Todo[] = [];
+  // on parcours la liste des todos
+  for (const todo of todos) {
+    //on recupere l'array de tags de la todo
+    for (const todoTag of todo.tags) {
+      let isTodoInFilter = true;
+      // on parcout l'array de filter
+      for (const filterTag of props.filter) {
+        // verifier que le filterTag est dans la todo
+        if (todoTag.name !== filterTag) {
+          // sinon on vire la todo de todosFiltered
+          isTodoInFilter = false;
+        }
+      }
+      if (isTodoInFilter) {
+        todosFiltered.includes(todo) ? null : todosFiltered.push(todo);
+      }
+    }
+  }
 
   const logOut = async () => {
     const { error } = await supabase.auth.signOut();
@@ -46,6 +66,6 @@ export default function Body(props: BodyProps) {
     {props.tab == "create" && <Create setTab={props.setTab} />}
     {props.isLoading && <CardLoader />}
     {props.tab == "listDeleted" && <DeleteBar />}
-    {todos.length > 0 && todos.map((e, i) => <Card todo={e} id={i} key={e.id} tab={props.tab} />)}
+    {todosFiltered.length > 0 && todosFiltered.map((e, i) => <Card todo={e} id={i} key={e.id} tab={props.tab} />)}
   </div>
 }

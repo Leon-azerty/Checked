@@ -4,7 +4,7 @@ import { BsListNested } from 'react-icons/bs';
 import { MenuProps } from './menu.props';
 import { gray_700, starYellow } from "../../const/colors";
 import IconButton from "../iconButton/iconButton";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { TagsContext } from '../../context/tagsContext';
 import TagMenu from "../tagMenu/tagMenu";
 
@@ -40,7 +40,13 @@ export default function Menu(props: MenuProps) {
   }
 
   const addTagsInFilter = (name: String) => {
-    console.log("on filtre par tag", name);
+    if (props.filter.includes(name)) {
+      console.log("on enleve le tag du filtre")
+      props.setFilter(props.filter.filter((e) => e != name));
+    } else {
+      console.log("on ajoute le tag dans le filtre", name);
+      props.setFilter([...props.filter, name]);
+    }
     return;
   }
 
@@ -53,7 +59,8 @@ export default function Menu(props: MenuProps) {
     <IconButton icon={<RiDeleteBin6Line />} text='Trash' onClick={handleListTrash} iconColor={gray_700} className={`${props.tab == 'listTrash' ? "font-bold" : ""}`} />
     <div className="border-gray-400 border-solid border-b-2 rounded-md mx-8"></div>
     <div className="flex flex-wrap mt-2">
-      {tags.length > 0 && tags.map((e, i) => <TagMenu key={e.name + i} tag={e} addTagsInFilter={addTagsInFilter}></TagMenu>)}
+      {tags.length > 0 && tags.map((e, i) => <TagMenu key={e.name + i.toString()} tag={e} addTagsInFilter={addTagsInFilter}></TagMenu>)}
     </div>
+    {props.filter.length > 0 && props.filter.map((e, i) => <div key={e + i.toString()} className="flex flex-wrap mt-2">{e}</div>)}
   </div >
 }
