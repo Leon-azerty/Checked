@@ -2,7 +2,7 @@ import Button from "@/components/button/button"
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import Input from "./input/input"
+import Input from "../../components/input/input"
 
 export default function Form() {
   const [email, setEmail] = useState("")
@@ -54,7 +54,7 @@ export default function Form() {
     </div>
     <div className="flex flex-col w-60 justify-around items-center">
       <div className="flex flex-col items-center pt-2">
-        <Input type="text" htmlFor="email" label="Email"
+        <Input type="email" htmlFor="email" label="Email"
           placeholder="johndoe@gmail.com" onchange={(e) => { setEmail(e.target.value) }} />
         <Input type="password" htmlFor="password" label="Password"
           placeholder="*******" onchange={(e) => { setPassword(e.target.value) }} />

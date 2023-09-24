@@ -7,6 +7,9 @@ import Tag from '@/components/tag/tag';
 import { HexColorPicker } from "react-colorful";
 import { TagTypes } from '@/dto/tag.types';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import Input from '../input/input';
+import Textarea from '../textarea/textarea';
+import Button from '../button/button';
 
 export default function Create(props: CreateProps) {
   const context = useContext(TodosContext);
@@ -79,48 +82,24 @@ export default function Create(props: CreateProps) {
   }
 
   return <div className="pt-4 animate-wiggle">
-    <div className='flex justify-between mr-6' onClick={() => { props.setTab("") }}>
+    <div className='flex justify-between mr-6' onClick={() => { props.setTab("ListAll") }}>
       <div></div>
       <IconContext.Provider value={{ size: '32' }}>
         <AiOutlineCloseCircle />
       </IconContext.Provider>
     </div>
-    <label htmlFor="title" className="ml-4 block mb-2 text-sm font-medium text-gray-900 
-    dark:text-white">Your title</label>
-    <textarea id="title" rows={1} onChange={(e) => setTitle(e.target.value)} className='flex 
-    w-full resize-none p-2.5' placeholder='title' ></textarea>
-
-    <label htmlFor="tags" className="pt-4 ml-4 block mb-2 text-sm font-medium text-gray-900 
-    dark:text-white">Tags</label>
+    <Input htmlFor='title' onchange={(e) => setTitle(e.target.value)}
+      label='Your title' placeholder='title' type='email' />
     <div className='flex items-center'>
-      <textarea id="tags" rows={1} onChange={(e) => setTagName(e.target.value)} className="resize-none
-      block p-2.5 mr-4 w-64 text-sm text-gray-900 bg-gray-50 description-lg focus:ring-blue-500 
-      focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
-      dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-md
-      " placeholder="Tags" value={tagName as string}></textarea>
-      <button type="button" onClick={addTag} className="w-28 text-white bg-gradient-to-r 
-      from-black to-gray-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none 
-      focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 
-      text-center  mr-4">Add Tags</button>
+      <Input htmlFor='tags' onchange={(e) => setTagName(e.target.value)} label='Tags' placeholder='Tags' type='text' />
+      <Button onClick={addTag} text='Add Tags' />
       <HexColorPicker color={color as string} onChange={setColor} />
       {tags.length > 0 && tags.map((e, i) => <Tag key={e.name as string} tag={e} removeTag={() => { removeTag(e) }} />)}
     </div>
-
-    <label htmlFor="description" className="pt-4 ml-4 block mb-2 text-sm font-medium 
-    text-gray-900 dark:text-white">Your description</label>
-    <textarea id="description" rows={4} onChange={(e) => setDescription(e.target.value)}
-      className="resize-none block p-2.5 w-full text-sm text-gray-900 bg-gray-50 
-    description-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 
-    dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
-    dark:focus:border-blue-500" placeholder="Description"></textarea>
-
-
+    <Textarea onChange={(e) => setDescription(e.target.value)} />
     <div className="flex justify-between mr-6 max-w-full">
       <div></div>
-      <button type="button" onClick={() => createTodo()} className="text-white bg-gradient-to-r 
-      from-black to-gray-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none 
-      focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 
-      text-center">Valider</button>
+      <Button onClick={() => createTodo()} text='Valider' />
     </div>
 
   </div>
