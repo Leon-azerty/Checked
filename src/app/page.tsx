@@ -13,7 +13,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
 export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [tab, setTab] = useState<String>('');
+  const [tab, setTab] = useState<String>('listAll');
   const [filter, setFilter] = useState<String[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [tags, setTags] = useState<TagTypes[]>([]);

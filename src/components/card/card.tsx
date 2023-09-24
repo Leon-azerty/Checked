@@ -56,6 +56,7 @@ export default function Card(props: CardProps) {
   }
 
   if (props.tab == "listFavorite" && !is_favorite) return (<></>);
+  if (props.tab == "listAll" && is_deleted) return (<></>);
   if (props.tab == "listChecked" && !is_finished) return (<></>);
   if (props.tab == "listUnchecked" && is_finished) return (<></>);
   if (props.tab == "listDeleted" && !is_deleted) return (<></>);
