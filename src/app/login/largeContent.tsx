@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Form from './form'
 import Image from 'next/image'
+import CheckedDesc from './checkedDesc';
 
 export default function LargeContent() {
   const [windowSize, setWindow] = useState<{ width: number | undefined, height: number | undefined }>({ width: undefined, height: undefined });
@@ -10,14 +11,22 @@ export default function LargeContent() {
 
   if (windowSize.width! < 1024) {
     return <div className="flex flex-col items-center">
-      <Image className='animate-tinyBounce' src="/todos.png" width="500" height="100" alt="todos" />
+      <div className='w-11/12 '>
+        <Image className='animate-tinyBounce' src="/todos.png" width="500" height="100" alt="todos" />
+      </div>
       <div className='h-8'></div>
       <Form />
+      <CheckedDesc />
     </div>
   } else {
     return <div className='flex justify-around'>
-      <Image className='animate-tinyBounce' src="/todos.png" width="700" height="700" alt="todos" />
-      <Form />
+      <div className='w-7/12 lg:w-10/12 flex justify-center'>
+        <Image className='animate-tinyBounce' src="/todos.png" width="700" height="700" alt="todos" />
+      </div>
+      <div className="flex flex-col w-full md:w-10/12 md:h-5/12 justify-around items-center">
+        <Form />
+        <CheckedDesc />
+      </div>
     </div>
   }
 

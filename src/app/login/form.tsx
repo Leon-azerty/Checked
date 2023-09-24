@@ -6,6 +6,7 @@ import Input from "./input/input"
 
 export default function Form() {
   const [email, setEmail] = useState("")
+  const [isLogIn, setIsLogIn] = useState(true)
   const [password, setPassword] = useState("")
   const router = useRouter()
   const supabase = createClientComponentClient();
@@ -26,27 +27,41 @@ export default function Form() {
     }
     console.log("data", data, "error", error)
   }
-  return <div className="flex flex-col w-10/12 md:w-5/12 justify-around items-center">
 
-    <div className="flex flex-col items-center">
-      <Input type="text" htmlFor="email" label="Email" placeholder="johndoe@gmail.com" onchange={(e) => { setEmail(e.target.value) }} />
-      <Input type="password" htmlFor="password" label="Password" placeholder="*******" onchange={(e) => { setPassword(e.target.value) }} />
-      <div className="flex justify-around mt-4">
-        <Button text="Sign in" onClick={() => { SignIn({ email, password }) }} />
-        <Button text="Sign up" onClick={() => { SignUp({ email, password }) }} />
-      </div>
+  const SubmitForm = async () => {
+    console.log("submit form", isLogIn)
+    if (isLogIn) {
+      await SignIn({ email, password });
+    } else {
+      await SignUp({ email, password });
+    }
+  }
+
+
+  return <div className="w-80 h-70 lg:w-96 flex flex-col items-center 
+  bg-gray-200 rounded-xl mb-4" >
+    <div className="flex w-full h-12 items-center border-b border-gray-500">
+      <span onClick={() => setIsLogIn(true)} className={`w-6/12 h-full flex 
+      items-center justify-center border-r	border-gray-500 rounded-tl-xl
+      ${isLogIn ? "bg-gray-700" : ""}`}>
+        <p>Log In</p>
+      </span>
+      <span onClick={() => setIsLogIn(false)} className={`w-6/12 h-full flex 
+      items-center justify-center border-l border-gray-500 rounded-tr-xl
+      ${isLogIn ? "" : "bg-gray-700"}`}>
+        <p>Sign Up</p>
+      </span>
     </div>
-    <div className=" w-full md:w-10/12 flex justify-center">
-      <div className="text-xl w-full ">
-        <p>
-          Take control of your daily tasks and boost your productivity.
-        </p>
-        <br />
-        <p>
-          Look no further than Checked, the perfect todo app designed with
-          beginners in mind. Our user-friendly interface and intuitive features
-          make task management a breeze
-        </p>
+    <div className="flex flex-col w-60 justify-around items-center">
+      <div className="flex flex-col items-center pt-2">
+        <Input type="text" htmlFor="email" label="Email"
+          placeholder="johndoe@gmail.com" onchange={(e) => { setEmail(e.target.value) }} />
+        <Input type="password" htmlFor="password" label="Password"
+          placeholder="*******" onchange={(e) => { setPassword(e.target.value) }} />
+        <div className="flex justify-around my-4">
+          <Button text={isLogIn ? "Log in" : "Create an account"}
+            className={isLogIn ? "" : "w-44"} onClick={() => SubmitForm()} />
+        </div>
       </div>
     </div>
   </div>
