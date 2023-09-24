@@ -13,8 +13,8 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
 export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [tab, setTab] = useState<String>('listAll');
-  const [filter, setFilter] = useState<String[]>([]);
+  const [tab, setTab] = useState<string>('listAll');
+  const [filter, setFilter] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [tags, setTags] = useState<TagTypes[]>([]);
   const [todosToDelete, setTodosToDelete] = useState<Todo[]>([]);
@@ -32,7 +32,7 @@ export default function Home() {
     userIsLogged();
   },);
 
-  const fillTodoWithTag = async (tag_ids: String[]) => {
+  const fillTodoWithTag = async (tag_ids: string[]) => {
     let tagsForTodo: TagTypes[] = []
     for (const tag_id of tag_ids) {
       const tag = await getTag(tag_id);
@@ -41,7 +41,7 @@ export default function Home() {
     return tagsForTodo;
   }
 
-  const getMenuTags = async (tag_ids: String[], res: TagTypes[], nameTodo: String[]) => {
+  const getMenuTags = async (tag_ids: string[], res: TagTypes[], nameTodo: string[]) => {
     for (const tag_id of tag_ids) {
       const tag = await getTag(tag_id);
       if (!nameTodo.includes(tag.name)) {
@@ -55,7 +55,7 @@ export default function Home() {
   const fetchData = async () => {
     setIsLoading(true);
     const allTodos: Todo[] = await getAllTodos();
-    let nameTodo: String[] = [];
+    let nameTodo: string[] = [];
     let res: TagTypes[] = [];
     for (let i = 0; i < allTodos.length; i++) {
       const tag_ids = await getTag_ids(allTodos[i].id);
@@ -72,7 +72,7 @@ export default function Home() {
   }, []);
 
   async function getTag_ids(todosId: number) {
-    const tagsIds: String[] = [];
+    const tagsIds: string[] = [];
     const { data, error } = await supabase.from('todo_tag').select(`tag_id`).eq('todo_id', todosId)
     if (error) {
       console.error("error", error);
@@ -84,7 +84,7 @@ export default function Home() {
     return tagsIds;
   }
 
-  async function getTag(tag_id: String) {
+  async function getTag(tag_id: string) {
     const { data, error } = await supabase.from('tag').select(`*`).eq('id', tag_id)
     if (error) {
       console.error("error", error);

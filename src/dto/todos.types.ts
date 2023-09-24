@@ -2,8 +2,8 @@ import { TagTypes } from "./tag.types";
 
 export interface Todo {
   id: number;
-  title: String;
-  description: String;
+  title: string;
+  description: string;
   is_finished: boolean;
   is_favorite: boolean;
   is_deleted: boolean;

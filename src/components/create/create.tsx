@@ -13,8 +13,8 @@ export default function Create(props: CreateProps) {
   const [tags, setTags] = useState<TagTypes[]>([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [tagName, setTagName] = useState<String>("");
-  const [color, setColor] = useState<String>("#D9D9D9");
+  const [tagName, setTagName] = useState<string>("");
+  const [color, setColor] = useState<string>("#D9D9D9");
   const supabase = createClientComponentClient();
 
   if (!context) {
@@ -97,13 +97,13 @@ export default function Create(props: CreateProps) {
       block p-2.5 mr-4 w-64 text-sm text-gray-900 bg-gray-50 description-lg focus:ring-blue-500 
       focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
       dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-md
-      " placeholder="Tags" value={tagName}></textarea>
+      " placeholder="Tags" value={tagName as string}></textarea>
       <button type="button" onClick={addTag} className="w-28 text-white bg-gradient-to-r 
       from-black to-gray-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none 
       focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 
       text-center  mr-4">Add Tags</button>
-      <HexColorPicker color={color} onChange={setColor} />
-      {tags.length > 0 && tags.map((e, i) => <Tag key={e.name} tag={e} removeTag={() => { removeTag(e) }} />)}
+      <HexColorPicker color={color as string} onChange={setColor} />
+      {tags.length > 0 && tags.map((e, i) => <Tag key={e.name as string} tag={e} removeTag={() => { removeTag(e) }} />)}
     </div>
 
     <label htmlFor="description" className="pt-4 ml-4 block mb-2 text-sm font-medium 

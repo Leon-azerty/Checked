@@ -39,7 +39,7 @@ export default function Menu(props: MenuProps) {
     props.setTab('listDeleted');
   }
 
-  const addTagsInFilter = (name: String) => {
+  const addTagsInFilter = (name: string) => {
     if (props.filter.includes(name)) {
       console.log("on enleve le tag du filtre")
       props.setFilter(props.filter.filter((e) => e != name));
@@ -59,8 +59,8 @@ export default function Menu(props: MenuProps) {
     <IconButton icon={<RiDeleteBin6Line />} text='Trash' onClick={handleListTrash} iconColor={gray_700} className={`${props.tab == 'listTrash' ? "font-bold" : ""}`} />
     <div className="border-gray-400 border-solid border-b-2 rounded-md mx-8"></div>
     <div className="flex flex-wrap mt-2">
-      {tags.length > 0 && tags.map((e, i) => <TagMenu key={e.name + i.toString()} tag={e} addTagsInFilter={addTagsInFilter}></TagMenu>)}
+      {tags.length > 0 && tags.map((e, i) => <TagMenu key={e.name + i} tag={e} addTagsInFilter={addTagsInFilter}></TagMenu>)}
     </div>
-    {props.filter.length > 0 && props.filter.map((e, i) => <div key={e + i.toString()} className="flex flex-wrap mt-2">{e}</div>)}
+    {props.filter.length > 0 && props.filter.map((e, i) => <div key={e + i} className="flex flex-wrap mt-2">{e}</div>)}
   </div >
 }

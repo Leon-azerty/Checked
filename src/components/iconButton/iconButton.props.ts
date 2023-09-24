@@ -1,9 +1,9 @@
 import { MouseEventHandler } from "react";
 
 export interface IconButtonProps {
-  text: String;
+  text: string;
   onClick: MouseEventHandler<HTMLButtonElement>;
   icon: any;
-  iconColor: String;
-  className?: String;
+  iconColor: string;
+  className?: string;
 }

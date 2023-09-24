@@ -1,6 +1,6 @@
 export interface BodyProps {
-  tab: String;
-  setTab: (tab: String) => void;
+  tab: string;
+  setTab: (tab: string) => void;
   isLoading: boolean;
-  filter: String[];
+  filter: string[];
 }
