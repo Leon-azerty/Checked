@@ -4,4 +4,5 @@ export interface InputProps {
   placeholder: string;
   type: string;
   onchange: (e: any) => void;
+  value?: string;
 }

@@ -41,7 +41,6 @@ export function LeftContent(props: LeftContentProps) {
   return <div className="w-full hover:pl-4 duration-300">
     <div ref={hoverRef} className="flex items-center">
       <p className="text-3xl font-bold">{props.todo.title}</p>
-      {tags.map((e, i) => <Tag key={i} tag={e} removeTag={removeTag} />)}
       {!isDebug &&
         <IconContext.Provider value={{ size: '26', color: "#7E7E7E" }}>
           <div onClick={() => { console.log("ajout d'un tag WIP") }}>
@@ -49,6 +48,9 @@ export function LeftContent(props: LeftContentProps) {
           </div>
         </IconContext.Provider>
       }
+    </div>
+    <div className="flex flex-wrap">
+      {tags.map((e, i) => <Tag key={i} tag={e} removeTag={removeTag} />)}
     </div>
 
     {isUpdating ?
@@ -60,8 +62,8 @@ export function LeftContent(props: LeftContentProps) {
         {props.todo.description}</p>}
 
     <div className="flex flex-row-reverse">
-      {isUpdating && <Button text="update" onClick={() => { UpdateTodo() }} />}
-      {isUpdating && <Button text="cancel"
+      {isUpdating && <Button type="button" text="update" onClick={() => { UpdateTodo() }} />}
+      {isUpdating && <Button type="button" text="cancel"
         onClick={() => { setIsUpdating(false) }}
         className=" bg-gradient-to-r from-[#384854] to-[#d7d2cc]" />}
     </div>

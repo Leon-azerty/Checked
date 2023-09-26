@@ -20,6 +20,11 @@ export default function Home() {
   const [todosToDelete, setTodosToDelete] = useState<Todo[]>([]);
   const router = useRouter()
   const supabase = createClientComponentClient();
+  let isScreenMedium = false;
+  if (window.innerWidth > 768) {
+    isScreenMedium = true;
+  }
+  const [showMenu, setShowMenu] = useState<boolean>(isScreenMedium);
 
   const userIsLogged = async () => {
     const { data, error } = await supabase.auth.getSession()
@@ -99,8 +104,8 @@ export default function Home() {
       <TodosContext.Provider value={[todos, setTodos]}>
         <TagsContext.Provider value={[tags, setTags]}>
           <TodosToDeleteContext.Provider value={[todosToDelete, setTodosToDelete]}>
-            <Menu tab={tab} setTab={setTab} filter={filter} setFilter={setFilter} />
-            <Body tab={tab} setTab={setTab} isLoading={isLoading} filter={filter} />
+            {showMenu && <Menu tab={tab} setTab={setTab} filter={filter} setFilter={setFilter} />}
+            <Body tab={tab} setTab={setTab} isLoading={isLoading} filter={filter} setShowMenu={setShowMenu} showMenu={showMenu} />
           </TodosToDeleteContext.Provider>
         </TagsContext.Provider>
       </TodosContext.Provider>

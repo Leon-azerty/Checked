@@ -7,6 +7,7 @@ import Create from '../create/create';
 import CardLoader from '@/components/loader/cardLoader';
 import DeleteBar from '@/components/deleteBar/deleteBar';
 import { RiLogoutBoxRLine } from 'react-icons/ri';
+import { AiOutlineMenuFold, AiOutlineMenuUnfold } from 'react-icons/ai';
 import IconButton from '@/components/iconButton/iconButton';
 import { useRouter } from 'next/navigation'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
@@ -50,10 +51,12 @@ export default function Body(props: BodyProps) {
   }
 
   return <div className='flex-col bg-white w-full h-full min-h-screen max-w-screen'>
-    <div className='flex'>
-      <div className='w-full'>
-        <Title />
+    <div className='flex justify-between'>
+      <div className='w-20'>
+        {props.showMenu ? <IconButton icon={<AiOutlineMenuFold />} onClick={() => props.setShowMenu(false)} text='' iconColor='black' /> :
+          <IconButton icon={<AiOutlineMenuUnfold />} onClick={() => props.setShowMenu(true)} text='' iconColor='black' />}
       </div>
+      <Title />
       <div className='w-20'>
         <IconButton icon={<RiLogoutBoxRLine />} text=''
           onClick={logOut} iconColor='black'

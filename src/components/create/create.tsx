@@ -94,7 +94,8 @@ export default function Create(props: CreateProps) {
       <Input htmlFor='title' onchange={(e) => setTitle(e.target.value)}
         label='Your title' placeholder='title' type='email' />
       <div className='flex items-center'>
-        <Input htmlFor='tags' onchange={(e) => setTagName(e.target.value)} label='Tags' placeholder='Tags' type='text' />
+        <Input htmlFor='tags' onchange={(e) => setTagName(e.target.value)}
+          value={tagName} label='Tags' placeholder='Tags' type='text' />
         <Button type='button' onClick={addTag} text='Add Tags' />
         <HexColorPicker color={color as string} onChange={setColor} />
         {tags.length > 0 && tags.map((e, i) => <Tag key={e.name as string} tag={e} removeTag={() => { removeTag(e) }} />)}
