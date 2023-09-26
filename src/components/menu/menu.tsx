@@ -50,17 +50,17 @@ export default function Menu(props: MenuProps) {
     return;
   }
 
-  return <div className="bg-white w-72 border-white-500 border-solid border-r-4 " >
+  return <aside className="bg-white w-72 border-white-500 border-solid border-r-4 " >
     <IconButton icon={<AiOutlinePlusCircle />} text='Create Todo' onClick={handleCreateTodo} iconColor='black' className={`${props.tab == 'create' ? "font-bold" : ""}`} />
     <IconButton icon={<BsListNested />} text='All' onClick={handleListAllTodos} iconColor='black' className={`${props.tab == 'listAll' ? "font-bold" : ""}`} />
     <IconButton icon={<AiFillStar />} text='Favorites' onClick={handleListFavoriteTodos} iconColor={starYellow} className={`${props.tab == 'listFavorite' ? "font-bold" : ""}`} />
     <IconButton icon={<AiFillCheckSquare />} text='Checked' onClick={handleListCheckedTodos} iconColor={gray_700} className={`${props.tab == 'listChecked' ? "font-bold" : ""}`} />
     <IconButton icon={<AiTwotoneCheckSquare />} text='Unchecked' onClick={handleListUncheckedTodos} iconColor={gray_700} className={`${props.tab == 'listUnchecked' ? "font-bold" : ""}`} />
     <IconButton icon={<RiDeleteBin6Line />} text='Trash' onClick={handleListTrash} iconColor={gray_700} className={`${props.tab == 'listTrash' ? "font-bold" : ""}`} />
-    <div className="border-gray-400 border-solid border-b-2 rounded-md mx-8"></div>
+    <hr className="border-gray-400 border-solid border-b-2 rounded-lg mx-8"></hr>
     <div className="flex flex-wrap mt-2">
       {tags.length > 0 && tags.map((e, i) => <TagMenu key={e.name + i} tag={e} addTagsInFilter={addTagsInFilter}></TagMenu>)}
     </div>
     {props.filter.length > 0 && props.filter.map((e, i) => <div key={e + i} className="flex flex-wrap mt-2">{e}</div>)}
-  </div >
+  </aside >
 }

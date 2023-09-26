@@ -94,7 +94,7 @@ export default function Home() {
   }
 
   return (
-    <main className='w-screen h-full min-h-screen flex text-black'>
+    <div className='w-screen h-full min-h-screen flex text-black'>
       <TodosContext.Provider value={[todos, setTodos]}>
         <TagsContext.Provider value={[tags, setTags]}>
           <TodosToDeleteContext.Provider value={[todosToDelete, setTodosToDelete]}>
@@ -103,6 +103,6 @@ export default function Home() {
           </TodosToDeleteContext.Provider>
         </TagsContext.Provider>
       </TodosContext.Provider>
-    </main>
+    </div>
   )
 }

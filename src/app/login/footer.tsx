@@ -5,7 +5,7 @@ export default function Footer() {
   return <div className="flex my-8">
     <div className="w-5/12 md:w-8/12"></div>
     <div className="flex justify-around items-center">
-      <p className="md:mx-4">Created by @Leon</p>
+      <address className="md:mx-4">Created by @Leon</address>
       <IconContext.Provider value={{
         size: '44',
       }}>

@@ -1,5 +1,5 @@
 export default function MenuDesc() {
-  return <div className="flex flex-col w-10/12 md:w-7/12 text-xl md:ml-14">
+  return <section className="flex flex-col w-10/12 md:w-7/12 text-xl md:ml-14">
     <p >Simplify your life with Checked&apos; intuitive menu for todo sorting.
       With just a few clicks, you can effortlessly organize your tasks based
       on multiple criteria:
@@ -16,5 +16,5 @@ export default function MenuDesc() {
       have full control and clarity in your todo journey. Stay organized,
       stay efficient, and stay on top of your tasks with Checked.
     </p>
-  </div>
+  </section>
 }

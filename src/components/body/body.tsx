@@ -60,10 +60,11 @@ export default function Body(props: BodyProps) {
         />
       </div>
     </div>
-
-    {props.tab == "create" && <Create setTab={props.setTab} />}
-    {props.isLoading && <CardLoader />}
-    {props.tab == "listDeleted" && <DeleteBar />}
-    {todosFiltered.length > 0 && todosFiltered.map((e, i) => <Card todo={e} id={i} key={e.id} tab={props.tab} />)}
+    <main>
+      {props.tab == "create" && <Create setTab={props.setTab} />}
+      {props.isLoading && <CardLoader />}
+      {props.tab == "listDeleted" && <DeleteBar />}
+      {todosFiltered.length > 0 && todosFiltered.map((e, i) => <Card todo={e} id={i} key={e.id} tab={props.tab} />)}
+    </main>
   </div>
 }

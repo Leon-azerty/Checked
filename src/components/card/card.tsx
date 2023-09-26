@@ -60,7 +60,7 @@ export default function Card(props: CardProps) {
   if (props.tab == "listChecked" && !is_finished) return (<></>);
   if (props.tab == "listUnchecked" && is_finished) return (<></>);
   if (props.tab == "listDeleted" && !is_deleted) return (<></>);
-  return <div id={`card-${props.id}`} onClick={addTodoToDelete} className={` 
+  return <article id={`card-${props.id}`} onClick={addTodoToDelete} className={` 
   rounded-3xl p-6 m-6 border-[#D9D9D9] border-solid border-4 flex flex-col hover:pl-4 
   transition-all ease-in duration-500 animate-wiggle hover:scale-y-110
   ${is_finished ? "background-gradient-left-to-right border-[#22c55e]" : ""} 
@@ -76,6 +76,6 @@ export default function Card(props: CardProps) {
         todo={props.todo}
       />
     </div>
-  </div>
+  </article>
 
 }

@@ -81,6 +81,11 @@ export default function Create(props: CreateProps) {
     setTags(tags.filter(e => e !== tag));
   }
 
+  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   console.log("submit");
+  // }
+
   return <div className="pt-4 animate-wiggle">
     <div className='flex justify-between mr-6' onClick={() => { props.setTab("ListAll") }}>
       <div></div>
@@ -88,6 +93,7 @@ export default function Create(props: CreateProps) {
         <AiOutlineCloseCircle />
       </IconContext.Provider>
     </div>
+    {/* <form onSubmit={(e) => handleSubmit(e)}> */}
     <Input htmlFor='title' onchange={(e) => setTitle(e.target.value)}
       label='Your title' placeholder='title' type='email' />
     <div className='flex items-center'>
@@ -101,6 +107,7 @@ export default function Create(props: CreateProps) {
       <div></div>
       <Button onClick={() => createTodo()} text='Valider' />
     </div>
+    {/* </form> */}
 
   </div>
 
