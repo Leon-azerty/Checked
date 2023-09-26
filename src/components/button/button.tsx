@@ -1,7 +1,7 @@
 import { ButtonProps } from './button.props';
 
 export default function Button(props: ButtonProps) {
-  return <button type="button" onClick={props.onClick}
+  return <button type={props.type} onClick={props.onClick}
     className={`${props.className} w-28 text-white
   bg-gradient-to-r from-black to-gray-700
   hover:bg-gradient-to-br focus:ring-4 focus:outline-none 

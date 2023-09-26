@@ -14,7 +14,8 @@ export default function Form() {
   const SignIn = async ({ email, password }: { email: string, password: string }) => {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password, })
     console.log("route = /login", "data", data, "error", error)
-    if (data !== null)
+    console.log("data", data);
+    if (error === null)
       router.push('/');
   }
 
@@ -28,8 +29,9 @@ export default function Form() {
     console.log("data", data, "error", error)
   }
 
-  const SubmitForm = async () => {
-    console.log("submit form", isLogIn)
+  const SubmitForm = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    console.log("submit form with button", isLogIn, email, password)
     if (isLogIn) {
       await SignIn({ email, password });
     } else {
@@ -38,7 +40,7 @@ export default function Form() {
   }
 
 
-  return <div className="w-80 h-70 lg:w-96 flex flex-col items-center 
+  return <form className="w-80 h-70 lg:w-96 flex flex-col items-center 
   bg-gray-200 rounded-xl mb-4" >
     <div className="flex w-full h-12 items-center border-b border-gray-500">
       <span onClick={() => setIsLogIn(true)} className={`w-6/12 h-full flex 
@@ -59,10 +61,10 @@ export default function Form() {
         <Input type="password" htmlFor="password" label="Password"
           placeholder="*******" onchange={(e) => { setPassword(e.target.value) }} />
         <div className="flex justify-around my-4">
-          <Button text={isLogIn ? "Log in" : "Create an account"}
-            className={isLogIn ? "" : "w-44"} onClick={() => SubmitForm()} />
+          <Button type="submit" text={isLogIn ? "Log in" : "Create an account"}
+            className={isLogIn ? "" : "w-44"} onClick={(e) => SubmitForm(e)} />
         </div>
       </div>
     </div>
-  </div>
+  </form>
 }
