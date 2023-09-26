@@ -13,8 +13,6 @@ export default function Form() {
 
   const SignIn = async ({ email, password }: { email: string, password: string }) => {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password, })
-    console.log("route = /login", "data", data, "error", error)
-    console.log("data", data);
     if (error === null)
       router.push('/');
   }

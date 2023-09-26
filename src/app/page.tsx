@@ -24,9 +24,9 @@ export default function Home() {
   const userIsLogged = async () => {
     const { data, error } = await supabase.auth.getSession()
     console.log("data", data, "error", error)
-    // if (data.session === null) {
-    //   router.push('/login');
-    // }
+    if (data.session === null) {
+      router.push('/login');
+    }
   }
 
   useEffect(() => {

@@ -49,7 +49,9 @@ export default function Create(props: CreateProps) {
 
   }
 
-  const createTodo = async () => {
+  const createTodo = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    console.log("submit");
     console.log('click');
     if (title == "" || description == "") return console.log('empty');
     // mettre un message d'erreur
@@ -81,11 +83,6 @@ export default function Create(props: CreateProps) {
     setTags(tags.filter(e => e !== tag));
   }
 
-  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   console.log("submit");
-  // }
-
   return <div className="pt-4 animate-wiggle">
     <div className='flex justify-between mr-6' onClick={() => { props.setTab("ListAll") }}>
       <div></div>
@@ -93,21 +90,21 @@ export default function Create(props: CreateProps) {
         <AiOutlineCloseCircle />
       </IconContext.Provider>
     </div>
-    {/* <form onSubmit={(e) => handleSubmit(e)}> */}
-    <Input htmlFor='title' onchange={(e) => setTitle(e.target.value)}
-      label='Your title' placeholder='title' type='email' />
-    <div className='flex items-center'>
-      <Input htmlFor='tags' onchange={(e) => setTagName(e.target.value)} label='Tags' placeholder='Tags' type='text' />
-      <Button onClick={addTag} text='Add Tags' />
-      <HexColorPicker color={color as string} onChange={setColor} />
-      {tags.length > 0 && tags.map((e, i) => <Tag key={e.name as string} tag={e} removeTag={() => { removeTag(e) }} />)}
-    </div>
-    <Textarea onChange={(e) => setDescription(e.target.value)} />
-    <div className="flex justify-between mr-6 max-w-full">
-      <div></div>
-      <Button onClick={() => createTodo()} text='Valider' />
-    </div>
-    {/* </form> */}
+    <form >
+      <Input htmlFor='title' onchange={(e) => setTitle(e.target.value)}
+        label='Your title' placeholder='title' type='email' />
+      <div className='flex items-center'>
+        <Input htmlFor='tags' onchange={(e) => setTagName(e.target.value)} label='Tags' placeholder='Tags' type='text' />
+        <Button type='button' onClick={addTag} text='Add Tags' />
+        <HexColorPicker color={color as string} onChange={setColor} />
+        {tags.length > 0 && tags.map((e, i) => <Tag key={e.name as string} tag={e} removeTag={() => { removeTag(e) }} />)}
+      </div>
+      <Textarea onChange={(e) => setDescription(e.target.value)} />
+      <div className="flex justify-between mr-6 max-w-full">
+        <div></div>
+        <Button type='submit' onClick={(e) => createTodo(e)} text='Valider' />
+      </div>
+    </form>
 
   </div>
 
