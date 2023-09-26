@@ -90,15 +90,21 @@ export default function Create(props: CreateProps) {
         <AiOutlineCloseCircle />
       </IconContext.Provider>
     </div>
-    <form >
+    <form className='p-2'>
       <Input htmlFor='title' onchange={(e) => setTitle(e.target.value)}
         label='Your title' placeholder='title' type='email' />
-      <div className='flex items-center'>
-        <Input htmlFor='tags' onchange={(e) => setTagName(e.target.value)}
-          value={tagName} label='Tags' placeholder='Tags' type='text' />
-        <Button type='button' onClick={addTag} text='Add Tags' />
-        <HexColorPicker color={color as string} onChange={setColor} />
-        {tags.length > 0 && tags.map((e, i) => <Tag key={e.name as string} tag={e} removeTag={() => { removeTag(e) }} />)}
+      <div className='flex flex-wrap'>
+        <div className='my-2'>
+          <Input htmlFor='tags' onchange={(e) => setTagName(e.target.value)}
+            value={tagName} label='Tags' placeholder='Tags' type='text' />
+          <Button type='button' onClick={addTag} text='Add Tags' />
+        </div>
+        <div className='my-2 flex h-full w-full'>
+          <HexColorPicker color={color as string} className='w-6/12' onChange={setColor} />
+          <div className='h-full w-6/12 flex flex-wrap justify-start'>
+            {tags.length > 0 && tags.map((e, i) => <Tag key={e.name as string} tag={e} removeTag={() => { removeTag(e) }} />)}
+          </div>
+        </div>
       </div>
       <Textarea onChange={(e) => setDescription(e.target.value)} />
       <div className="flex justify-between mr-6 max-w-full">

@@ -1,7 +1,7 @@
 import { InputProps } from "./input.props";
 
 export default function Input(props: InputProps) {
-  return <div>
+  return <div className="m-2">
     <label htmlFor={props.htmlFor} className="block mb-2 text-sm 
     font-medium text-gray-900 dark:text-white">
       {props.label}
