@@ -16,6 +16,7 @@ export default function Create(props: CreateProps) {
   const [tags, setTags] = useState<TagTypes[]>([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [isTitleFilled, setIsTitleFilled] = useState(false);
   const [tagName, setTagName] = useState<string>("");
   const [color, setColor] = useState<string>("#D9D9D9");
   const supabase = createClientComponentClient();
@@ -51,10 +52,10 @@ export default function Create(props: CreateProps) {
 
   const createTodo = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log("submit");
-    console.log('click');
-    if (title == "" || description == "") return console.log('empty');
-    // mettre un message d'erreur
+    if (title == "") {
+      setIsTitleFilled(true);
+      return;
+    }
     const todo_id = await insertTodo();
     //ajouter dans la table todo_tag
     for (const tag of tags) {
@@ -92,7 +93,7 @@ export default function Create(props: CreateProps) {
     </div>
     <form className='p-2'>
       <Input htmlFor='title' onchange={(e) => setTitle(e.target.value)}
-        label='Your title' placeholder='title' type='email' />
+        label='Your title' placeholder='title' type='email' isError={isTitleFilled} />
       <div className='flex flex-wrap'>
         <div className='my-2'>
           <Input htmlFor='tags' onchange={(e) => setTagName(e.target.value)}

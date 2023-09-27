@@ -5,5 +5,5 @@ export interface InputProps {
   type: string;
   onchange: (e: any) => void;
   value?: string;
-  isError: boolean;
+  isError?: boolean;
 }
