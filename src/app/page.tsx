@@ -21,7 +21,7 @@ export default function Home() {
   const router = useRouter()
   const supabase = createClientComponentClient();
   let isScreenMedium = false;
-  if (window.innerWidth > 768) {
+  if (typeof window !== "undefined" && window.innerWidth > 768) {
     isScreenMedium = true;
   }
   const [showMenu, setShowMenu] = useState<boolean>(isScreenMedium);
