@@ -1,8 +1,9 @@
 import Button from "@/components/button/button"
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Input from "../../components/input/input"
+import { ModalTextContext } from "@/context/modalTextContext"
 
 export default function Form() {
   const [email, setEmail] = useState("")
@@ -12,22 +13,31 @@ export default function Form() {
   const [isPasswordError, setIsPasswordError] = useState(false);
   const router = useRouter()
   const supabase = createClientComponentClient();
+  const context = useContext(ModalTextContext);
+  if (!context) {
+    throw new Error('modalTextContext must be used within a ModalTextContext');
+  }
+  const [modalText, setModalText] = context;
 
   const SignIn = async ({ email, password }: { email: string, password: string }) => {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password, })
     console.log("sign in")
-    if (error === null)
+    if (error === null) {
       router.push('/');
+    } else {
+      console.log("error", error)
+      setModalText(error.message);
+    }
   }
 
   const SignUp = async ({ email, password }: { email: string, password: string }) => {
     const { data, error } = await supabase.auth.signUp({ email, password })
-    alert("Please check your email to confirm your account");
     if (!error) {
-      console.log("no error")
-      router.push('/');
+      setModalText("Please check your email to confirm your account");
+    } else {
+      console.log("error", error)
+      setModalText(error.message);
     }
-    console.log("data", data, "error", error)
   }
 
   const SubmitForm = async (event: React.MouseEvent<HTMLButtonElement>) => {
