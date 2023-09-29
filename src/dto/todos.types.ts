@@ -8,4 +8,6 @@ export interface Todo {
   is_favorite: boolean;
   is_deleted: boolean;
   tags: TagTypes[];
+  deadline: string;
+  deadline_type: string;
 }

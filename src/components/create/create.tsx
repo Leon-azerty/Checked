@@ -11,6 +11,8 @@ import Input from '../input/input';
 import Textarea from '../textarea/textarea';
 import Button from '../button/button';
 import { ModalTextContext } from '@/context/modalTextContext';
+import Checkbox from '../checkbox/checkbox';
+import Radio from '../radio/radio';
 
 export default function Create(props: CreateProps) {
   const context = useContext(TodosContext);
@@ -19,7 +21,11 @@ export default function Create(props: CreateProps) {
   const [description, setDescription] = useState("");
   const [isTitleFilled, setIsTitleFilled] = useState(false);
   const [tagName, setTagName] = useState<string>("");
+  const [date, setDate] = useState<string>("");
+  const [time, setTime] = useState<string>("");
   const [color, setColor] = useState<string>("#D9D9D9");
+  const [isDeadline, setIsDeadline] = useState<boolean>(false);
+  const [deadlineType, setDeadlineType] = useState<string>("");
   const supabase = createClientComponentClient();
   const modalContext = useContext(ModalTextContext);
 
@@ -42,6 +48,8 @@ export default function Create(props: CreateProps) {
       is_favorite: false,
       is_deleted: false,
       author_id: id,
+      deadline: date + " " + time,
+      deadline_type: deadlineType,
     }).select('id');
     if (error) {
       setModalText(error.message);
@@ -65,6 +73,8 @@ export default function Create(props: CreateProps) {
 
   const createTodo = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    console.log(date);
+    console.log(time);
     if (title == "") {
       setIsTitleFilled(true);
       return;
@@ -76,7 +86,8 @@ export default function Create(props: CreateProps) {
     }
     setTodos([...todos, {
       title: title, description: description, is_finished: false,
-      is_favorite: false, is_deleted: false, id: todo_id, tags: tags
+      is_favorite: false, is_deleted: false, id: todo_id, tags: tags,
+      deadline: date + " " + time, deadline_type: deadlineType,
     }]);
     setTitle("");
     setDescription("");
@@ -110,6 +121,19 @@ export default function Create(props: CreateProps) {
     <form className='p-2'>
       <Input htmlFor='title' onchange={(e) => setTitle(e.target.value)}
         label='Your title' placeholder='title' type='email' isError={isTitleFilled} />
+      <Checkbox htmlFor='deadline' onchange={(e) => { setIsDeadline(!isDeadline) }}
+        label='Add Deadline' placeholder='' />
+      {isDeadline && <Input htmlFor='date' onchange={(e) => { setDate(e.target.value) }}
+        label='Date' placeholder='' type='date' />}
+      {isDeadline && <Input htmlFor='time' onchange={(e) => { setTime(e.target.value) }}
+        label='Time' placeholder='' type='time' />}
+      {isDeadline && <Radio htmlFor='To_do_The' onchange={(e) => { setDeadlineType("to do the") }}
+        label='To_do_The' placeholder='' name='deadline_type' />}
+      {isDeadline && <Radio htmlFor='Before_The' onchange={(e) => { setDeadlineType("before the") }}
+        label='Before_The' placeholder='' name='deadline_type' />}
+
+
+
       <div className='flex flex-wrap'>
         <div className='my-2'>
           <Input htmlFor='tags' onchange={(e) => setTagName(e.target.value)}
