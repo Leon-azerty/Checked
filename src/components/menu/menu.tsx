@@ -59,7 +59,7 @@ export default function Menu(props: MenuProps) {
     <IconButton icon={<RiDeleteBin6Line />} text='Trash' onClick={handleListTrash} iconColor={gray_700} className={`${props.tab == 'listTrash' ? "font-bold" : ""}`} />
     <hr className="border-gray-400 border-solid border-b-2 rounded-lg mx-8"></hr>
     <div className="flex flex-wrap mt-2">
-      {tags.length > 0 && tags.map((e, i) => <TagMenu key={e.name + i} tag={e} addTagsInFilter={addTagsInFilter}></TagMenu>)}
+      {tags.length > 0 && tags.map((e, i) => <TagMenu key={e.name + i} tag={e} onClick={addTagsInFilter}></TagMenu>)}
     </div>
     {props.filter.length > 0 && props.filter.map((e, i) => <div key={e + i} className="flex flex-wrap mt-2">{e}</div>)}
   </aside >

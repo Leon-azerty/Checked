@@ -40,11 +40,11 @@ export function LeftContent(props: LeftContentProps) {
 
   return <div className="w-full hover:pl-4 duration-300">
     <div ref={hoverRef} className="flex items-center w-full">
-      <div className="flex w-full justify-between">
+      <div className="flex w-full justify-between flex-col md:flex-row">
         <p className="text-3xl font-bold">{props.todo.title}</p>
-        <div className="flex">
-          <p className="flex bg-gray-300 rounded-xl items-center px-3 m-1">{props.todo.deadline_type}</p>
-          <p className="flex bg-gray-300 rounded-xl items-center px-3 m-1">{props.todo.deadline}</p>
+        <div className="flex flex-col md:flex-row">
+          <p className="flex bg-gray-300 rounded-xl items-center px-3 m-1 w-fit">{props.todo.deadline_type}</p>
+          <p className="flex bg-gray-300 rounded-xl items-center px-3 m-1 w-fit">{props.todo.deadline}</p>
         </div>
       </div>
       {
@@ -57,7 +57,7 @@ export function LeftContent(props: LeftContentProps) {
       }
     </div >
     <div className="flex flex-wrap">
-      {tags.map((e, i) => <Tag key={i} tag={e} removeTag={removeTag} />)}
+      {tags.map((e, i) => <Tag key={i} tag={e} onClick={removeTag} />)}
     </div>
 
     {

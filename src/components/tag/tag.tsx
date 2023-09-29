@@ -11,7 +11,7 @@ export default function Tag(props: TagProps) {
   }
   return <article ref={hoverRef} className='flex items-center h-8'>
     <div style={{ backgroundColor: props.tag.color }} className="mx-1 rounded-lg px-2">#{props.tag.name}</div>
-    {isHover && <div onClick={() => { props.removeTag(props.tag) }}><ImCancelCircle /></div>}
+    {isHover && <div onClick={() => { props.onClick(props.tag) }}><ImCancelCircle /></div>}
   </article>
 
 }

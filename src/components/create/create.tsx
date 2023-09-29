@@ -13,6 +13,8 @@ import Button from '../button/button';
 import { ModalTextContext } from '@/context/modalTextContext';
 import Checkbox from '../checkbox/checkbox';
 import Radio from '../radio/radio';
+import { TagsContext } from '@/context/tagsContext';
+import TagMenu from '../tagMenu/tagMenu';
 
 export default function Create(props: CreateProps) {
   const context = useContext(TodosContext);
@@ -28,7 +30,12 @@ export default function Create(props: CreateProps) {
   const [deadlineType, setDeadlineType] = useState<string>("");
   const supabase = createClientComponentClient();
   const modalContext = useContext(ModalTextContext);
+  const tagsContext = useContext(TagsContext);
 
+  if (!tagsContext) {
+    throw new Error('useTagsContext must be used within a TagsProvider');
+  }
+  const [existantTags,] = tagsContext;
   if (!context) {
     throw new Error('useTodosContext must be used within a TodosProvider');
   }
@@ -48,8 +55,8 @@ export default function Create(props: CreateProps) {
       is_favorite: false,
       is_deleted: false,
       author_id: id,
-      deadline: date + " " + time,
-      deadline_type: deadlineType,
+      deadline: date + " " + time != " " ? date + " " + time : null,
+      deadline_type: deadlineType != "" ? deadlineType : null,
     }).select('id');
     if (error) {
       setModalText(error.message);
@@ -111,6 +118,10 @@ export default function Create(props: CreateProps) {
     setTags(tags.filter(e => e !== tag));
   }
 
+  const addExistantTag = (tag: TagTypes) => {
+    setTags([...tags, tag]);
+  }
+
   return <div className="pt-4 animate-wiggle">
     <div className='flex justify-between mr-6' onClick={() => { props.setTab("ListAll") }}>
       <div></div>
@@ -132,10 +143,11 @@ export default function Create(props: CreateProps) {
       {isDeadline && <Radio htmlFor='Before_The' onchange={(e) => { setDeadlineType("before the") }}
         label='Before_The' placeholder='' name='deadline_type' />}
 
-
-
       <div className='flex flex-wrap'>
         <div className='my-2'>
+          <div className='flex'>
+            {existantTags.length > 0 && existantTags.map((e, i) => <TagMenu key={e.name as string} tag={e} onClick={() => { addExistantTag(e) }} />)}
+          </div>
           <Input htmlFor='tags' onchange={(e) => setTagName(e.target.value)}
             value={tagName} label='Tags' placeholder='Tags' type='text' />
           <Button type='button' onClick={addTag} text='Add Tags' />
@@ -143,7 +155,7 @@ export default function Create(props: CreateProps) {
         <div className='my-2 flex h-full w-full'>
           <HexColorPicker color={color as string} className='w-6/12' onChange={setColor} />
           <div className='h-full w-6/12 flex flex-wrap justify-start'>
-            {tags.length > 0 && tags.map((e, i) => <Tag key={e.name as string} tag={e} removeTag={() => { removeTag(e) }} />)}
+            {tags.length > 0 && tags.map((e, i) => <Tag key={e.name as string} tag={e} onClick={() => { removeTag(e) }} />)}
           </div>
         </div>
       </div>
@@ -152,8 +164,8 @@ export default function Create(props: CreateProps) {
         <div></div>
         <Button type='submit' onClick={(e) => createTodo(e)} text='Valider' />
       </div>
-    </form>
+    </form >
 
-  </div>
+  </div >
 
 }
