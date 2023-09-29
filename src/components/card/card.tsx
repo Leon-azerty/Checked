@@ -6,12 +6,14 @@ import { RightCard } from "./rightCard";
 import { Star } from "./star";
 import { TodosToDeleteContext } from "@/context/todoToDeleteContext";
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { ModalTextContext } from '@/context/modalTextContext';
 
 export default function Card(props: CardProps) {
   const [is_finished, setIs_finished] = useState(props.todo.is_finished);
   const [is_favorite, setIs_favorite] = useState(props.todo.is_favorite);
   const [is_deleted, setIs_deleted] = useState(props.todo.is_deleted);
   const supabase = createClientComponentClient();
+  const modalContext = useContext(ModalTextContext);
 
   const context = useContext(TodosToDeleteContext);
   if (!context) {
@@ -19,12 +21,19 @@ export default function Card(props: CardProps) {
     return <></>
   }
   const [todosToDeleteContext, setTodosToDeleteContext] = context;
+  if (!modalContext) {
+    throw new Error('use modalContext must be used within a modalProvider');
+  }
+  const [, setModalText] = modalContext;
 
   const handleTodoState = async () => {
     const { data, error } = await supabase.from('todo').update({
       is_finished: !is_finished
     }).eq('id', props.todo.id);
-    if (error) return console.log(error);
+    if (error) {
+      setModalText(error.message);
+      return console.log(error);
+    }
     setIs_finished(!is_finished);
   }
 
@@ -32,8 +41,10 @@ export default function Card(props: CardProps) {
     setIs_deleted(true);
     const { data, error } = await supabase.from('todo')
       .update({ is_deleted: true }).eq('id', props.todo.id);
-    if (error) return console.log(error);
-
+    if (error) {
+      setModalText(error.message);
+      return console.log(error);
+    }
     // la ligne update quand on delete la todo
     // il faudrait mettre d'abord une anim pour montrer qu'on delete
     // puis seulement quand l'anim est finit on delete
@@ -45,6 +56,7 @@ export default function Card(props: CardProps) {
       is_favorite: !is_favorite
     }).eq('id', props.todo.id);
     if (error) {
+      setModalText(error.message);
       return console.log("error ", error);
     }
     setIs_favorite(!is_favorite);

@@ -10,6 +10,7 @@ import { TagTypes } from '../dto/tag.types';
 import { TodosToDeleteContext } from '@/context/todoToDeleteContext';
 import { useRouter } from 'next/navigation'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { ModalTextContext } from '@/context/modalTextContext';
 
 export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -20,6 +21,7 @@ export default function Home() {
   const [todosToDelete, setTodosToDelete] = useState<Todo[]>([]);
   const router = useRouter()
   const supabase = createClientComponentClient();
+  const [modalText, setModalText] = useState<string>('');
   let isScreenMedium = false;
   if (typeof window !== "undefined" && window.innerWidth > 768) {
     isScreenMedium = true;
@@ -81,6 +83,7 @@ export default function Home() {
     const tagsIds: string[] = [];
     const { data, error } = await supabase.from('todo_tag').select(`tag_id`).eq('todo_id', todosId)
     if (error) {
+      setModalText(error.message);
       console.error("error", error);
       return []
     }
@@ -93,6 +96,7 @@ export default function Home() {
   async function getTag(tag_id: string) {
     const { data, error } = await supabase.from('tag').select(`*`).eq('id', tag_id)
     if (error) {
+      setModalText(error.message);
       console.error("error", error);
       return {}
     }
@@ -101,14 +105,16 @@ export default function Home() {
 
   return (
     <div className='w-screen h-full min-h-screen flex text-black'>
-      <TodosContext.Provider value={[todos, setTodos]}>
-        <TagsContext.Provider value={[tags, setTags]}>
-          <TodosToDeleteContext.Provider value={[todosToDelete, setTodosToDelete]}>
-            {showMenu && <Menu tab={tab} setTab={setTab} filter={filter} setFilter={setFilter} />}
-            <Body tab={tab} setTab={setTab} isLoading={isLoading} filter={filter} setShowMenu={setShowMenu} showMenu={showMenu} />
-          </TodosToDeleteContext.Provider>
-        </TagsContext.Provider>
-      </TodosContext.Provider>
+      <ModalTextContext.Provider value={[modalText, setModalText]}>
+        <TodosContext.Provider value={[todos, setTodos]}>
+          <TagsContext.Provider value={[tags, setTags]}>
+            <TodosToDeleteContext.Provider value={[todosToDelete, setTodosToDelete]}>
+              {showMenu && <Menu tab={tab} setTab={setTab} filter={filter} setFilter={setFilter} />}
+              <Body tab={tab} setTab={setTab} isLoading={isLoading} filter={filter} setShowMenu={setShowMenu} showMenu={showMenu} />
+            </TodosToDeleteContext.Provider>
+          </TagsContext.Provider>
+        </TodosContext.Provider>
+      </ModalTextContext.Provider>
     </div>
   )
 }

@@ -10,6 +10,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import Input from '../input/input';
 import Textarea from '../textarea/textarea';
 import Button from '../button/button';
+import { ModalTextContext } from '@/context/modalTextContext';
 
 export default function Create(props: CreateProps) {
   const context = useContext(TodosContext);
@@ -20,11 +21,17 @@ export default function Create(props: CreateProps) {
   const [tagName, setTagName] = useState<string>("");
   const [color, setColor] = useState<string>("#D9D9D9");
   const supabase = createClientComponentClient();
+  const modalContext = useContext(ModalTextContext);
 
   if (!context) {
     throw new Error('useTodosContext must be used within a TodosProvider');
   }
   const [todos, setTodos] = context;
+  if (!modalContext) {
+    throw new Error('use modalContext must be used within a modalProvider');
+  }
+  const [, setModalText] = modalContext;
+
 
   const insertTodo = async () => {
     const id = (await supabase.auth.getUser()).data.user?.id;
@@ -36,7 +43,10 @@ export default function Create(props: CreateProps) {
       is_deleted: false,
       author_id: id,
     }).select('id');
-    if (error) return console.log(error);
+    if (error) {
+      setModalText(error.message);
+      return console.log(error);
+    }
     return data[0].id;
   }
 
@@ -45,7 +55,10 @@ export default function Create(props: CreateProps) {
       todo_id: todo_id,
       tag_id: tag_id,
     })
-    if (error) return console.log(error)
+    if (error) {
+      setModalText(error.message);
+      return console.log(error)
+    }
     console.log(data);
 
   }
@@ -75,7 +88,10 @@ export default function Create(props: CreateProps) {
       name: tagName,
       color: color,
     }).select('id');
-    if (error) return console.log(error);
+    if (error) {
+      setModalText(error.message);
+      return console.log(error);
+    }
     setTags([...tags, { id: data[0].id, name: tagName, color: color }]);
     setTagName("");
   }

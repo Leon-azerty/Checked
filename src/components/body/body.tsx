@@ -13,16 +13,22 @@ import { useRouter } from 'next/navigation'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Todo } from '@/dto/todos.types';
 import { TagTypes } from '@/dto/tag.types';
+import { ModalTextContext } from '@/context/modalTextContext';
 
 export default function Body(props: BodyProps) {
   const router = useRouter()
   const context = useContext(TodosContext);
   const supabase = createClientComponentClient();
+  const modalContext = useContext(ModalTextContext);
 
   if (!context) {
     throw new Error('useTodosContext must be used within a TodosProvider');
   }
   const [todos,] = context;
+  if (!modalContext) {
+    throw new Error('use modalContext must be used within a modalProvider');
+  }
+  const [, setModalText] = modalContext;
   let todosFiltered: Todo[] = todos;
 
   function getNameTags(tags: TagTypes) {
@@ -43,6 +49,7 @@ export default function Body(props: BodyProps) {
   const logOut = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) {
+      setModalText(error.message);
       console.log(error);
     } else {
       console.log("redirect to login")

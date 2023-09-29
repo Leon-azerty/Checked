@@ -5,11 +5,13 @@ import { TodosToDeleteContext } from "@/context/todoToDeleteContext";
 import TodosToDelete from "../todosToDelete/todosToDelete";
 import { TodosContext } from "@/context/todosContext";
 import { Todo } from "@/dto/todos.types";
+import { ModalTextContext } from '@/context/modalTextContext';
 
 export default function DeleteBar() {
   const todosToDeleteContext = useContext(TodosToDeleteContext);
   const todosContext = useContext(TodosContext);
   const supabase = createClientComponentClient();
+  const modalContext = useContext(ModalTextContext);
 
   if (!todosToDeleteContext) {
     console.error("todosToDeleteContext is null");
@@ -22,17 +24,27 @@ export default function DeleteBar() {
     return <></>
   }
   const [todos, setTodos] = todosContext;
+  if (!modalContext) {
+    throw new Error('use modalContext must be used within a modalProvider');
+  }
+  const [, setModalText] = modalContext;
 
   const deleteTodoTags = async (todo: Todo) => {
     let { data, error } = await supabase.from('todo_tag')
       .delete().eq('todo_id', todo.id);
-    if (error) return console.log(error);
+    if (error) {
+      setModalText(error.message);
+      return console.log(error);
+    }
   }
 
   const deleteTodo = async (todo_id: number) => {
     const { data, error } = await supabase.from('todo').delete()
       .eq('id', todo_id);
-    if (error) return console.log(error);
+    if (error) {
+      setModalText(error.message);
+      return console.log(error);
+    }
   }
 
   const removeTodo = async () => {
@@ -52,6 +64,6 @@ export default function DeleteBar() {
       {todosToDelete.map((e, i) => <TodosToDelete key={i} name={e.title} />)}
     </div>
     <div></div>
-    <Button text='Delete' onClick={removeTodo} />
+    <Button text='Delete' onClick={removeTodo} type="button" />
   </div>
 }
