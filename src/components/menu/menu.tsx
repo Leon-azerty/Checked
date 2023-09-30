@@ -1,12 +1,12 @@
 import { AiOutlinePlusCircle, AiFillStar, AiFillCheckSquare, AiTwotoneCheckSquare } from "react-icons/ai";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { BsListNested } from 'react-icons/bs';
-import { MenuProps } from './menu.props';
-import { gray_700, starYellow } from "../../const/colors";
-import IconButton from "../iconButton/iconButton";
+import { MenuProps } from '@/components/menu/menu.props';
+import { gray_700, starYellow } from "@/const/colors";
+import IconButton from "@/components/iconButton/iconButton";
 import { useContext } from "react";
-import { TagsContext } from '../../context/tagsContext';
-import TagMenu from "../tagMenu/tagMenu";
+import { TagsContext } from '@/context/tagsContext';
+import TagMenu from "@/components/tagMenu/tagMenu";
 
 export default function Menu(props: MenuProps) {
   const tagsContext = useContext(TagsContext);

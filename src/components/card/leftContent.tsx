@@ -1,12 +1,12 @@
-import { LeftContentProps } from "./leftContent.props"
+import { LeftContentProps } from "@/components/card/leftContent.props"
 import { AiFillPlusCircle } from "react-icons/ai";
 import { IconContext } from "react-icons";
-import Tag from "../tag/tag";
+import Tag from "@/components/tag/tag";
 import { useRef, useState } from "react";
 import { useHover } from 'usehooks-ts';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { TagTypes } from "@/dto/tag.types";
-import Button from "../button/button";
+import Button from "@/components/button/button";
 
 export function LeftContent(props: LeftContentProps) {
   const hoverRef = useRef(null)

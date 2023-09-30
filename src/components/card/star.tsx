@@ -1,5 +1,5 @@
 import { IconContext } from "react-icons";
-import { StarProps } from "./starProps";
+import { StarProps } from "@/components/card/starProps";
 import { BsStarFill } from "react-icons/bs";
 
 export function Star(props: StarProps) {

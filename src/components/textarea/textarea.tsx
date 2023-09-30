@@ -1,4 +1,4 @@
-import { TextareaProps } from "./textarea.props";
+import { TextareaProps } from "@/components/textarea/textarea.props";
 
 export default function Textarea(props: TextareaProps) {
   return <>

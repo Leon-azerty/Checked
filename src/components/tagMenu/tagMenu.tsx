@@ -1,4 +1,4 @@
-import { TagMenuProps } from './tagMenu.props';
+import { TagMenuProps } from '@/components/tagMenu/tagMenu.props';
 
 export default function TagMenu(props: TagMenuProps) {
   return <article className='flex items-center m-1' onClick={() => props.onClick(props.tag.name)}>

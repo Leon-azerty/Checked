@@ -1,4 +1,4 @@
-import { CheckboxProps } from "./checkbox.props";
+import { CheckboxProps } from "@/components/checkbox/checkbox.props";
 
 export default function Checkbox(props: CheckboxProps) {
   return <div className="m-2">

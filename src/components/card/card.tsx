@@ -1,9 +1,9 @@
-import { CardProps } from "./card.props";
+import { CardProps } from "@/components/card/card.props";
 import { useContext, useState } from "react";
-import "./card.css"
-import { LeftContent } from "./leftContent";
-import { RightCard } from "./rightCard";
-import { Star } from "./star";
+import "@/components/card/card.css"
+import { LeftContent } from "@/components/card/leftContent";
+import { RightCard } from "@/components/card/rightCard";
+import { Star } from "@/components/card/star";
 import { TodosToDeleteContext } from "@/context/todoToDeleteContext";
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { ModalTextContext } from '@/context/modalTextContext';

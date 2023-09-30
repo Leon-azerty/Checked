@@ -1,10 +1,10 @@
 'use client';
-import '../globals.css'
-import "./scrollbar.css"
+import '@/app/globals.css'
+import "@/app/login/scrollbar.css"
 import { useContext } from 'react';
 import Modal from '@/components/modal/modal';
 import { ModalTextContext } from '@/context/modalTextContext';
-import Body from './body';
+import Body from '@/app/login/body';
 
 export default function Login() {
   const context = useContext(ModalTextContext);

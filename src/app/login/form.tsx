@@ -2,7 +2,7 @@ import Button from "@/components/button/button"
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useContext, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import Input from "../../components/input/input"
+import Input from "@/components/input/input"
 import { ModalTextContext } from "@/context/modalTextContext"
 
 export default function Form() {

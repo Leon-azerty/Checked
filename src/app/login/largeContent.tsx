@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import Form from './form'
+import Form from '@/app/login/form'
 import Image from 'next/image'
-import CheckedDesc from './checkedDesc';
+import CheckedDesc from '@/app/login/checkedDesc';
 
 export default function LargeContent() {
-  const [windowSize, setWindow] = useState<{ width: number | undefined, height: number | undefined }>({ width: undefined, height: undefined });
+  const [windowSize, setWindow] = useState<{ width?: number, height?: number }>({});
   useEffect(() => {
     setWindow({ width: window.innerWidth, height: window.innerHeight });
   }, [])

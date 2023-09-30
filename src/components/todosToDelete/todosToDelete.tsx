@@ -1,5 +1,5 @@
 import { IconContext } from "react-icons";
-import { TodosToDeleteProps } from "./TodosToDeleteProps.props";
+import { TodosToDeleteProps } from "@/components/todosToDelete/TodosToDeleteProps.props";
 import { ImCancelCircle } from "react-icons/im";
 import { useContext } from "react";
 import { TodosToDeleteContext } from "@/context/todoToDeleteContext";

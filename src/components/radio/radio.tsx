@@ -1,4 +1,4 @@
-import { RadioProps } from "./radio.props";
+import { RadioProps } from "@/components/radio/radio.props";
 
 export default function Radio(props: RadioProps) {
   return <div className="m-2">

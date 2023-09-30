@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { ImCancelCircle } from 'react-icons/im';
 import { useHover } from 'usehooks-ts';
-import { TagProps } from './tag.props';
+import { TagProps } from '@/components/tag/tag.props';
 
 export default function Tag(props: TagProps) {
   const hoverRef = useRef(null)

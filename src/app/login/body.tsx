@@ -1,11 +1,11 @@
 import { Suspense } from 'react';
 import Image from 'next/image'
-import Header from './header'
-import Title from './title'
-import MenuTitle from './menuTitle'
-import MenuDesc from './menuDesc'
-import Footer from './footer'
-import LargeContent from './largeContent'
+import Header from '@/app/login/header'
+import Title from '@/app/login/title'
+import MenuTitle from '@/app/login/menuTitle'
+import MenuDesc from '@/app/login/menuDesc'
+import Footer from '@/app/login/footer'
+import LargeContent from '@/app/login/largeContent'
 
 export default function Body() {
 

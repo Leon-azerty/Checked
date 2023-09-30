@@ -1,9 +1,9 @@
-import Title from '../title/title';
-import Card from '../card/card';
-import { BodyProps } from './body.props';
+import Title from '@/components/title/title';
+import Card from '@/components/card/card';
+import { BodyProps } from '@/components/body/body.props';
 import { useContext } from 'react';
-import { TodosContext } from '../../context/todosContext';
-import Create from '../create/create';
+import { TodosContext } from '@/context/todosContext';
+import Create from '@/components/create/create';
 import CardLoader from '@/components/loader/cardLoader';
 import DeleteBar from '@/components/deleteBar/deleteBar';
 import { RiLogoutBoxRLine } from 'react-icons/ri';

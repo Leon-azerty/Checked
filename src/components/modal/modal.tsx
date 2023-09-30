@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { ModalProps } from "./modal.props";
-import { ModalTextContext } from '../../context/modalTextContext';
+import { ModalProps } from "@/components/modal/modal.props";
+import { ModalTextContext } from '@/context/modalTextContext';
 
 export default function Modal(props: ModalProps) {
   const context = useContext(ModalTextContext);

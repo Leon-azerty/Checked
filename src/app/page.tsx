@@ -2,11 +2,11 @@
 import Menu from '@/components/menu/menu';
 import Body from '@/components/body/body';
 import { useEffect, useState } from 'react';
-import { Todo } from '../dto/todos.types';
-import { TagsContext } from '../context/tagsContext';
-import { TodosContext } from '../context/todosContext';
+import { Todo } from '@/dto/todos.types';
+import { TagsContext } from '@/context/tagsContext';
+import { TodosContext } from '@/context/todosContext';
 import { getAllTodos } from '@/Supabase/todos';
-import { TagTypes } from '../dto/tag.types';
+import { TagTypes } from '@/dto/tag.types';
 import { TodosToDeleteContext } from '@/context/todoToDeleteContext';
 import { useRouter } from 'next/navigation'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'

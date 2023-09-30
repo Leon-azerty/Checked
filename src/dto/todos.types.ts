@@ -1,4 +1,4 @@
-import { TagTypes } from "./tag.types";
+import { TagTypes } from "@/dto/tag.types";
 
 export interface Todo {
   id: number;

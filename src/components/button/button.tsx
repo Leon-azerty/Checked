@@ -1,4 +1,4 @@
-import { ButtonProps } from './button.props';
+import { ButtonProps } from '@/components/button/button.props';
 
 export default function Button(props: ButtonProps) {
   return <button type={props.type} onClick={props.onClick}

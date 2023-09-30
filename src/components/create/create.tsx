@@ -1,20 +1,20 @@
 import { useContext, useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { IconContext } from "react-icons";
-import { CreateProps } from './create.props';
-import { TodosContext } from '../../context/todosContext';
+import { CreateProps } from '@/components/create/create.props';
+import { TodosContext } from '@/context/todosContext';
 import Tag from '@/components/tag/tag';
 import { HexColorPicker } from "react-colorful";
 import { TagTypes } from '@/dto/tag.types';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import Input from '../input/input';
-import Textarea from '../textarea/textarea';
-import Button from '../button/button';
+import Input from '@/components/input/input';
+import Textarea from '@/components/textarea/textarea';
+import Button from '@/components/button/button';
 import { ModalTextContext } from '@/context/modalTextContext';
-import Checkbox from '../checkbox/checkbox';
-import Radio from '../radio/radio';
+import Checkbox from '@/components/checkbox/checkbox';
+import Radio from '@/components/radio/radio';
 import { TagsContext } from '@/context/tagsContext';
-import TagMenu from '../tagMenu/tagMenu';
+import TagMenu from '@/components/tagMenu/tagMenu';
 
 export default function Create(props: CreateProps) {
   const context = useContext(TodosContext);

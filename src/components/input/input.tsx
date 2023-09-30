@@ -1,4 +1,4 @@
-import { InputProps } from "./input.props";
+import { InputProps } from "@/components/input/input.props";
 
 export default function Input(props: InputProps) {
   return <div className="m-2">

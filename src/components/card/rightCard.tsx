@@ -1,4 +1,4 @@
-import { RightContentProps } from "./rightCard.props";
+import { RightContentProps } from "@/components/card/rightCard.props";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { AiFillCheckSquare, AiTwotoneCheckSquare } from "react-icons/ai";
 import { IconContext } from "react-icons";

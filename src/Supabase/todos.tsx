@@ -1,5 +1,5 @@
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { Todo } from '../dto/todos.types';
+import { Todo } from '@/dto/todos.types';
 
 export const getAllTodos = async () => {
   const supabase = createClientComponentClient();
