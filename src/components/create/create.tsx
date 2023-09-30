@@ -5,7 +5,7 @@ import { CreateProps } from '@/components/create/create.props';
 import { TodosContext } from '@/context/todosContext';
 import Tag from '@/components/tag/tag';
 import { HexColorPicker } from "react-colorful";
-import { TagTypes } from '@/dto/tag.types';
+import type { Tag as TagType } from '@/dto/tag.types';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import Input from '@/components/input/input';
 import Textarea from '@/components/textarea/textarea';
@@ -18,7 +18,7 @@ import TagMenu from '@/components/tagMenu/tagMenu';
 
 export default function Create(props: CreateProps) {
   const context = useContext(TodosContext);
-  const [tags, setTags] = useState<TagTypes[]>([]);
+  const [tags, setTags] = useState<TagType[]>([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [isTitleFilled, setIsTitleFilled] = useState(false);
@@ -114,11 +114,11 @@ export default function Create(props: CreateProps) {
     setTagName("");
   }
 
-  const removeTag = (tag: TagTypes) => {
+  const removeTag = (tag: TagType) => {
     setTags(tags.filter(e => e !== tag));
   }
 
-  const addExistantTag = (tag: TagTypes) => {
+  const addExistantTag = (tag: TagType) => {
     setTags([...tags, tag]);
   }
 

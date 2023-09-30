@@ -6,7 +6,7 @@ import { Todo } from '@/dto/todos.types';
 import { TagsContext } from '@/context/tagsContext';
 import { TodosContext } from '@/context/todosContext';
 import { getAllTodos } from '@/Supabase/todos';
-import { TagTypes } from '@/dto/tag.types';
+import type { Tag as TagType } from '@/dto/tag.types';
 import { TodosToDeleteContext } from '@/context/todoToDeleteContext';
 import { useRouter } from 'next/navigation'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
@@ -17,7 +17,7 @@ export default function Home() {
   const [tab, setTab] = useState<string>('listAll');
   const [filter, setFilter] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [tags, setTags] = useState<TagTypes[]>([]);
+  const [tags, setTags] = useState<TagType[]>([]);
   const [todosToDelete, setTodosToDelete] = useState<Todo[]>([]);
   const router = useRouter()
   const supabase = createClientComponentClient();
@@ -41,7 +41,7 @@ export default function Home() {
   },);
 
   const fillTodoWithTag = async (tag_ids: string[]) => {
-    let tagsForTodo: TagTypes[] = []
+    let tagsForTodo: TagType[] = []
     for (const tag_id of tag_ids) {
       const tag = await getTag(tag_id);
       tagsForTodo.push(tag)
@@ -49,7 +49,7 @@ export default function Home() {
     return tagsForTodo;
   }
 
-  const getMenuTags = async (tag_ids: string[], res: TagTypes[], nameTodo: string[]) => {
+  const getMenuTags = async (tag_ids: string[], res: TagType[], nameTodo: string[]) => {
     for (const tag_id of tag_ids) {
       const tag = await getTag(tag_id);
       if (!nameTodo.includes(tag.name)) {
@@ -64,7 +64,7 @@ export default function Home() {
     setIsLoading(true);
     const allTodos: Todo[] = await getAllTodos();
     let nameTodo: string[] = [];
-    let res: TagTypes[] = [];
+    let res: TagType[] = [];
     for (let i = 0; i < allTodos.length; i++) {
       const tag_ids = await getTag_ids(allTodos[i].id);
       allTodos[i].tags = await fillTodoWithTag(tag_ids);

@@ -12,7 +12,7 @@ import IconButton from '@/components/iconButton/iconButton';
 import { useRouter } from 'next/navigation'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Todo } from '@/dto/todos.types';
-import { TagTypes } from '@/dto/tag.types';
+import type { Tag as TagType } from '@/dto/tag.types';
 import { ModalTextContext } from '@/context/modalTextContext';
 
 export default function Body(props: BodyProps) {
@@ -31,7 +31,7 @@ export default function Body(props: BodyProps) {
   const [, setModalText] = modalContext;
   let todosFiltered: Todo[] = todos;
 
-  function getNameTags(tags: TagTypes) {
+  function getNameTags(tags: TagType) {
     const { name } = tags;
     return name;
   }

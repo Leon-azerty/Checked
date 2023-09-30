@@ -1,7 +1,7 @@
 import { createContext, Dispatch, SetStateAction } from 'react';
 
-import { TagTypes } from '@/dto/tag.types';
+import type { Tag as TagType } from '@/dto/tag.types';
 
-type TagsContextType = [TagTypes[], Dispatch<SetStateAction<TagTypes[]>>];
+type TagsContextType = [TagType[], Dispatch<SetStateAction<TagType[]>>];
 
 export const TagsContext = createContext<TagsContextType | undefined>(undefined);

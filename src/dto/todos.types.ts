@@ -1,4 +1,4 @@
-import { TagTypes } from "@/dto/tag.types";
+import type { Tag as TagType } from "@/dto/tag.types";
 
 export interface Todo {
   id: number;
@@ -7,7 +7,7 @@ export interface Todo {
   is_finished: boolean;
   is_favorite: boolean;
   is_deleted: boolean;
-  tags: TagTypes[];
+  tags: TagType[];
   deadline: string;
   deadline_type: string;
 }

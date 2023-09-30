@@ -1,6 +1,6 @@
-import { TagTypes } from "@/dto/tag.types";
+import type { Tag as TagType } from "@/dto/tag.types";
 
 export interface TagProps {
-  tag: TagTypes;
-  onClick: (tag: TagTypes) => void;
+  tag: TagType;
+  onClick: (tag: TagType) => void;
 }

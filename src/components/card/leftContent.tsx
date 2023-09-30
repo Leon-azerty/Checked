@@ -5,8 +5,9 @@ import Tag from "@/components/tag/tag";
 import { useRef, useState } from "react";
 import { useHover } from 'usehooks-ts';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { TagTypes } from "@/dto/tag.types";
+import type { Tag as TagType } from "@/dto/tag.types";
 import Button from "@/components/button/button";
+import { IconSizeInPx } from "@/const/iconSize";
 
 export function LeftContent(props: LeftContentProps) {
   const hoverRef = useRef(null)
@@ -16,7 +17,7 @@ export function LeftContent(props: LeftContentProps) {
   const isDebug = true;
   const supabase = createClientComponentClient();
 
-  const removeTag = async (tag: TagTypes) => {
+  const removeTag = async (tag: TagType) => {
     props.todo.tags = tags.filter(e => e.name !== tag.name);
     setTags(props.todo.tags);
     const { data, error } = await supabase.from('todo_tag')
@@ -49,7 +50,7 @@ export function LeftContent(props: LeftContentProps) {
       </div>
       {
         !isDebug &&
-        <IconContext.Provider value={{ size: '26', color: "#7E7E7E" }}>
+        <IconContext.Provider value={{ size: IconSizeInPx, color: "#7E7E7E" }}>
           <div onClick={() => { console.log("ajout d'un tag WIP") }}>
             {isHover && <AiFillPlusCircle />}
           </div>
