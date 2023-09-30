@@ -128,6 +128,15 @@ export default function Create(props: CreateProps) {
     setTags([...tags, tag]);
   }
 
+  const addDeadline = () => {
+    if (isDeadline) {
+      setDate("");
+      setTime("");
+      setDeadlineType("");
+    }
+    setIsDeadline(!isDeadline)
+  }
+
   return <div className="pt-4 animate-wiggle">
     <div className='flex justify-between mr-6' onClick={() => { props.setTab("ListAll") }}>
       <div></div>
@@ -138,15 +147,15 @@ export default function Create(props: CreateProps) {
     <form className='p-2'>
       <Input htmlFor='title' onchange={(e) => setTitle(e.target.value)}
         label='Your title' placeholder='title' type='email' isError={isTitleFilled} />
-      <Checkbox htmlFor='deadline' onchange={(e) => { setIsDeadline(!isDeadline) }}
+      <Checkbox htmlFor='deadline' onchange={() => { addDeadline() }}
         label='Add Deadline' placeholder='' />
       {isDeadline && <Input htmlFor='date' onchange={(e) => { setDate(e.target.value) }}
         label='Date' placeholder='' type='date' />}
       {isDeadline && <Input htmlFor='time' onchange={(e) => { setTime(e.target.value) }}
         label='Time' placeholder='' type='time' />}
-      {isDeadline && <Radio htmlFor='To_do_The' onchange={(e) => { setDeadlineType("to do the") }}
+      {isDeadline && <Radio htmlFor='To_do_The' onchange={() => { setDeadlineType("to do the") }}
         label='To do The' placeholder='' name='deadline_type' />}
-      {isDeadline && <Radio htmlFor='Before_The' onchange={(e) => { setDeadlineType("before the") }}
+      {isDeadline && <Radio htmlFor='Before_The' onchange={() => { setDeadlineType("before the") }}
         label='Before The' placeholder='' name='deadline_type' />}
 
       <div className='flex flex-wrap'>
