@@ -36,39 +36,46 @@ export default function Home() {
     userIsLogged();
   }, []);
 
-  const fillTodoWithTag = async (tag_ids: string[]) => {
+  const fillTodoWithTag = async (tag_ids: string[], Tags: TagType[]) => {
     let tagsForTodo: TagType[] = []
     for (const tag_id of tag_ids) {
-      const tag = await getTag(tag_id);
-      tagsForTodo.push(tag)
+      const tag = Tags.find(tag => tag.id.toString() === tag_id);
+      if (tag === undefined) {
+        const tag = await getTag(tag_id);
+        tagsForTodo.push(tag);
+        continue;
+      } else {
+        tagsForTodo.push(tag)
+      }
     }
     return tagsForTodo;
   }
 
-  const getMenuTags = async (tag_ids: string[], res: TagType[], nameTodo: string[]) => {
-    for (const tag_id of tag_ids) {
-      const tag = await getTag(tag_id);
-      if (!nameTodo.includes(tag.name)) {
-        res.push(tag);
-        nameTodo.push(tag.name);
-      }
+  const fetchTodos = async (Tags: TagType[]) => {
+    setIsLoading(true);
+    const allTodos: Todo[] = await getAllTodos();
+    for (let i = 0; i < allTodos.length; i++) {
+      const tag_ids = await getTag_ids(allTodos[i].id);
+      allTodos[i].tags = await fillTodoWithTag(tag_ids, Tags);
     }
-    return res;
+    setTodos(allTodos);
+    setIsLoading(false);
+  }
+
+  const fetchTags = async () => {
+    const { data, error } = await supabase.from('tag').select(`*`)
+    if (error) {
+      setModalText(error.message);
+      console.error("error", error);
+      return []
+    }
+    setTags(data);
+    return data;
   }
 
   const fetchData = async () => {
-    setIsLoading(true);
-    const allTodos: Todo[] = await getAllTodos();
-    let nameTodo: string[] = [];
-    let res: TagType[] = [];
-    for (let i = 0; i < allTodos.length; i++) {
-      const tag_ids = await getTag_ids(allTodos[i].id);
-      allTodos[i].tags = await fillTodoWithTag(tag_ids);
-      res = await getMenuTags(tag_ids, res, nameTodo);
-    }
-    setTags(res);
-    setTodos(allTodos);
-    setIsLoading(false);
+    const Tags = await fetchTags();
+    await fetchTodos(Tags);
   }
 
   useEffect(() => {
