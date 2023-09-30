@@ -2,7 +2,7 @@ import { CardProps } from "@/components/card/card.props";
 import { useContext, useState } from "react";
 import "@/components/card/card.css"
 import { LeftContent } from "@/components/card/leftContent";
-import { RightCard } from "@/components/card/rightCard";
+import { RightContent } from "@/components/card/rightContent";
 import { Star } from "@/components/card/star";
 import { TodosToDeleteContext } from "@/context/todoToDeleteContext";
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
@@ -67,6 +67,17 @@ export default function Card(props: CardProps) {
       setTodosToDeleteContext([...todosToDeleteContext, props.todo]);
   }
 
+  const restoreTodo = async () => {
+    const { data, error } = await supabase.from('todo').update({
+      is_deleted: false
+    }).eq('id', props.todo.id);
+    if (error) {
+      setModalText(error.message);
+      return console.log(error);
+    }
+    setIs_deleted(false);
+  }
+
   if (props.tab == "listFavorite" && !is_favorite) return (<></>);
   if (props.tab == "listAll" && is_deleted) return (<></>);
   if (props.tab == "listChecked" && !is_finished) return (<></>);
@@ -80,7 +91,8 @@ export default function Card(props: CardProps) {
   ${is_deleted ? `border-red` : ``}
 `}>
     <div className="flex flex-row-reverse">
-      <RightCard handleDeleteTodo={addTodoInTrash}
+      <RightContent handleDeleteTodo={addTodoInTrash}
+        restoreTodo={restoreTodo}
         handleTodoState={handleTodoState} id={props.id}
         is_deleted={is_deleted} is_finished={is_finished} />
       <Star handleTodoFavorite={addTodoInFavorite} id={props.id} is_favorite={is_favorite} />
