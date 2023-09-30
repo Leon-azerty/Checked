@@ -22,11 +22,7 @@ export default function Home() {
   const router = useRouter()
   const supabase = createClientComponentClient();
   const [modalText, setModalText] = useState<string>('');
-  let isScreenMedium = false;
-  if (typeof window !== "undefined" && window.innerWidth > 768) {
-    isScreenMedium = true;
-  }
-  const [showMenu, setShowMenu] = useState<boolean>(isScreenMedium);
+  const [showMenu, setShowMenu] = useState<boolean>(true);
 
   const userIsLogged = async () => {
     const { data, error } = await supabase.auth.getSession()
@@ -38,7 +34,7 @@ export default function Home() {
 
   useEffect(() => {
     userIsLogged();
-  },);
+  }, []);
 
   const fillTodoWithTag = async (tag_ids: string[]) => {
     let tagsForTodo: TagType[] = []
