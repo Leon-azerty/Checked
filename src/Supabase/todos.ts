@@ -33,7 +33,6 @@ export const getAllTodos = async () => {
       deadline_type: data![i].deadline_type,
     };
     if (todo.deadline != null) {
-      console.log("todo.deadline", todo.deadline);
       todo.deadline = todo.deadline.replace("T", ' ').split('+')[0];
     }
     tmp.push(todo);

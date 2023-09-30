@@ -40,7 +40,6 @@ export default function Body(props: BodyProps) {
     for (const todo of todos) {
       const tagsName = todo.tags.map(getNameTags);
       if (!tagsName.includes(filterTag)) {
-        console.log(filterTag, "is in ", tagsName)
         todosFiltered = todosFiltered.filter(e => e.id !== todo.id);
       }
     }

@@ -41,10 +41,8 @@ export default function Menu(props: MenuProps) {
 
   const addTagsInFilter = (name: string) => {
     if (props.filter.includes(name)) {
-      console.log("on enleve le tag du filtre")
       props.setFilter(props.filter.filter((e) => e != name));
     } else {
-      console.log("on ajoute le tag dans le filtre", name);
       props.setFilter([...props.filter, name]);
     }
     return;
