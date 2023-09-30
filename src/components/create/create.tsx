@@ -94,7 +94,7 @@ export default function Create(props: CreateProps) {
     setTodos([...todos, {
       title: title, description: description, is_finished: false,
       is_favorite: false, is_deleted: false, id: todo_id, tags: tags,
-      deadline: date + " " + time, deadline_type: deadlineType,
+      deadline: isDeadline ? date + " " + time : "", deadline_type: deadlineType,
     }]);
     for (const tag of tags) {
       if (!existantTags.includes(tag)) {
@@ -107,10 +107,12 @@ export default function Create(props: CreateProps) {
   };
 
   const addTag = async () => {
+    const author_id = (await supabase.auth.getUser()).data.user?.id;
     //vérifier si le tag existe déjà dans la liste des tags de l'user
     const { data, error } = await supabase.from('tag').insert({
       name: tagName,
       color: color,
+      author_id
     }).select('id');
     if (error) {
       setModalText(error.message);
