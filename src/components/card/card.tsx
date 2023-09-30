@@ -73,12 +73,12 @@ export default function Card(props: CardProps) {
   if (props.tab == "listUnchecked" && is_finished) return (<></>);
   if (props.tab == "listDeleted" && !is_deleted) return (<></>);
   return <article id={`card-${props.id}`} onClick={addTodoToDelete} className={` 
-  rounded-3xl p-6 m-6 border-[#D9D9D9] border-solid border-4 flex flex-col hover:pl-4 
+  rounded-3xl p-6 m-6 border-gray-200 border-solid border-4 flex flex-col hover:pl-4 
   transition-all ease-in duration-500 animate-wiggle hover:scale-y-110
-  ${is_finished ? "background-gradient-left-to-right border-[#22c55e]" : ""} 
-  ${is_favorite ? `border-[#FFC700]` : ``} 
-  ${is_deleted ? `background-gradient-left-to-right-deleted` : ``} 
-  `}>
+  ${is_finished ? "background-gradient-left-to-right border-green" : ""} 
+  ${is_favorite ? `border-star-yellow` : ``} 
+  ${is_deleted ? `border-red` : ``}
+`}>
     <div className="flex flex-row-reverse">
       <RightCard handleDeleteTodo={addTodoInTrash}
         handleTodoState={handleTodoState} id={props.id}

@@ -35,7 +35,7 @@ export default function Create(props: CreateProps) {
   if (!tagsContext) {
     throw new Error('useTagsContext must be used within a TagsProvider');
   }
-  const [existantTags,] = tagsContext;
+  const [existantTags, setExistantTags] = tagsContext;
   if (!todosContext) {
     throw new Error('useTodosContext must be used within a TodosProvider');
   }
@@ -96,6 +96,11 @@ export default function Create(props: CreateProps) {
       is_favorite: false, is_deleted: false, id: todo_id, tags: tags,
       deadline: date + " " + time, deadline_type: deadlineType,
     }]);
+    for (const tag of tags) {
+      if (!existantTags.includes(tag)) {
+        setExistantTags([...existantTags, tag]);
+      }
+    }
     setTitle("");
     setDescription("");
     props.setTab("");
@@ -140,9 +145,9 @@ export default function Create(props: CreateProps) {
       {isDeadline && <Input htmlFor='time' onchange={(e) => { setTime(e.target.value) }}
         label='Time' placeholder='' type='time' />}
       {isDeadline && <Radio htmlFor='To_do_The' onchange={(e) => { setDeadlineType("to do the") }}
-        label='To_do_The' placeholder='' name='deadline_type' />}
+        label='To do The' placeholder='' name='deadline_type' />}
       {isDeadline && <Radio htmlFor='Before_The' onchange={(e) => { setDeadlineType("before the") }}
-        label='Before_The' placeholder='' name='deadline_type' />}
+        label='Before The' placeholder='' name='deadline_type' />}
 
       <div className='flex flex-wrap'>
         <div className='my-2'>
