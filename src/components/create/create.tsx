@@ -17,7 +17,6 @@ import { TagsContext } from '@/context/tagsContext';
 import TagMenu from '@/components/tagMenu/tagMenu';
 
 export default function Create(props: CreateProps) {
-  const context = useContext(TodosContext);
   const [tags, setTags] = useState<TagType[]>([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -28,18 +27,19 @@ export default function Create(props: CreateProps) {
   const [color, setColor] = useState<string>("#D9D9D9");
   const [isDeadline, setIsDeadline] = useState<boolean>(false);
   const [deadlineType, setDeadlineType] = useState<string>("");
-  const supabase = createClientComponentClient();
+  const todosContext = useContext(TodosContext);
   const modalContext = useContext(ModalTextContext);
   const tagsContext = useContext(TagsContext);
+  const supabase = createClientComponentClient();
 
   if (!tagsContext) {
     throw new Error('useTagsContext must be used within a TagsProvider');
   }
   const [existantTags,] = tagsContext;
-  if (!context) {
+  if (!todosContext) {
     throw new Error('useTodosContext must be used within a TodosProvider');
   }
-  const [todos, setTodos] = context;
+  const [todos, setTodos] = todosContext;
   if (!modalContext) {
     throw new Error('use modalContext must be used within a modalProvider');
   }
@@ -102,6 +102,7 @@ export default function Create(props: CreateProps) {
   };
 
   const addTag = async () => {
+    //vérifier si le tag existe déjà dans la liste des tags de l'user
     const { data, error } = await supabase.from('tag').insert({
       name: tagName,
       color: color,
