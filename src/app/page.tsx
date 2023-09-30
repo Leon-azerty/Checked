@@ -1,7 +1,7 @@
 'use client';
 import Menu from '@/components/menu/menu';
 import Body from '@/components/body/body';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Todo } from '@/dto/todos.types';
 import { TagsContext } from '@/context/tagsContext';
 import { TodosContext } from '@/context/todosContext';
@@ -21,8 +21,12 @@ export default function Home() {
   const [todosToDelete, setTodosToDelete] = useState<Todo[]>([]);
   const router = useRouter()
   const supabase = createClientComponentClient();
-  const [modalText, setModalText] = useState<string>('');
   const [showMenu, setShowMenu] = useState<boolean>(true);
+  const modalContext = useContext(ModalTextContext);
+  if (!modalContext) {
+    throw new Error('use modalContext must be used within a modalProvider');
+  }
+  const [, setModalText] = modalContext;
 
   const userIsLogged = async () => {
     const { data, error } = await supabase.auth.getSession()
@@ -108,16 +112,14 @@ export default function Home() {
 
   return (
     <div className='w-screen h-full min-h-screen flex text-black'>
-      <ModalTextContext.Provider value={[modalText, setModalText]}>
-        <TodosContext.Provider value={[todos, setTodos]}>
-          <TagsContext.Provider value={[tags, setTags]}>
-            <TodosToDeleteContext.Provider value={[todosToDelete, setTodosToDelete]}>
-              {showMenu && <Menu tab={tab} setTab={setTab} filter={filter} setFilter={setFilter} />}
-              <Body tab={tab} setTab={setTab} isLoading={isLoading} filter={filter} setShowMenu={setShowMenu} showMenu={showMenu} />
-            </TodosToDeleteContext.Provider>
-          </TagsContext.Provider>
-        </TodosContext.Provider>
-      </ModalTextContext.Provider>
+      <TodosContext.Provider value={[todos, setTodos]}>
+        <TagsContext.Provider value={[tags, setTags]}>
+          <TodosToDeleteContext.Provider value={[todosToDelete, setTodosToDelete]}>
+            {showMenu && <Menu tab={tab} setTab={setTab} filter={filter} setFilter={setFilter} />}
+            <Body tab={tab} setTab={setTab} isLoading={isLoading} filter={filter} setShowMenu={setShowMenu} showMenu={showMenu} />
+          </TodosToDeleteContext.Provider>
+        </TagsContext.Provider>
+      </TodosContext.Provider>
     </div>
   )
 }

@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ModalTextContext } from '@/context/modalTextContext';
 import { useState } from 'react';
+import Modal from '@/components/modal/modal';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,6 +24,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ModalTextContext.Provider value={[modalText, setModalText]}>
+          {modalText != "" && <Modal />}
+
           {children}
         </ModalTextContext.Provider>
       </body>
