@@ -20,7 +20,7 @@ export default function Form() {
   const [modalText, setModalText] = context;
 
   const SignIn = async ({ email, password }: { email: string, password: string }) => {
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password, })
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password })
     console.log("sign in")
     if (error === null) {
       router.push('/');
@@ -31,7 +31,7 @@ export default function Form() {
   }
 
   const SignUp = async ({ email, password }: { email: string, password: string }) => {
-    const { data, error } = await supabase.auth.signUp({ email, password })
+    const { data, error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: 'http://checkd.online/' } })
     if (!error) {
       setModalText("Please check your email to confirm your account");
     } else {
