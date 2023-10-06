@@ -31,7 +31,7 @@ export default function Form() {
   }
 
   const SignUp = async ({ email, password }: { email: string, password: string }) => {
-    const { data, error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: 'http://checkd.online/' } })
+    const { data, error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: 'https://checkd.online/' } })
     if (!error) {
       setModalText("Please check your email to confirm your account");
     } else {
