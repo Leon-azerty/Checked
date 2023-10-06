@@ -22,6 +22,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <title>Checked, Todo app</title>
       <body className={inter.className}>
         <ModalTextContext.Provider value={[modalText, setModalText]}>
           {modalText != "" && <Modal />}
