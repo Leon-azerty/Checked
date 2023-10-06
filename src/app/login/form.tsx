@@ -41,7 +41,6 @@ export default function Form() {
   }
 
   const SubmitForm = async (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log("submit form with button", isLogIn, email, password)
     event.preventDefault();
     if (email === "" && password === "") {
       setIsEmailError(true);

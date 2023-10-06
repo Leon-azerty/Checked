@@ -25,11 +25,9 @@ export function LeftContent(props: LeftContentProps) {
       .eq('tag_id', tag.id)
       .eq('todo_id', props.todo.id);
     if (error) return console.log(error);
-    console.log("data", data);
   }
 
   const UpdateTodo = async () => {
-    console.log("send todo updated", props.todo.id, props.todo.description, props.todo.title)
     const { data, error } = await supabase.from('todo').update({
       description: props.todo.description,
       name: props.todo.title

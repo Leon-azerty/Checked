@@ -74,14 +74,11 @@ export default function Create(props: CreateProps) {
       setModalText(error.message);
       return console.log(error)
     }
-    console.log(data);
 
   }
 
   const createTodo = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log(date);
-    console.log(time);
     if (title == "") {
       setIsTitleFilled(true);
       return;

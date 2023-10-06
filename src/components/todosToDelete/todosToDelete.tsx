@@ -12,7 +12,6 @@ export default function TodosToDelete(props: TodosToDeleteProps) {
   }
   const [todosToDeleteContext, setTodosToDeleteContext] = context;
   const deleteTodoInDeleteQueue = () => {
-    console.log("deleteTodoInDeleteQueue");
     setTodosToDeleteContext(todosToDeleteContext.filter(e => e.title !== props.name));
   }
   return <div className="flex items-center">

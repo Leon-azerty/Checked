@@ -51,7 +51,6 @@ export default function Body(props: BodyProps) {
       setModalText(error.message);
       console.log(error);
     } else {
-      console.log("redirect to login")
       router.push('/login');
     }
   }
