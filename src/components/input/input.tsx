@@ -3,7 +3,7 @@ import { InputProps } from "@/components/input/input.props";
 export default function Input(props: InputProps) {
   return <div className="m-2">
     <label htmlFor={props.htmlFor} className={`block mb-2 text-sm 
-    font-medium text-gray-900 dark:text-white ${props.isError ? "text-red" : ""}`}>
+    font-medium text-gray-900 ${props.isError ? "text-red" : ""}`}>
       {props.label} {props.isError ? " is required" : ""}
     </label>
     <input onChange={props.onchange} type={props.type} id={props.htmlFor}
