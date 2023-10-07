@@ -19,13 +19,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   const [modalText, setModalText] = useState<string>("");
+  const infoMessageColor = "text-[#046c94]";
+  const errorMessageColor = "text-red";
 
   return (
     <html lang="en">
       <title>Checked, Todo app</title>
       <body className={inter.className}>
         <ModalTextContext.Provider value={[modalText, setModalText]}>
-          {modalText != "" && <Modal color={modalText.includes("ERROR") ? "text-red" : "text-[#046c94]"} />}
+          {modalText != "" && <Modal color={modalText.includes("ERROR") ? errorMessageColor : infoMessageColor} />}
 
           {children}
         </ModalTextContext.Provider>
