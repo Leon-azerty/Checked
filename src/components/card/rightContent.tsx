@@ -4,6 +4,7 @@ import { AiFillCheckSquare, AiTwotoneCheckSquare } from "react-icons/ai";
 import { IconContext } from "react-icons";
 import { IconSizeInPx } from "@/const/iconSize";
 import { ImCancelCircle } from 'react-icons/im';
+import { gray_700 } from "@/const/colors";
 
 export function RightContent(props: RightContentProps) {
 
@@ -15,14 +16,14 @@ export function RightContent(props: RightContentProps) {
     }
   }
 
-  return <div className="w-36 border-[#D9D9D9] border-solid border-l-2 flex flex-col 
+  return <div className="w-36 border-gray-200 border-solid border-l-2 flex flex-col 
   justify-between items-center" >
-    <IconContext.Provider value={{ size: IconSizeInPx, color: '#7E7E7E' }}>
+    <IconContext.Provider value={{ size: IconSizeInPx, color: gray_700 }}>
       <a onClick={() => props.handleTodoState()} href={`#card-${props.id}`}>
         {props.is_finished ? <AiFillCheckSquare /> : <AiTwotoneCheckSquare />}
       </a>
     </IconContext.Provider>
-    <IconContext.Provider value={{ size: IconSizeInPx, color: props.is_deleted ? 'black' : '#7E7E7E' }}>
+    <IconContext.Provider value={{ size: IconSizeInPx, color: props.is_deleted ? 'black' : gray_700 }}>
       <a onClick={() => { handleOnClick() }} href={`#card-${props.id}`}>
         {props.is_deleted ? <ImCancelCircle /> : <RiDeleteBin6Line />}
       </a>
