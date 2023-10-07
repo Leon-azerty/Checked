@@ -14,6 +14,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Todo } from '@/dto/todos.types';
 import type { Tag as TagType } from '@/dto/tag.types';
 import { ModalTextContext } from '@/context/modalTextContext';
+import NoTodoToDisplay from '../noTodoToDisplay';
 
 export default function Body(props: BodyProps) {
   const router = useRouter()
@@ -72,6 +73,7 @@ export default function Body(props: BodyProps) {
       {props.tab == "create" && <Create setTab={props.setTab} />}
       {props.isLoading && <CardLoader />}
       {props.tab == "listDeleted" && <DeleteBar />}
+      {todos.length === 0 && !props.isLoading && <NoTodoToDisplay setTab={props.setTab} />}
       {todosFiltered.length > 0 && todosFiltered.map((e, i) => <Card todo={e} id={i} key={e.id} tab={props.tab} />)}
     </main>
   </div>
