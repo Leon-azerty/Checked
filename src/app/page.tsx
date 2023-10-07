@@ -16,7 +16,7 @@ export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [tab, setTab] = useState<string>('listAll');
   const [filter, setFilter] = useState<string[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [tags, setTags] = useState<TagType[]>([]);
   const [todosToDelete, setTodosToDelete] = useState<Todo[]>([]);
   const router = useRouter()
@@ -55,7 +55,6 @@ export default function Home() {
   }
 
   const fetchTodos = async (Tags: TagType[]) => {
-    setIsLoading(true);
     const allTodos: Todo[] = await getAllTodos();
     for (let i = 0; i < allTodos.length; i++) {
       const tag_ids = await getTag_ids(allTodos[i].id);
