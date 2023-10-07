@@ -11,7 +11,8 @@ export default function Form() {
   const [password, setPassword] = useState("")
   const [isEmailError, setIsEmailError] = useState(false);
   const [isPasswordError, setIsPasswordError] = useState(false);
-  const router = useRouter()
+  const [waitResForm, setWaitResForm] = useState(false);
+  const router = useRouter();
   const supabase = createClientComponentClient();
   const context = useContext(ModalTextContext);
   if (!context) {
@@ -55,11 +56,13 @@ export default function Form() {
       setIsPasswordError(true);
       return;
     }
+    setWaitResForm(true);
     if (isLogIn) {
       await SignIn({ email, password });
     } else {
       await SignUp({ email, password });
     }
+    setWaitResForm(false);
   }
 
 
@@ -85,7 +88,7 @@ export default function Form() {
           placeholder="*******" onchange={(e) => { setPassword(e.target.value) }} />
         <div className="flex justify-around my-4">
           <Button type="submit" text={isLogIn ? "Log in" : "Create an account"}
-            className={isLogIn ? "" : "w-44"} onClick={(e) => SubmitForm(e)} />
+            className={isLogIn ? "" : "w-44"} onClick={(e) => SubmitForm(e)} step={waitResForm ? "loading" : ""} />
         </div>
       </form>
     </div>

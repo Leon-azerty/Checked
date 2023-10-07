@@ -6,4 +6,5 @@ export interface ButtonProps {
   onClick: MouseEventHandler<HTMLButtonElement>;
   className?: string;
   type: "button" | "submit" | "reset";
+  step?: string;
 }
