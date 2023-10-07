@@ -52,8 +52,8 @@ export default function Menu(props: MenuProps) {
     <IconButton icon={<AiOutlinePlusCircle />} text='Create Todo' onClick={handleCreateTodo} iconColor='black' className={`${props.tab == 'create' ? "font-bold" : ""}`} />
     <IconButton icon={<BsListNested />} text='All' onClick={handleListAllTodos} iconColor='black' className={`${props.tab == 'listAll' ? "font-bold" : ""}`} />
     <IconButton icon={<AiFillStar />} text='Favorites' onClick={handleListFavoriteTodos} iconColor={starYellow} className={`${props.tab == 'listFavorite' ? "font-bold" : ""}`} />
-    <IconButton icon={<AiFillCheckSquare />} text='Checked' onClick={handleListCheckedTodos} iconColor={gray_700} className={`${props.tab == 'listChecked' ? "font-bold" : ""}`} />
     <IconButton icon={<AiTwotoneCheckSquare />} text='Unchecked' onClick={handleListUncheckedTodos} iconColor={gray_700} className={`${props.tab == 'listUnchecked' ? "font-bold" : ""}`} />
+    <IconButton icon={<AiFillCheckSquare />} text='Checked' onClick={handleListCheckedTodos} iconColor={gray_700} className={`${props.tab == 'listChecked' ? "font-bold" : ""}`} />
     <IconButton icon={<RiDeleteBin6Line />} text='Trash' onClick={handleListTrash} iconColor={gray_700} className={`${props.tab == 'listTrash' ? "font-bold" : ""}`} />
     <hr className="border-gray-400 border-solid border-b-2 rounded-lg mx-8"></hr>
     <div className="flex flex-wrap mt-2">

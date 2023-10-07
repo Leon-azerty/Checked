@@ -166,9 +166,9 @@ export default function Create(props: CreateProps) {
           <div className='flex'>
             {existantTags.length > 0 && existantTags.map((e, i) => <TagMenu key={e.name as string} tag={e} onClick={() => { addExistantTag(e) }} />)}
           </div>
-          <Input htmlFor='tags' onchange={(e) => setTagName(e.target.value)}
-            value={tagName} label='Tags' placeholder='Tags' type='text' />
-          <Button type='button' onClick={addTag} text='Add Tags' />
+          <Input htmlFor='tag' onchange={(e) => setTagName(e.target.value)}
+            value={tagName} label='Tag' placeholder='Tag' type='text' />
+          <Button type='button' onClick={addTag} text='Add Tag' />
         </div>
         <div className='my-2 flex h-full w-full'>
           <HexColorPicker color={color as string} className='w-6/12' onChange={setColor} />
