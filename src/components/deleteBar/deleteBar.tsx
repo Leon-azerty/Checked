@@ -33,7 +33,7 @@ export default function DeleteBar() {
     let { data, error } = await supabase.from('todo_tag')
       .delete().eq('todo_id', todo.id);
     if (error) {
-      setModalText(error.message);
+      setModalText("ERROR : " + error.message);
       return console.log(error);
     }
   }
@@ -42,7 +42,7 @@ export default function DeleteBar() {
     const { data, error } = await supabase.from('todo').delete()
       .eq('id', todo_id);
     if (error) {
-      setModalText(error.message);
+      setModalText("ERROR : " + error.message);
       return console.log(error);
     }
   }

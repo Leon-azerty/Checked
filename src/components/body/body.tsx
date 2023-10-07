@@ -48,7 +48,7 @@ export default function Body(props: BodyProps) {
   const logOut = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) {
-      setModalText(error.message);
+      setModalText("ERROR : " + error.message);
       console.log(error);
     } else {
       router.push('/login');

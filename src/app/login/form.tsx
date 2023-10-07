@@ -26,7 +26,7 @@ export default function Form() {
       router.push('/');
     } else {
       console.log("error", error)
-      setModalText(error.message);
+      setModalText("ERROR : " + error.message);
     }
   }
 
@@ -36,7 +36,7 @@ export default function Form() {
       setModalText("Please check your email to confirm your account");
     } else {
       console.log("error", error)
-      setModalText(error.message);
+      setModalText("ERROR : " + error.message);
     }
   }
 

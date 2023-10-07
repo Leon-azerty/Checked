@@ -31,7 +31,7 @@ export default function Card(props: CardProps) {
       is_finished: !is_finished
     }).eq('id', props.todo.id);
     if (error) {
-      setModalText(error.message);
+      setModalText("ERROR : " + error.message);
       return console.log(error);
     }
     setIs_finished(!is_finished);
@@ -42,7 +42,7 @@ export default function Card(props: CardProps) {
     const { data, error } = await supabase.from('todo')
       .update({ is_deleted: true }).eq('id', props.todo.id);
     if (error) {
-      setModalText(error.message);
+      setModalText("ERROR : " + error.message);
       return console.log(error);
     }
     // la ligne update quand on delete la todo
@@ -56,7 +56,7 @@ export default function Card(props: CardProps) {
       is_favorite: !is_favorite
     }).eq('id', props.todo.id);
     if (error) {
-      setModalText(error.message);
+      setModalText("ERROR : " + error.message);
       return console.log("error ", error);
     }
     setIs_favorite(!is_favorite);
@@ -72,7 +72,7 @@ export default function Card(props: CardProps) {
       is_deleted: false
     }).eq('id', props.todo.id);
     if (error) {
-      setModalText(error.message);
+      setModalText("ERROR : " + error.message);
       return console.log(error);
     }
     setIs_deleted(false);

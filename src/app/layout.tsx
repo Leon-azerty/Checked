@@ -25,7 +25,7 @@ export default function RootLayout({
       <title>Checked, Todo app</title>
       <body className={inter.className}>
         <ModalTextContext.Provider value={[modalText, setModalText]}>
-          {modalText != "" && <Modal />}
+          {modalText != "" && <Modal color={modalText.includes("ERROR") ? "text-red" : "text-[#046c94]"} />}
 
           {children}
         </ModalTextContext.Provider>

@@ -59,7 +59,7 @@ export default function Create(props: CreateProps) {
       deadline_type: deadlineType != "" ? deadlineType : null,
     }).select('id');
     if (error) {
-      setModalText(error.message);
+      setModalText("ERROR : " + error.message);
       return console.log(error);
     }
     return data[0].id;
@@ -71,7 +71,7 @@ export default function Create(props: CreateProps) {
       tag_id: tag_id,
     })
     if (error) {
-      setModalText(error.message);
+      setModalText("ERROR : " + error.message);
       return console.log(error)
     }
 
@@ -105,7 +105,7 @@ export default function Create(props: CreateProps) {
 
   const addTag = async () => {
     if (existantTags.find(e => e.name === tagName) !== undefined) {
-      setModalText("Tag already exist");
+      setModalText("ERROR : Tag already exist");
       return;
     }
     const author_id = (await supabase.auth.getUser()).data.user?.id;
@@ -116,7 +116,7 @@ export default function Create(props: CreateProps) {
       author_id
     }).select('id');
     if (error) {
-      setModalText(error.message);
+      setModalText("ERROR : " + error.message);
       return console.log(error);
     }
     setTags([...tags, { id: data[0].id, name: tagName, color: color }]);

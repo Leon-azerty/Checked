@@ -68,7 +68,7 @@ export default function Home() {
   const fetchTags = async () => {
     const { data, error } = await supabase.from('tag').select(`*`)
     if (error) {
-      setModalText(error.message);
+      setModalText("ERROR : " + error.message);
       console.error("error", error);
       return []
     }
@@ -89,7 +89,7 @@ export default function Home() {
     const tagsIds: string[] = [];
     const { data, error } = await supabase.from('todo_tag').select(`tag_id`).eq('todo_id', todosId)
     if (error) {
-      setModalText(error.message);
+      setModalText("ERROR : " + error.message);
       console.error("error", error);
       return []
     }
@@ -102,7 +102,7 @@ export default function Home() {
   async function getTag(tag_id: string) {
     const { data, error } = await supabase.from('tag').select(`*`).eq('id', tag_id)
     if (error) {
-      setModalText(error.message);
+      setModalText("ERROR : " + error.message);
       console.error("error", error);
       return {}
     }
