@@ -64,6 +64,6 @@ export default function DeleteBar() {
       {todosToDelete.map((e, i) => <TodosToDelete key={i} name={e.title} />)}
     </div>
     <div></div>
-    <Button text='Delete' onClick={removeTodo} type="button" />
+    {todosToDelete.length > 0 && < Button text='Delete' onClick={removeTodo} type="button" />}
   </div>
 }
