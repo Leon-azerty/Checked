@@ -71,7 +71,7 @@ export function LeftContent(props: LeftContentProps) {
           {props.todo.description}</p>
     }
 
-    <div className="flex flex-row-reverse">
+    <div className="flex flex-col-reverse md:flex-row-reverse">
       {isUpdating && <Button type="button" text="update" onClick={() => { UpdateTodo() }} />}
       {isUpdating && <Button type="button" text="cancel"
         onClick={() => { setIsUpdating(false) }}
