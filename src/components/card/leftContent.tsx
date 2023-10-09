@@ -41,7 +41,7 @@ export function LeftContent(props: LeftContentProps) {
     <div ref={hoverRef} className="flex items-center w-full">
       <div className="flex w-full justify-between flex-col md:flex-row">
         <div className="flex items-center">
-          <p className="text-3xl font-bold">{props.todo.title}</p>
+          <p className="text-3xl font-bold flex flex-wrap">{props.todo.title}</p>
           {
             !isDebug &&
             <IconContext.Provider value={{ size: IconSizeInPx, color: "#7E7E7E" }}>
