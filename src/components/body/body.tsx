@@ -57,7 +57,7 @@ export default function Body(props: BodyProps) {
   }
 
   return <div className='flex-col bg-white w-full h-full min-h-screen max-w-screen'>
-    <div className='flex justify-between'>
+    <div className='flex justify-between w-96 md:w-full'>
       <div className='w-20'>
         {props.showMenu ? <IconButton icon={<AiOutlineMenuFold />} onClick={() => props.setShowMenu(false)} text='' iconColor='black' /> :
           <IconButton icon={<AiOutlineMenuUnfold />} onClick={() => props.setShowMenu(true)} text='' iconColor='black' />}
@@ -75,6 +75,7 @@ export default function Body(props: BodyProps) {
       {props.tab == "listDeleted" && <DeleteBar />}
       {todos.length === 0 && !props.isLoading && <NoTodoToDisplay setTab={props.setTab} />}
       {todosFiltered.length > 0 && todosFiltered.map((e, i) => <Card todo={e} id={i} key={e.id} tab={props.tab} />)}
+      {todosFiltered.length == 0 && <NoTodoToDisplay setTab={props.setTab} />}
     </main>
   </div>
 }
