@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { getModalContext } from '@/context/modalTextContext';
 
 export default function Modal({ color }: { color: string }) {

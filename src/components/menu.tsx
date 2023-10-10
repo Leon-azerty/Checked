@@ -3,8 +3,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { BsListNested } from 'react-icons/bs';
 import { gray_700, starYellow } from "@/const/colors";
 import IconButton from "@/components/iconButton";
-import { useContext } from "react";
-import { TagsContext } from '@/context/tagsContext';
+import { getTagsContext } from '@/context/tagsContext';
 import TagMenu from "@/components/tagMenu";
 
 export default function Menu({ tab, setTab, filter, setFilter }: {
@@ -13,11 +12,7 @@ export default function Menu({ tab, setTab, filter, setFilter }: {
   filter: string[];
   setFilter: (filter: string[]) => void;
 }) {
-  const tagsContext = useContext(TagsContext);
-  if (!tagsContext) {
-    throw new Error('todosContext must be used within a TodosProvider');
-  }
-  const [tags, setTags] = tagsContext;
+  const [tags,] = getTagsContext();
 
   const handleCreateTodo = () => {
     setTab('create');

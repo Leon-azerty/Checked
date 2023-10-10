@@ -1,9 +1,9 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import "@/components/card.css"
 import { LeftContent } from "@/components/leftContent";
 import { RightContent } from "@/components/rightContent";
 import { Star } from "@/components/star";
-import { TodosToDeleteContext } from "@/context/todoToDeleteContext";
+import { getTodosToDeleteContext } from "@/context/todoToDeleteContext";
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { getModalContext } from '@/context/modalTextContext';
 import { Todo } from "@/dto/todos.types";
@@ -17,13 +17,7 @@ export default function Card({ todo, id, tab }: {
   const [is_favorite, setIs_favorite] = useState(todo.is_favorite);
   const [is_deleted, setIs_deleted] = useState(todo.is_deleted);
   const supabase = createClientComponentClient();
-
-  const context = useContext(TodosToDeleteContext);
-  if (!context) {
-    console.error("context is null");
-    return <></>
-  }
-  const [todosToDeleteContext, setTodosToDeleteContext] = context;
+  const [todosToDeleteContext, setTodosToDeleteContext] = getTodosToDeleteContext();
   const [, setModalText] = getModalContext();
 
   const handleTodoState = async () => {

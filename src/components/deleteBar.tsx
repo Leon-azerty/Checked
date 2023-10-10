@@ -1,28 +1,15 @@
 import Button from "@/components/button";
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { useContext } from "react";
-import { TodosToDeleteContext } from "@/context/todoToDeleteContext";
+import { getTodosToDeleteContext } from "@/context/todoToDeleteContext";
 import TodosToDelete from "@/components/todosToDelete";
-import { TodosContext } from "@/context/todosContext";
+import { getTodosContext } from "@/context/todosContext";
 import { Todo } from "@/dto/todos.types";
 import { getModalContext } from '@/context/modalTextContext';
 
 export default function DeleteBar() {
-  const todosToDeleteContext = useContext(TodosToDeleteContext);
-  const todosContext = useContext(TodosContext);
   const supabase = createClientComponentClient();
-
-  if (!todosToDeleteContext) {
-    console.error("todosToDeleteContext is null");
-    return <></>
-  }
-  const [todosToDelete, setTodosToDelete] = todosToDeleteContext;
-
-  if (!todosContext) {
-    console.error("todosToDeleteContext is null");
-    return <></>
-  }
-  const [todos, setTodos] = todosContext;
+  const [todosToDelete, setTodosToDelete] = getTodosToDeleteContext();
+  const [todos, setTodos] = getTodosContext();
   const [, setModalText] = getModalContext();
 
   const deleteTodoTags = async (todo: Todo) => {

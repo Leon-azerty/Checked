@@ -6,7 +6,6 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/navigation'
 import { getModalContext } from '@/context/modalTextContext';
 
-
 export default function Header({ showMenu, setShowMenu }: { showMenu: boolean, setShowMenu: (showMenu: boolean) => void }) {
   const supabase = createClientComponentClient();
   const router = useRouter()

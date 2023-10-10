@@ -1,7 +1,7 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { IconContext } from "react-icons";
-import { TodosContext } from '@/context/todosContext';
+import { getTodosContext } from '@/context/todosContext';
 import Tag from '@/components/tag';
 import { HexColorPicker } from "react-colorful";
 import type { Tag as TagType } from '@/dto/tag.types';
@@ -10,7 +10,7 @@ import Input from '@/components/input';
 import Textarea from '@/components/textarea';
 import Button from '@/components/button';
 import { getModalContext } from '@/context/modalTextContext';
-import { TagsContext } from '@/context/tagsContext';
+import { getTagsContext } from '@/context/tagsContext';
 import TagMenu from '@/components/tagMenu';
 import Deadline from './deadline';
 
@@ -24,22 +24,13 @@ export default function Create({ setTab
   const [isTitleFilled, setIsTitleFilled] = useState(false);
   const [tagName, setTagName] = useState<string>("");
   const [color, setColor] = useState<string>("#D9D9D9");
-  const todosContext = useContext(TodosContext);
-  const tagsContext = useContext(TagsContext);
   const supabase = createClientComponentClient();
   const [date, setDate] = useState<string>("");
   const [time, setTime] = useState<string>("");
   const [isDeadline, setIsDeadline] = useState<boolean>(false);
   const [deadlineType, setDeadlineType] = useState<string>("");
-
-  if (!tagsContext) {
-    throw new Error('useTagsContext must be used within a TagsProvider');
-  }
-  const [existantTags, setExistantTags] = tagsContext;
-  if (!todosContext) {
-    throw new Error('useTodosContext must be used within a TodosProvider');
-  }
-  const [todos, setTodos] = todosContext;
+  const [existantTags, setExistantTags] = getTagsContext();
+  const [todos, setTodos] = getTodosContext();
   const [, setModalText] = getModalContext();
 
 

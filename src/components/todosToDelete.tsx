@@ -1,15 +1,9 @@
 import { IconContext } from "react-icons";
 import { ImCancelCircle } from "react-icons/im";
-import { useContext } from "react";
-import { TodosToDeleteContext } from "@/context/todoToDeleteContext";
+import { getTodosToDeleteContext } from "@/context/todoToDeleteContext";
 
 export default function TodosToDelete({ name }: { name: string }) {
-  const context = useContext(TodosToDeleteContext);
-  if (!context) {
-    console.error("context is null");
-    return <></>
-  }
-  const [todosToDeleteContext, setTodosToDeleteContext] = context;
+  const [todosToDeleteContext, setTodosToDeleteContext] = getTodosToDeleteContext();
   const deleteTodoInDeleteQueue = () => {
     setTodosToDeleteContext(todosToDeleteContext.filter(e => e.title !== name));
   }
