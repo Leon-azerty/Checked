@@ -65,7 +65,7 @@ export default function Home() {
           <TodosToDeleteContext.Provider value={[todosToDelete, setTodosToDelete]}>
             {showMenu && <Menu tab={tab} setTab={setTab} filter={filter} setFilter={setFilter} />}
             <div className='flex-col bg-white w-full h-full min-h-screen max-w-screen'>
-              <Header setModalText={setModalText} setShowMenu={setShowMenu} showMenu={showMenu} />
+              <Header setShowMenu={setShowMenu} showMenu={showMenu} />
               {tab == "create" && <Create setTab={setTab} />}
               <Body tab={tab} setTab={setTab} isLoading={isLoading} filter={filter} />
             </div>

@@ -4,11 +4,13 @@ import { AiOutlineMenuFold, AiOutlineMenuUnfold } from 'react-icons/ai';
 import IconButton from '@/components/iconButton';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/navigation'
+import { getModalContext } from '@/context/modalTextContext';
 
 
-export default function Header({ showMenu, setShowMenu, setModalText }: { showMenu: boolean, setShowMenu: (showMenu: boolean) => void, setModalText: (text: string) => void }) {
+export default function Header({ showMenu, setShowMenu }: { showMenu: boolean, setShowMenu: (showMenu: boolean) => void }) {
   const supabase = createClientComponentClient();
   const router = useRouter()
+  const [, setModalText] = getModalContext();
 
   const logOut = async () => {
     const { error } = await supabase.auth.signOut();
