@@ -16,11 +16,7 @@ export function RightContent({ is_finished, handleTodoState, is_deleted, id, han
 }) {
 
   const handleOnClick = async () => {
-    if (is_deleted) {
-      restoreTodo()
-    } else {
-      handleDeleteTodo()
-    }
+    is_deleted ? restoreTodo() : handleDeleteTodo()
   }
 
   return <div className="w-36 border-gray-200 border-solid border-l-2 flex flex-col 

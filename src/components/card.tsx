@@ -39,10 +39,6 @@ export default function Card({ todo, id, tab }: {
       setModalText("ERROR : " + error.message);
       return console.log(error);
     }
-    // la ligne update quand on delete la todo
-    // il faudrait mettre d'abord une anim pour montrer qu'on delete
-    // puis seulement quand l'anim est finit on delete
-    // setTodos(todos.filter((e, i) => i != id));
   }
 
   const addTodoInFavorite = async () => {

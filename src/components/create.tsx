@@ -33,7 +33,6 @@ export default function Create({ setTab
   const [todos, setTodos] = getTodosContext();
   const [, setModalText] = getModalContext();
 
-
   const insertTodo = async () => {
     const id = (await supabase.auth.getUser()).data.user?.id;
     const { data, error } = await supabase.from('todo').insert({
@@ -55,14 +54,13 @@ export default function Create({ setTab
 
   const insertTodoTag = async (todo_id: number, tag_id: number) => {
     const { data, error } = await supabase.from('todo_tag').insert({
-      todo_id: todo_id,
-      tag_id: tag_id,
+      todo_id,
+      tag_id,
     })
     if (error) {
       setModalText("ERROR : " + error.message);
       return console.log(error)
     }
-
   }
 
   const createTodo = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -76,8 +74,8 @@ export default function Create({ setTab
       insertTodoTag(todo_id, tag.id);
     }
     setTodos([...todos, {
-      title: title, description: description, is_finished: false,
-      is_favorite: false, is_deleted: false, id: todo_id, tags: tags,
+      title, description, is_finished: false,
+      is_favorite: false, is_deleted: false, id: todo_id, tags,
       deadline: isDeadline ? date + " " + time : "", deadline_type: deadlineType,
     }]);
     for (const tag of tags) {
@@ -99,14 +97,14 @@ export default function Create({ setTab
     //vérifier si le tag existe déjà dans la liste des tags de l'user
     const { data, error } = await supabase.from('tag').insert({
       name: tagName,
-      color: color,
+      color,
       author_id
     }).select('id');
     if (error) {
       setModalText("ERROR : " + error.message);
       return console.log(error);
     }
-    setTags([...tags, { id: data[0].id, name: tagName, color: color }]);
+    setTags([...tags, { id: data[0].id, name: tagName, color }]);
     setTagName("");
   }
 
