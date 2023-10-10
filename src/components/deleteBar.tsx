@@ -5,13 +5,12 @@ import { TodosToDeleteContext } from "@/context/todoToDeleteContext";
 import TodosToDelete from "@/components/todosToDelete";
 import { TodosContext } from "@/context/todosContext";
 import { Todo } from "@/dto/todos.types";
-import { ModalTextContext } from '@/context/modalTextContext';
+import { getModalContext } from '@/context/modalTextContext';
 
 export default function DeleteBar() {
   const todosToDeleteContext = useContext(TodosToDeleteContext);
   const todosContext = useContext(TodosContext);
   const supabase = createClientComponentClient();
-  const modalContext = useContext(ModalTextContext);
 
   if (!todosToDeleteContext) {
     console.error("todosToDeleteContext is null");
@@ -24,10 +23,7 @@ export default function DeleteBar() {
     return <></>
   }
   const [todos, setTodos] = todosContext;
-  if (!modalContext) {
-    throw new Error('use modalContext must be used within a modalProvider');
-  }
-  const [, setModalText] = modalContext;
+  const [, setModalText] = getModalContext();
 
   const deleteTodoTags = async (todo: Todo) => {
     let { data, error } = await supabase.from('todo_tag')

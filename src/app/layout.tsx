@@ -2,7 +2,7 @@
 import '@/app/globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { ModalTextContext } from '@/context/modalTextContext';
+import { ModalContext } from '@/context/modalTextContext';
 import { useState } from 'react';
 import Modal from '@/components/modal';
 
@@ -26,11 +26,11 @@ export default function RootLayout({
     <html lang="en">
       <title>Checked, Todo app</title>
       <body className={inter.className}>
-        <ModalTextContext.Provider value={[modalText, setModalText]}>
+        <ModalContext.Provider value={[modalText, setModalText]}>
           {modalText != "" && <Modal color={modalText.includes("ERROR") ? errorMessageColor : infoMessageColor} />}
 
           {children}
-        </ModalTextContext.Provider>
+        </ModalContext.Provider>
       </body>
     </html>
   )

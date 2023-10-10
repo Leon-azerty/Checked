@@ -10,7 +10,8 @@ import type { Tag as TagType } from '@/dto/tag.types';
 import { TodosToDeleteContext } from '@/context/todoToDeleteContext';
 import { useRouter } from 'next/navigation'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { ModalTextContext } from '@/context/modalTextContext';
+import { getModalContext } from '@/context/modalTextContext';
+import Header from '@/components/header';
 
 export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -22,11 +23,7 @@ export default function Home() {
   const router = useRouter()
   const supabase = createClientComponentClient();
   const [showMenu, setShowMenu] = useState<boolean>(true);
-  const modalContext = useContext(ModalTextContext);
-  if (!modalContext) {
-    throw new Error('use modalContext must be used within a modalProvider');
-  }
-  const [, setModalText] = modalContext;
+  const [, setModalText] = getModalContext();
 
   const userIsLogged = async () => {
     const { data, error } = await supabase.auth.getSession()
@@ -114,7 +111,10 @@ export default function Home() {
         <TagsContext.Provider value={[tags, setTags]}>
           <TodosToDeleteContext.Provider value={[todosToDelete, setTodosToDelete]}>
             {showMenu && <Menu tab={tab} setTab={setTab} filter={filter} setFilter={setFilter} />}
-            <Body tab={tab} setTab={setTab} isLoading={isLoading} filter={filter} setShowMenu={setShowMenu} showMenu={showMenu} />
+            <div className='flex-col bg-white w-full h-full min-h-screen max-w-screen'>
+              <Header setModalText={setModalText} setShowMenu={setShowMenu} showMenu={showMenu} />
+              <Body tab={tab} setTab={setTab} isLoading={isLoading} filter={filter} setShowMenu={setShowMenu} showMenu={showMenu} />
+            </div>
           </TodosToDeleteContext.Provider>
         </TagsContext.Provider>
       </TodosContext.Provider>

@@ -1,9 +1,9 @@
 import Button from "@/components/button"
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Input from "@/components/input"
-import { ModalTextContext } from "@/context/modalTextContext"
+import { getModalContext } from "@/context/modalTextContext"
 
 export default function Form() {
   const [email, setEmail] = useState("")
@@ -14,11 +14,7 @@ export default function Form() {
   const [waitResForm, setWaitResForm] = useState(false);
   const router = useRouter();
   const supabase = createClientComponentClient();
-  const context = useContext(ModalTextContext);
-  if (!context) {
-    throw new Error('modalTextContext must be used within a ModalTextContext');
-  }
-  const [modalText, setModalText] = context;
+  const [, setModalText] = getModalContext();
 
   const SignIn = async ({ email, password }: { email: string, password: string }) => {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password })

@@ -9,7 +9,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import Input from '@/components/input';
 import Textarea from '@/components/textarea';
 import Button from '@/components/button';
-import { ModalTextContext } from '@/context/modalTextContext';
+import { getModalContext } from '@/context/modalTextContext';
 import Checkbox from '@/components/checkbox';
 import Radio from '@/components/radio';
 import { TagsContext } from '@/context/tagsContext';
@@ -30,7 +30,6 @@ export default function Create({ setTab
   const [isDeadline, setIsDeadline] = useState<boolean>(false);
   const [deadlineType, setDeadlineType] = useState<string>("");
   const todosContext = useContext(TodosContext);
-  const modalContext = useContext(ModalTextContext);
   const tagsContext = useContext(TagsContext);
   const supabase = createClientComponentClient();
 
@@ -42,10 +41,7 @@ export default function Create({ setTab
     throw new Error('useTodosContext must be used within a TodosProvider');
   }
   const [todos, setTodos] = todosContext;
-  if (!modalContext) {
-    throw new Error('use modalContext must be used within a modalProvider');
-  }
-  const [, setModalText] = modalContext;
+  const [, setModalText] = getModalContext();
 
 
   const insertTodo = async () => {

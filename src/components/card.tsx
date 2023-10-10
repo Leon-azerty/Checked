@@ -5,7 +5,7 @@ import { RightContent } from "@/components/rightContent";
 import { Star } from "@/components/star";
 import { TodosToDeleteContext } from "@/context/todoToDeleteContext";
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { ModalTextContext } from '@/context/modalTextContext';
+import { getModalContext } from '@/context/modalTextContext';
 import { Todo } from "@/dto/todos.types";
 
 export default function Card({ todo, id, tab }: {
@@ -17,7 +17,6 @@ export default function Card({ todo, id, tab }: {
   const [is_favorite, setIs_favorite] = useState(todo.is_favorite);
   const [is_deleted, setIs_deleted] = useState(todo.is_deleted);
   const supabase = createClientComponentClient();
-  const modalContext = useContext(ModalTextContext);
 
   const context = useContext(TodosToDeleteContext);
   if (!context) {
@@ -25,10 +24,7 @@ export default function Card({ todo, id, tab }: {
     return <></>
   }
   const [todosToDeleteContext, setTodosToDeleteContext] = context;
-  if (!modalContext) {
-    throw new Error('use modalContext must be used within a modalProvider');
-  }
-  const [, setModalText] = modalContext;
+  const [, setModalText] = getModalContext();
 
   const handleTodoState = async () => {
     const { data, error } = await supabase.from('todo').update({
