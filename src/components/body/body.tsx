@@ -71,6 +71,7 @@ export default function Body(props: BodyProps) {
     </div>
     <main>
       {props.tab == "create" && <Create setTab={props.setTab} />}
+      {props.filter.map((e, i) => <div key={i} className='flex w-full mt-4'>{e}</div>)}
       {props.isLoading && <CardLoader />}
       {props.tab == "listDeleted" && <DeleteBar />}
       {todos.length === 0 && !props.isLoading && <NoTodoToDisplay setTab={props.setTab} />}
