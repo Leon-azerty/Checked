@@ -28,7 +28,6 @@ export default function RootLayout({
       <body className={inter.className}>
         <ModalContext.Provider value={[modalText, setModalText]}>
           {modalText != "" && <Modal color={modalText.includes("ERROR") ? errorMessageColor : infoMessageColor} />}
-
           {children}
         </ModalContext.Provider>
       </body>
