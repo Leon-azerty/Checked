@@ -41,8 +41,8 @@ export default function Home() {
         setModalText(error);
       }
       console.log("catch error : " + error);
-      setIsLoading(false);
     }
+    setIsLoading(false);
   }
 
   const userIsLogged = async () => {
