@@ -18,7 +18,7 @@ export default function Body() {
       </Suspense>
       <MenuTitle />
       <div className='flex flex-col md:flex-row items-center justify-center'>
-        <Image src="/menu_tags.png" width="200" height="200" alt="menu" />
+        <Image src="/menu_tags.png" className="w-auto" width="200" height="200" alt="menu" />
         <MenuDesc />
       </div>
     </div>
