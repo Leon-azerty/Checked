@@ -1,4 +1,4 @@
-import Button from "./button/button";
+import Button from "./button";
 
 export default function NoTodoToDisplay({ setTab }: { setTab: (tab: string) => void }) {
   return <div className='flex justify-center items-center h-96'>

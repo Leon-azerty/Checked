@@ -1,22 +1,24 @@
 import { useContext, useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { IconContext } from "react-icons";
-import { CreateProps } from '@/components/create/create.props';
 import { TodosContext } from '@/context/todosContext';
-import Tag from '@/components/tag/tag';
+import Tag from '@/components/tag';
 import { HexColorPicker } from "react-colorful";
 import type { Tag as TagType } from '@/dto/tag.types';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import Input from '@/components/input/input';
-import Textarea from '@/components/textarea/textarea';
-import Button from '@/components/button/button';
+import Input from '@/components/input';
+import Textarea from '@/components/textarea';
+import Button from '@/components/button';
 import { ModalTextContext } from '@/context/modalTextContext';
-import Checkbox from '@/components/checkbox/checkbox';
-import Radio from '@/components/radio/radio';
+import Checkbox from '@/components/checkbox';
+import Radio from '@/components/radio';
 import { TagsContext } from '@/context/tagsContext';
-import TagMenu from '@/components/tagMenu/tagMenu';
+import TagMenu from '@/components/tagMenu';
 
-export default function Create(props: CreateProps) {
+export default function Create({ setTab
+}: {
+  setTab: (create: string) => void;
+}) {
   const [tags, setTags] = useState<TagType[]>([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -100,7 +102,7 @@ export default function Create(props: CreateProps) {
     }
     setTitle("");
     setDescription("");
-    props.setTab("");
+    setTab("");
   };
 
   const addTag = async () => {
@@ -141,7 +143,7 @@ export default function Create(props: CreateProps) {
   }
 
   return <div className="pt-4 animate-wiggle">
-    <div className='flex justify-between mr-6' onClick={() => { props.setTab("ListAll") }}>
+    <div className='flex justify-between mr-6' onClick={() => { setTab("ListAll") }}>
       <div></div>
       <IconContext.Provider value={{ size: '32' }}>
         <AiOutlineCloseCircle />

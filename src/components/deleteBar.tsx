@@ -1,8 +1,8 @@
-import Button from "@/components/button/button";
+import Button from "@/components/button";
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useContext } from "react";
 import { TodosToDeleteContext } from "@/context/todoToDeleteContext";
-import TodosToDelete from "@/components/todosToDelete/todosToDelete";
+import TodosToDelete from "@/components/todosToDelete";
 import { TodosContext } from "@/context/todosContext";
 import { Todo } from "@/dto/todos.types";
 import { ModalTextContext } from '@/context/modalTextContext';

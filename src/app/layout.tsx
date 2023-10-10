@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ModalTextContext } from '@/context/modalTextContext';
 import { useState } from 'react';
-import Modal from '@/components/modal/modal';
+import Modal from '@/components/modal';
 
 const inter = Inter({ subsets: ['latin'] })
 

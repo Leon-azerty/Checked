@@ -1,17 +1,21 @@
-import { CardProps } from "@/components/card/card.props";
 import { useContext, useState } from "react";
-import "@/components/card/card.css"
-import { LeftContent } from "@/components/card/leftContent";
-import { RightContent } from "@/components/card/rightContent";
-import { Star } from "@/components/card/star";
+import "@/components/card.css"
+import { LeftContent } from "@/components/leftContent";
+import { RightContent } from "@/components/rightContent";
+import { Star } from "@/components/star";
 import { TodosToDeleteContext } from "@/context/todoToDeleteContext";
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { ModalTextContext } from '@/context/modalTextContext';
+import { Todo } from "@/dto/todos.types";
 
-export default function Card(props: CardProps) {
-  const [is_finished, setIs_finished] = useState(props.todo.is_finished);
-  const [is_favorite, setIs_favorite] = useState(props.todo.is_favorite);
-  const [is_deleted, setIs_deleted] = useState(props.todo.is_deleted);
+export default function Card({ todo, id, tab }: {
+  todo: Todo;
+  id: number;
+  tab: string;
+}) {
+  const [is_finished, setIs_finished] = useState(todo.is_finished);
+  const [is_favorite, setIs_favorite] = useState(todo.is_favorite);
+  const [is_deleted, setIs_deleted] = useState(todo.is_deleted);
   const supabase = createClientComponentClient();
   const modalContext = useContext(ModalTextContext);
 
@@ -29,7 +33,7 @@ export default function Card(props: CardProps) {
   const handleTodoState = async () => {
     const { data, error } = await supabase.from('todo').update({
       is_finished: !is_finished
-    }).eq('id', props.todo.id);
+    }).eq('id', todo.id);
     if (error) {
       setModalText("ERROR : " + error.message);
       return console.log(error);
@@ -40,7 +44,7 @@ export default function Card(props: CardProps) {
   const addTodoInTrash = async () => {
     setIs_deleted(true);
     const { data, error } = await supabase.from('todo')
-      .update({ is_deleted: true }).eq('id', props.todo.id);
+      .update({ is_deleted: true }).eq('id', todo.id);
     if (error) {
       setModalText("ERROR : " + error.message);
       return console.log(error);
@@ -48,13 +52,13 @@ export default function Card(props: CardProps) {
     // la ligne update quand on delete la todo
     // il faudrait mettre d'abord une anim pour montrer qu'on delete
     // puis seulement quand l'anim est finit on delete
-    // setTodos(todos.filter((e, i) => i != props.id));
+    // setTodos(todos.filter((e, i) => i != id));
   }
 
   const addTodoInFavorite = async () => {
     const { data, error } = await supabase.from('todo').update({
       is_favorite: !is_favorite
-    }).eq('id', props.todo.id);
+    }).eq('id', todo.id);
     if (error) {
       setModalText("ERROR : " + error.message);
       return console.log("error ", error);
@@ -63,14 +67,14 @@ export default function Card(props: CardProps) {
   }
 
   const addTodoToDelete = () => {
-    if (!todosToDeleteContext.includes(props.todo))
-      setTodosToDeleteContext([...todosToDeleteContext, props.todo]);
+    if (!todosToDeleteContext.includes(todo))
+      setTodosToDeleteContext([...todosToDeleteContext, todo]);
   }
 
   const restoreTodo = async () => {
     const { data, error } = await supabase.from('todo').update({
       is_deleted: false
-    }).eq('id', props.todo.id);
+    }).eq('id', todo.id);
     if (error) {
       setModalText("ERROR : " + error.message);
       return console.log(error);
@@ -78,12 +82,12 @@ export default function Card(props: CardProps) {
     setIs_deleted(false);
   }
 
-  if (props.tab == "listFavorite" && !is_favorite) return (<></>);
-  if (props.tab == "listAll" && is_deleted) return (<></>);
-  if (props.tab == "listChecked" && !is_finished) return (<></>);
-  if (props.tab == "listUnchecked" && is_finished) return (<></>);
-  if (props.tab == "listDeleted" && !is_deleted) return (<></>);
-  return <article id={`card-${props.id}`} onClick={addTodoToDelete} className={` 
+  if (tab == "listFavorite" && !is_favorite) return (<></>);
+  if (tab == "listAll" && is_deleted) return (<></>);
+  if (tab == "listChecked" && !is_finished) return (<></>);
+  if (tab == "listUnchecked" && is_finished) return (<></>);
+  if (tab == "listDeleted" && !is_deleted) return (<></>);
+  return <article id={`card-${id}`} onClick={addTodoToDelete} className={` 
   rounded-3xl p-6 m-6 border-gray-200 border-solid border-4 flex flex-col hover:pl-4 
   transition-all ease-in duration-500 animate-wiggle hover:scale-y-110
   ${is_finished ? "background-gradient-left-to-right border-green" : ""} 
@@ -93,11 +97,11 @@ export default function Card(props: CardProps) {
     <div className="flex flex-row-reverse">
       <RightContent handleDeleteTodo={addTodoInTrash}
         restoreTodo={restoreTodo}
-        handleTodoState={handleTodoState} id={props.id}
+        handleTodoState={handleTodoState} id={id}
         is_deleted={is_deleted} is_finished={is_finished} />
-      <Star handleTodoFavorite={addTodoInFavorite} id={props.id} is_favorite={is_favorite} />
+      <Star handleTodoFavorite={addTodoInFavorite} id={id} is_favorite={is_favorite} />
       <LeftContent
-        todo={props.todo}
+        todo={todo}
       />
     </div>
   </article>

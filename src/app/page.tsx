@@ -1,6 +1,6 @@
 'use client';
-import Menu from '@/components/menu/menu';
-import Body from '@/components/body/body';
+import Menu from '@/components/menu';
+import Body from '@/components/body';
 import { useContext, useEffect, useState } from 'react';
 import { Todo } from '@/dto/todos.types';
 import { TagsContext } from '@/context/tagsContext';

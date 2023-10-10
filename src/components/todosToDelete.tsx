@@ -1,10 +1,9 @@
 import { IconContext } from "react-icons";
-import { TodosToDeleteProps } from "@/components/todosToDelete/TodosToDelete.props";
 import { ImCancelCircle } from "react-icons/im";
 import { useContext } from "react";
 import { TodosToDeleteContext } from "@/context/todoToDeleteContext";
 
-export default function TodosToDelete(props: TodosToDeleteProps) {
+export default function TodosToDelete({ name }: { name: string }) {
   const context = useContext(TodosToDeleteContext);
   if (!context) {
     console.error("context is null");
@@ -12,10 +11,10 @@ export default function TodosToDelete(props: TodosToDeleteProps) {
   }
   const [todosToDeleteContext, setTodosToDeleteContext] = context;
   const deleteTodoInDeleteQueue = () => {
-    setTodosToDeleteContext(todosToDeleteContext.filter(e => e.title !== props.name));
+    setTodosToDeleteContext(todosToDeleteContext.filter(e => e.title !== name));
   }
   return <div className="flex items-center">
-    <p className="bg-[#D9D9D9] p-2 rounded-lg m-2">{props.name}</p>
+    <p className="bg-[#D9D9D9] p-2 rounded-lg m-2">{name}</p>
     <IconContext.Provider value={{ size: "20" }}>
       <div onClick={deleteTodoInDeleteQueue} className="hover:scale-150">
         <ImCancelCircle />

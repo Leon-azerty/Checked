@@ -1,37 +1,39 @@
-import { LeftContentProps } from "@/components/card/leftContent.props"
 import { AiFillPlusCircle } from "react-icons/ai";
 import { IconContext } from "react-icons";
-import Tag from "@/components/tag/tag";
+import Tag from "@/components/tag";
 import { useRef, useState } from "react";
 import { useHover } from 'usehooks-ts';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import type { Tag as TagType } from "@/dto/tag.types";
-import Button from "@/components/button/button";
+import Button from "@/components/button";
 import { IconSizeInPx } from "@/const/iconSize";
+import { Todo } from "@/dto/todos.types";
 
-export function LeftContent(props: LeftContentProps) {
+export function LeftContent({ todo }: {
+  todo: Todo;
+}) {
   const hoverRef = useRef(null)
   const isHover = useHover(hoverRef)
-  const [tags, setTags] = useState(props.todo.tags);
+  const [tags, setTags] = useState(todo.tags);
   const [isUpdating, setIsUpdating] = useState(false);
   const isDebug = true;
   const supabase = createClientComponentClient();
 
   const removeTag = async (tag: TagType) => {
-    props.todo.tags = tags.filter(e => e.name !== tag.name);
-    setTags(props.todo.tags);
+    todo.tags = tags.filter(e => e.name !== tag.name);
+    setTags(todo.tags);
     const { data, error } = await supabase.from('todo_tag')
       .delete()
       .eq('tag_id', tag.id)
-      .eq('todo_id', props.todo.id);
+      .eq('todo_id', todo.id);
     if (error) return console.log(error);
   }
 
   const UpdateTodo = async () => {
     const { data, error } = await supabase.from('todo').update({
-      description: props.todo.description,
-      name: props.todo.title
-    }).eq('id', props.todo.id);
+      description: todo.description,
+      name: todo.title
+    }).eq('id', todo.id);
     if (error) return console.log(error);
     console.log("data", data);
     setIsUpdating(false)
@@ -41,7 +43,7 @@ export function LeftContent(props: LeftContentProps) {
     <div ref={hoverRef} className="flex items-center w-full">
       <div className="flex w-full justify-between flex-col md:flex-row">
         <div className="flex items-center">
-          <p className="text-3xl font-bold flex flex-wrap">{props.todo.title}</p>
+          <p className="text-3xl font-bold flex flex-wrap">{todo.title}</p>
           {
             !isDebug &&
             <IconContext.Provider value={{ size: IconSizeInPx, color: "#7E7E7E" }}>
@@ -52,8 +54,8 @@ export function LeftContent(props: LeftContentProps) {
           }
         </div>
         <div className="flex flex-col md:flex-row">
-          {props.todo.deadline_type && <p className="flex bg-gray-300 rounded-xl items-center px-3 m-1 w-fit">{props.todo.deadline_type}</p>}
-          {props.todo.deadline && <p className="flex bg-gray-300 rounded-xl items-center px-3 m-1 w-fit">{props.todo.deadline}</p>}
+          {todo.deadline_type && <p className="flex bg-gray-300 rounded-xl items-center px-3 m-1 w-fit">{todo.deadline_type}</p>}
+          {todo.deadline && <p className="flex bg-gray-300 rounded-xl items-center px-3 m-1 w-fit">{todo.deadline}</p>}
         </div>
       </div>
     </div >
@@ -64,11 +66,11 @@ export function LeftContent(props: LeftContentProps) {
     {
       isUpdating ?
         <textarea className="w-full"
-          autoFocus defaultValue={props.todo.description}
-          onChange={(e) => { props.todo.description = e.target.value }}>
+          autoFocus defaultValue={todo.description}
+          onChange={(e) => { todo.description = e.target.value }}>
         </textarea> :
         <p className="w-full" onClick={() => { setIsUpdating(true) }}>
-          {props.todo.description}</p>
+          {todo.description}</p>
     }
 
     <div className="flex flex-col-reverse md:flex-row-reverse">
