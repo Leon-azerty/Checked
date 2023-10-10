@@ -1,13 +1,13 @@
 import Card from '@/components/card';
 import { getTodosContext } from '@/context/todosContext';
-import Create from '@/components/create';
 import CardLoader from '@/components/cardLoader';
 import DeleteBar from '@/components/deleteBar';
 import { Todo } from '@/dto/todos.types';
 import type { Tag as TagType } from '@/dto/tag.types';
 import NoTodoToDisplay from './noTodoToDisplay';
 
-export default function Body({ tab, setTab, isLoading, filter, showMenu, setShowMenu }: { tab: string, setTab: (tab: string) => void, isLoading: boolean, filter: string[], showMenu: boolean, setShowMenu: (showMenu: boolean) => void }) {
+export default function Body({ tab, setTab, isLoading, filter }:
+  { tab: string, setTab: (tab: string) => void, isLoading: boolean, filter: string[] }) {
   const [todos,] = getTodosContext();
   let todosFiltered: Todo[] = todos;
 
@@ -26,7 +26,6 @@ export default function Body({ tab, setTab, isLoading, filter, showMenu, setShow
   }
 
   return <main>
-    {tab == "create" && <Create setTab={setTab} />}
     {filter.map((e, i) => <div key={i} className='flex w-full mt-4'>{e}</div>)}
     {isLoading && <CardLoader />}
     {tab == "listDeleted" && <DeleteBar />}

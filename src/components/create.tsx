@@ -10,10 +10,9 @@ import Input from '@/components/input';
 import Textarea from '@/components/textarea';
 import Button from '@/components/button';
 import { getModalContext } from '@/context/modalTextContext';
-import Checkbox from '@/components/checkbox';
-import Radio from '@/components/radio';
 import { TagsContext } from '@/context/tagsContext';
 import TagMenu from '@/components/tagMenu';
+import Deadline from './deadline';
 
 export default function Create({ setTab
 }: {
@@ -24,14 +23,14 @@ export default function Create({ setTab
   const [description, setDescription] = useState("");
   const [isTitleFilled, setIsTitleFilled] = useState(false);
   const [tagName, setTagName] = useState<string>("");
-  const [date, setDate] = useState<string>("");
-  const [time, setTime] = useState<string>("");
   const [color, setColor] = useState<string>("#D9D9D9");
-  const [isDeadline, setIsDeadline] = useState<boolean>(false);
-  const [deadlineType, setDeadlineType] = useState<string>("");
   const todosContext = useContext(TodosContext);
   const tagsContext = useContext(TagsContext);
   const supabase = createClientComponentClient();
+  const [date, setDate] = useState<string>("");
+  const [time, setTime] = useState<string>("");
+  const [isDeadline, setIsDeadline] = useState<boolean>(false);
+  const [deadlineType, setDeadlineType] = useState<string>("");
 
   if (!tagsContext) {
     throw new Error('useTagsContext must be used within a TagsProvider');
@@ -82,7 +81,6 @@ export default function Create({ setTab
       return;
     }
     const todo_id = await insertTodo();
-    //ajouter dans la table todo_tag
     for (const tag of tags) {
       insertTodoTag(todo_id, tag.id);
     }
@@ -129,15 +127,6 @@ export default function Create({ setTab
     setTags([...tags, tag]);
   }
 
-  const addDeadline = () => {
-    if (isDeadline) {
-      setDate("");
-      setTime("");
-      setDeadlineType("");
-    }
-    setIsDeadline(!isDeadline)
-  }
-
   return <div className="pt-4 animate-wiggle">
     <div className='flex justify-between mr-6' onClick={() => { setTab("ListAll") }}>
       <div></div>
@@ -148,17 +137,7 @@ export default function Create({ setTab
     <form className='p-2'>
       <Input htmlFor='title' onchange={(e) => setTitle(e.target.value)}
         label='Your title' placeholder='title' type='email' isError={isTitleFilled} />
-      <Checkbox htmlFor='deadline' onchange={() => { addDeadline() }}
-        label='Add Deadline' placeholder='' />
-      {isDeadline && <Input htmlFor='date' onchange={(e) => { setDate(e.target.value) }}
-        label='Date' placeholder='' type='date' />}
-      {isDeadline && <Input htmlFor='time' onchange={(e) => { setTime(e.target.value) }}
-        label='Time' placeholder='' type='time' />}
-      {isDeadline && <Radio htmlFor='To_do_The' onchange={() => { setDeadlineType("to do the") }}
-        label='To do The' placeholder='' name='deadline_type' />}
-      {isDeadline && <Radio htmlFor='Before_The' onchange={() => { setDeadlineType("before the") }}
-        label='Before The' placeholder='' name='deadline_type' />}
-
+      <Deadline isDeadline={isDeadline} setDate={setDate} setDeadlineType={setDeadlineType} setIsDeadline={setIsDeadline} setTime={setTime} />
       <div className='flex flex-wrap'>
         <div className='my-2'>
           <div className='flex'>

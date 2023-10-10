@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { getModalContext } from '@/context/modalTextContext';
 import Header from '@/components/header';
+import Create from '@/components/create';
 
 export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -65,7 +66,8 @@ export default function Home() {
             {showMenu && <Menu tab={tab} setTab={setTab} filter={filter} setFilter={setFilter} />}
             <div className='flex-col bg-white w-full h-full min-h-screen max-w-screen'>
               <Header setModalText={setModalText} setShowMenu={setShowMenu} showMenu={showMenu} />
-              <Body tab={tab} setTab={setTab} isLoading={isLoading} filter={filter} setShowMenu={setShowMenu} showMenu={showMenu} />
+              {tab == "create" && <Create setTab={setTab} />}
+              <Body tab={tab} setTab={setTab} isLoading={isLoading} filter={filter} />
             </div>
           </TodosToDeleteContext.Provider>
         </TagsContext.Provider>
