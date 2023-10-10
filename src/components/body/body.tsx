@@ -58,12 +58,12 @@ export default function Body(props: BodyProps) {
 
   return <div className='flex-col bg-white w-full h-full min-h-screen max-w-screen'>
     <div className='flex justify-between w-96 md:w-full'>
-      <div className='w-20'>
+      <div className='ml-4 w-20'>
         {props.showMenu ? <IconButton icon={<AiOutlineMenuFold />} onClick={() => props.setShowMenu(false)} text='' iconColor='black' /> :
           <IconButton icon={<AiOutlineMenuUnfold />} onClick={() => props.setShowMenu(true)} text='' iconColor='black' />}
       </div>
       <Title />
-      <div className='w-20'>
+      <div className='mr-4 w-20'>
         <IconButton icon={<RiLogoutBoxRLine />} text=''
           onClick={logOut} iconColor='black'
         />
