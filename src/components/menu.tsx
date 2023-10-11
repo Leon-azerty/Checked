@@ -4,7 +4,8 @@ import { BsListNested } from 'react-icons/bs';
 import { gray_700, starYellow } from "@/const/colors";
 import IconButton from "@/components/iconButton";
 import { getTagsContext } from '@/context/tagsContext';
-import TagMenu from "@/components/tagMenu";
+import Tag from "./tag";
+import type { Tag as TagType } from "@/dto/tag.types";
 
 export default function Menu({ tab, setTab, filter, setFilter }: {
   tab: string;
@@ -38,11 +39,11 @@ export default function Menu({ tab, setTab, filter, setFilter }: {
     setTab('listDeleted');
   }
 
-  const addTagsInFilter = (name: string) => {
-    if (filter.includes(name)) {
-      setFilter(filter.filter((e) => e != name));
+  const addTagsInFilter = (tag: TagType) => {
+    if (filter.includes(tag.name)) {
+      setFilter(filter.filter((e) => e != tag.name));
     } else {
-      setFilter([...filter, name]);
+      setFilter([...filter, tag.name]);
     }
     return;
   }
@@ -56,7 +57,7 @@ export default function Menu({ tab, setTab, filter, setFilter }: {
     <IconButton icon={<RiDeleteBin6Line />} text='Trash' onClick={handleListTrash} iconColor={gray_700} className={`${tab == 'listTrash' ? "font-bold" : ""}`} />
     <hr className="border-gray-400 border-solid border-b-2 rounded-lg mx-8"></hr>
     <div className="flex flex-wrap mt-2">
-      {tags.length > 0 && tags.map((e, i) => <TagMenu key={e.name + i} tag={e} onClick={addTagsInFilter} />)}
+      {tags.length > 0 && tags.map((e, i) => <Tag key={e.name + i} tag={e} onClick={addTagsInFilter} />)}
     </div>
   </aside >
 }

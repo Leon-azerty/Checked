@@ -11,7 +11,6 @@ import Textarea from '@/components/textarea';
 import Button from '@/components/button';
 import { getModalContext } from '@/context/modalTextContext';
 import { getTagsContext } from '@/context/tagsContext';
-import TagMenu from '@/components/tagMenu';
 import Deadline from './deadline';
 
 export default function Create({ setTab
@@ -129,7 +128,7 @@ export default function Create({ setTab
       <div className='flex flex-wrap'>
         <div className=''>
           <div className='flex'>
-            {existantTags.length > 0 && existantTags.map((e, i) => <TagMenu key={e.name as string} tag={e} onClick={() => { addExistantTag(e) }} />)}
+            {existantTags.length > 0 && existantTags.map((e, i) => <Tag key={e.name as string} tag={e} onClick={() => { addExistantTag(e) }} />)}
           </div>
           <Input htmlFor='tag' onchange={(e) => setTagName(e.target.value)}
             value={tagName} label='Tag' placeholder='Tag' type='text' />
@@ -138,7 +137,7 @@ export default function Create({ setTab
         <div className='my-2 flex h-full w-full'>
           <HexColorPicker color={color as string} className='w-6/12' onChange={setColor} />
           <div className='h-full w-6/12 flex flex-wrap justify-start'>
-            {tags.length > 0 && tags.map((e, i) => <Tag key={e.name as string} tag={e} onClick={() => { removeTag(e) }} />)}
+            {tags.length > 0 && tags.map((e, i) => <Tag key={e.name as string} tag={e} onClick={() => null} removeTag={() => { removeTag(e) }} />)}
           </div>
         </div>
       </div>
