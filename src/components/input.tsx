@@ -8,7 +8,7 @@ export default function Input({ htmlFor, label, placeholder, type, onchange, val
   value?: string;
   isError?: boolean;
 }) {
-  return <div className="m-2">
+  return <div className="">
     <label htmlFor={htmlFor} className={`block mb-2 text-sm 
     font-medium text-gray-900 ${isError ? "text-red" : ""}`}>
       {label} {isError ? " is required" : ""}

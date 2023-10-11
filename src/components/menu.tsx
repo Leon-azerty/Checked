@@ -56,7 +56,7 @@ export default function Menu({ tab, setTab, filter, setFilter }: {
     <IconButton icon={<RiDeleteBin6Line />} text='Trash' onClick={handleListTrash} iconColor={gray_700} className={`${tab == 'listTrash' ? "font-bold" : ""}`} />
     <hr className="border-gray-400 border-solid border-b-2 rounded-lg mx-8"></hr>
     <div className="flex flex-wrap mt-2">
-      {tags.length > 0 && tags.map((e, i) => <TagMenu key={e.name + i} tag={e} onClick={addTagsInFilter}></TagMenu>)}
+      {tags.length > 0 && tags.map((e, i) => <TagMenu key={e.name + i} tag={e} onClick={addTagsInFilter} />)}
     </div>
   </aside >
 }

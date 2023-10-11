@@ -3,10 +3,6 @@
     background-image: linear-gradient(to right, white 50%, #22c55e 50%);
     background-position: -100% 0%;
     transition: background-position 1s;
-    /* 
-    voir à quoi ça sert
-    -webkit-transition: background-position 1s;
-    -moz-transition: background-position 1s; */
 }
 
 .background-gradient-left-to-right-deleted {
@@ -14,24 +10,4 @@
     background-image: linear-gradient(to right, white 50%, #e21414 50%);
     background-position: -100% 0%;
     transition: background-position 1s;
-    /* -webkit-transition: background-position 1s;
-    -moz-transition: background-position 1s; */
 }
-
-/* .border-gradient-left-to-right:target {
-    animation: border_anim 1s linear forwards;
-}
-
-@keyframes border_anim {
-    0% {
-        width: 10%;
-    }
-
-    99% {
-        width: 90%;
-    }
-
-    100% {
-        width: auto;
-    }
-} */

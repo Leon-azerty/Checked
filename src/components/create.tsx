@@ -117,18 +117,17 @@ export default function Create({ setTab
   }
 
   return <div className="pt-4 animate-wiggle">
-    <div className='flex justify-between mr-6' onClick={() => { setTab("ListAll") }}>
-      <div></div>
+    <div className='flex flex-row-reverse mr-5' onClick={() => { setTab("ListAll") }}>
       <IconContext.Provider value={{ size: '32' }}>
         <AiOutlineCloseCircle />
       </IconContext.Provider>
     </div>
-    <form className='p-2'>
+    <form className='ml-2 p-2'>
       <Input htmlFor='title' onchange={(e) => setTitle(e.target.value)}
         label='Your title' placeholder='title' type='email' isError={isTitleFilled} />
       <Deadline isDeadline={isDeadline} setDate={setDate} setDeadlineType={setDeadlineType} setIsDeadline={setIsDeadline} setTime={setTime} />
       <div className='flex flex-wrap'>
-        <div className='my-2'>
+        <div className=''>
           <div className='flex'>
             {existantTags.length > 0 && existantTags.map((e, i) => <TagMenu key={e.name as string} tag={e} onClick={() => { addExistantTag(e) }} />)}
           </div>

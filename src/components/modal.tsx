@@ -9,7 +9,7 @@ export default function Modal({ color }: { color: string }) {
     <p className={color}>
       {modalText}
     </p>
-    <button className="text-xl" onClick={() => setModalText("")}>
+    <button className="text-xl text-black" onClick={() => setModalText("")}>
       X
     </button>
   </div>

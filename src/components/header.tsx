@@ -21,13 +21,13 @@ export default function Header({ showMenu, setShowMenu }: { showMenu: boolean, s
     }
   }
 
-  return <div className='flex justify-between w-96 md:w-full'>
-    <div className='ml-4 w-20'>
+  return <div className='flex justify-between items-center w-96 md:w-full'>
+    <div className='w-20'>
       {showMenu ? <IconButton icon={<AiOutlineMenuFold />} onClick={() => setShowMenu(false)} text='' iconColor='black' /> :
         <IconButton icon={<AiOutlineMenuUnfold />} onClick={() => setShowMenu(true)} text='' iconColor='black' />}
     </div>
     <Title />
-    <div className='mr-4 w-20'>
+    <div className='w-20'>
       <IconButton icon={<RiLogoutBoxRLine />} text=''
         onClick={logOut} iconColor='black'
       />
