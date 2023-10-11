@@ -17,7 +17,7 @@ export default function Card({ todo, id, tab }: {
   const [is_favorite, setIs_favorite] = useState(todo.is_favorite);
   const [is_deleted, setIs_deleted] = useState(todo.is_deleted);
   const supabase = createClientComponentClient();
-  const [todosToDeleteContext, setTodosToDeleteContext] = getTodosToDeleteContext();
+  const [todosToDelete, setTodosToDelete] = getTodosToDeleteContext();
   const [, setModalText] = getModalContext();
 
   const handleTodoState = async () => {
@@ -53,8 +53,8 @@ export default function Card({ todo, id, tab }: {
   }
 
   const addTodoToDelete = () => {
-    if (!todosToDeleteContext.includes(todo))
-      setTodosToDeleteContext([...todosToDeleteContext, todo]);
+    if (!todosToDelete.includes(todo))
+      setTodosToDelete([...todosToDelete, todo]);
   }
 
   const restoreTodo = async () => {
@@ -66,6 +66,7 @@ export default function Card({ todo, id, tab }: {
       return console.log(error);
     }
     setIs_deleted(false);
+    setTodosToDelete(todosToDelete.filter(e => e.id !== todo.id));
   }
 
   if (tab == "listFavorite" && !is_favorite) return (<></>);
