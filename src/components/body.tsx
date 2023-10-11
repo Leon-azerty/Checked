@@ -29,7 +29,8 @@ export default function Body({ tab, setTab, isLoading, filter }:
     {filter.map((e, i) => <div key={i} className='flex w-full mt-4'>{e}</div>)}
     {isLoading && <CardLoader />}
     {tab == "listDeleted" && <DeleteBar />}
-    {((todos.length === 0 || todosFiltered.length == 0) && !isLoading) && <NoTodoToDisplay setTab={setTab} />}
+    {todos.length === 0 && !isLoading && <NoTodoToDisplay setTab={setTab} />}
     {todosFiltered.length > 0 && todosFiltered.map((e, i) => <Card todo={e} id={i} key={e.id} tab={tab} />)}
+    {todosFiltered.length == 0 && <NoTodoToDisplay setTab={setTab} />}
   </main>
 }

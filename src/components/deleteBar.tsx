@@ -1,6 +1,7 @@
 import Button from "@/components/button";
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { getTodosToDeleteContext } from "@/context/todoToDeleteContext";
+import TodosToDelete from "@/components/todosToDelete";
 import { getTodosContext } from "@/context/todosContext";
 import { Todo } from "@/dto/todos.types";
 import { getModalContext } from '@/context/modalTextContext';
@@ -41,7 +42,11 @@ export default function DeleteBar() {
     setTodosToDelete([]);
   }
 
-  return <div className="flex flex-row-reverse items-center">
-    {todosToDelete.length > 0 && <Button text='Delete' onClick={removeTodo} type="button" />}
+  return <div className="flex justify-between items-center">
+    <div className="flex">
+      {todosToDelete.map((e, i) => <TodosToDelete key={i} name={e.title} />)}
+    </div>
+    <div></div>
+    {todosToDelete.length > 0 && < Button text='Delete' onClick={removeTodo} type="button" />}
   </div>
 }
