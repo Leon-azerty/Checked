@@ -8,6 +8,7 @@ import type { Tag as TagType } from "@/dto/tag.types";
 import Button from "@/components/button";
 import { IconSizeInPx } from "@/const/iconSize";
 import { Todo } from "@/dto/todos.types";
+import { gray_700 } from "@/const/colors";
 
 export function LeftContent({ todo }: {
   todo: Todo;
@@ -46,7 +47,7 @@ export function LeftContent({ todo }: {
           <p className="text-3xl font-bold flex flex-wrap">{todo.title}</p>
           {
             !isDebug &&
-            <IconContext.Provider value={{ size: IconSizeInPx, color: "#7E7E7E" }}>
+            <IconContext.Provider value={{ size: IconSizeInPx, color: gray_700 }}>
               <div onClick={() => { console.log("ajout d'un tag WIP") }}>
                 {isHover && <AiFillPlusCircle />}
               </div>
@@ -77,7 +78,7 @@ export function LeftContent({ todo }: {
       {isUpdating && <Button type="button" text="update" onClick={() => { UpdateTodo() }} />}
       {isUpdating && <Button type="button" text="cancel"
         onClick={() => { setIsUpdating(false) }}
-        className=" bg-gradient-to-r from-[#384854] to-[#d7d2cc]" />}
+      />}
     </div>
   </div >
 }

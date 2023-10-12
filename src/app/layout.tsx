@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   const [modalText, setModalText] = useState<string>("");
-  const infoMessageColor = "text-[#046c94]";
+  const infoMessageColor = "text-info";
   const errorMessageColor = "text-red";
 
   return (

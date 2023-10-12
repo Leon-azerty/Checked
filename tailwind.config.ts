@@ -16,6 +16,7 @@ const config: Config = {
         "gray-700": "#7E7E7E",
         "green": "#22c55e",
         "red": "#e21414",
+        "info": "#046c94",
 
       },
       keyframes: {

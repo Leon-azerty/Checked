@@ -22,7 +22,7 @@ export default function Create({ setTab
   const [description, setDescription] = useState("");
   const [isTitleFilled, setIsTitleFilled] = useState(false);
   const [tagName, setTagName] = useState<string>("");
-  const [color, setColor] = useState<string>("#D9D9D9");
+  const [color, setColor] = useState<string>("gray-200");
   const supabase = createClientComponentClient();
   const [date, setDate] = useState<string>("");
   const [time, setTime] = useState<string>("");
