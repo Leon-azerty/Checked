@@ -1,9 +1,9 @@
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { Todo } from '@/dto/todos.types';
-import type { Tag as TagType } from '@/dto/tag.types';
+import { Todo } from '@/dto/todos.types'
+import type { Tag as TagType } from '@/dto/tag.types'
 
 const getAllTodos = async () => {
-  const supabase = createClientComponentClient();
+  const supabase = createClientComponentClient()
   const { data, error } = await supabase.from('todo').select(`
   id,
   name,
@@ -15,12 +15,12 @@ const getAllTodos = async () => {
   author_id,
   deadline,
   deadline_type
-  `);
+  `)
   if (error) {
     console.log(error)
-    return [];
+    return []
   }
-  let tmp: Todo[] = [];
+  let tmp: Todo[] = []
   for (let i = 0; i < data!.length; i++) {
     let todo: Todo = {
       id: data[i].id,
@@ -32,64 +32,70 @@ const getAllTodos = async () => {
       tags: [],
       deadline: data![i].deadline,
       deadline_type: data![i].deadline_type,
-    };
-    if (todo.deadline != null) {
-      todo.deadline = todo.deadline.replace("T", ' ').split('+')[0];
     }
-    tmp.push(todo);
+    if (todo.deadline != null) {
+      todo.deadline = todo.deadline.replace('T', ' ').split('+')[0]
+    }
+    tmp.push(todo)
   }
-  return tmp;
+  return tmp
 }
 
 const fillTodoWithTag = async (tag_ids: string[], Tags: TagType[]) => {
   let tagsForTodo: TagType[] = []
   for (const tag_id of tag_ids) {
-    const tag = Tags.find(tag => tag.id.toString() === tag_id);
+    const tag = Tags.find((tag) => tag.id.toString() === tag_id)
     if (tag === undefined) {
-      const tag = await getTag(tag_id);
-      tagsForTodo.push(tag);
-      continue;
+      const tag = await getTag(tag_id)
+      tagsForTodo.push(tag)
+      continue
     } else {
       tagsForTodo.push(tag)
     }
   }
-  return tagsForTodo;
+  return tagsForTodo
 }
 
 async function getTag_ids(todosId: number) {
-  const tagsIds: string[] = [];
-  const supabase = createClientComponentClient();
-  const { data, error } = await supabase.from('todo_tag').select(`tag_id`).eq('todo_id', todosId)
+  const tagsIds: string[] = []
+  const supabase = createClientComponentClient()
+  const { data, error } = await supabase
+    .from('todo_tag')
+    .select(`tag_id`)
+    .eq('todo_id', todosId)
   if (error) {
-    console.error("error", error);
-    throw new Error("ERROR : " + error.message);
+    console.error('error', error)
+    throw new Error('ERROR : ' + error.message)
   }
   for (const tag of data) {
-    tagsIds.push(tag.tag_id);
+    tagsIds.push(tag.tag_id)
   }
-  return tagsIds;
+  return tagsIds
 }
 
 async function getTag(tag_id: string) {
-  const supabase = createClientComponentClient();
-  const { data, error } = await supabase.from('tag').select(`id, name, color, author_id`).eq('id', tag_id)
+  const supabase = createClientComponentClient()
+  const { data, error } = await supabase
+    .from('tag')
+    .select(`id, name, color, author_id`)
+    .eq('id', tag_id)
   if (error) {
-    console.error("error", error);
-    throw new Error("ERROR : " + error.message);
+    console.error('error', error)
+    throw new Error('ERROR : ' + error.message)
   }
-  return data[0];
+  return data[0]
 }
 
 export const fetchTags = async () => {
-  const supabase = createClientComponentClient();
-  return await supabase.from('tag').select(`id, name, color, author_id`);
+  const supabase = createClientComponentClient()
+  return await supabase.from('tag').select(`id, name, color, author_id`)
 }
 
 export const fetchTodos = async (Tags: TagType[]) => {
-  const allTodos: Todo[] = await getAllTodos();
+  const allTodos: Todo[] = await getAllTodos()
   for (let i = 0; i < allTodos.length; i++) {
-    const tag_ids = await getTag_ids(allTodos[i].id);
-    allTodos[i].tags = await fillTodoWithTag(tag_ids, Tags);
+    const tag_ids = await getTag_ids(allTodos[i].id)
+    allTodos[i].tags = await fillTodoWithTag(tag_ids, Tags)
   }
-  return allTodos;
+  return allTodos
 }

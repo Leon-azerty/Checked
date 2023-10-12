@@ -1,13 +1,15 @@
-import { createContext, Dispatch, SetStateAction, useContext } from 'react';
+import { createContext, Dispatch, SetStateAction, useContext } from 'react'
 
-type ModalContextType = [string, Dispatch<SetStateAction<string>>];
+type ModalContextType = [string, Dispatch<SetStateAction<string>>]
 
-export const ModalContext = createContext<ModalContextType | undefined>(undefined);
+export const ModalContext = createContext<ModalContextType | undefined>(
+  undefined
+)
 
 export const getModalContext = () => {
-  const context = useContext(ModalContext);
+  const context = useContext(ModalContext)
   if (context === undefined) {
-    throw new Error('ModalContext must be used within a ModalProvider');
+    throw new Error('ModalContext must be used within a ModalProvider')
   }
-  return context;
+  return context
 }

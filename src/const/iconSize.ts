@@ -1,1 +1,1 @@
-export const IconSizeInPx = '26';
+export const IconSizeInPx = '26'
