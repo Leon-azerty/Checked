@@ -36,6 +36,11 @@ export default function Body({
 
   return (
     <main>
+      {filter.map((e, i) => (
+        <div key={i} className="flex w-full mt-4">
+          {e}
+        </div>
+      ))}
       {isLoading && <CardLoader />}
       {tab == 'listDeleted' && <DeleteBar />}
       {todos.length === 0 && !isLoading && <NoTodoToDisplay setTab={setTab} />}
