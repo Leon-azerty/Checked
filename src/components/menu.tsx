@@ -11,6 +11,8 @@ import IconButton from '@/components/iconButton'
 import { getTagsContext } from '@/context/tagsContext'
 import Tag from './tag'
 import type { Tag as TagType } from '@/dto/tag.types'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { getModalContext } from '@/context/modalTextContext'
 
 export default function Menu({
   tab,
@@ -24,6 +26,7 @@ export default function Menu({
   setFilter: (filter: string[]) => void
 }) {
   const [tags] = getTagsContext()
+  const [, setModalText] = getModalContext()
 
   const handleCreateTodo = () => {
     setTab('create')
@@ -56,6 +59,15 @@ export default function Menu({
       setFilter([...filter, tag.name])
     }
     return
+  }
+
+  const removeTag = async (tag: TagType) => {
+    const supabase = createClientComponentClient()
+    const { data, error } = await supabase.from('tag').delete().eq('id', tag.id)
+    if (error) {
+      console.log(error)
+      setModalText(error.message)
+    }
   }
 
   return (
@@ -106,7 +118,12 @@ export default function Menu({
       <div className="flex flex-wrap mt-2">
         {tags.length > 0 &&
           tags.map((e, i) => (
-            <Tag key={e.name + i} tag={e} onClick={addTagsInFilter} />
+            <Tag
+              key={e.name + i}
+              tag={e}
+              onClick={addTagsInFilter}
+              removeTag={removeTag}
+            />
           ))}
       </div>
     </aside>
