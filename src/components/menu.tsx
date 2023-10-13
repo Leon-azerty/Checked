@@ -134,6 +134,7 @@ export default function Menu({
               tag={e}
               onClick={addTagsInFilter}
               removeTag={removeTag}
+              filter={filter}
             />
           ))}
       </div>

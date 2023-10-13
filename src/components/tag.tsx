@@ -7,10 +7,12 @@ export default function Tag({
   tag,
   onClick,
   removeTag = undefined,
+  filter,
 }: {
   tag: TagType
   onClick: (tag: TagType) => void
   removeTag?: (tag: TagType) => void
+  filter?: string[]
 }) {
   const hoverRef = useRef(null)
   let isHover = useHover(hoverRef)
@@ -21,7 +23,9 @@ export default function Tag({
     <article ref={hoverRef} className="flex items-center h-8 my-1">
       <div
         style={{ backgroundColor: tag.color }}
-        className="mx-1 rounded-lg px-2"
+        className={` ${
+          filter?.includes(tag.name) ? 'h-full flex items-center' : ''
+        } mx-1 rounded-lg px-2`}
         onClick={() => onClick(tag)}
       >
         #{tag.name}
