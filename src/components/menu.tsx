@@ -13,6 +13,7 @@ import Tag from './tag'
 import type { Tag as TagType } from '@/dto/tag.types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { getModalContext } from '@/context/modalTextContext'
+import { getTodosContext } from '@/context/todosContext'
 
 export default function Menu({
   tab,
@@ -25,8 +26,9 @@ export default function Menu({
   filter: string[]
   setFilter: (filter: string[]) => void
 }) {
-  const [tags] = getTagsContext()
+  const [tags, setTags] = getTagsContext()
   const [, setModalText] = getModalContext()
+  const [todos, setTodos] = getTodosContext()
 
   const handleCreateTodo = () => {
     setTab('create')
@@ -63,11 +65,20 @@ export default function Menu({
 
   const removeTag = async (tag: TagType) => {
     const supabase = createClientComponentClient()
+    for (const todo of todos) {
+      for (const todoTag of todo.tags)
+        if (todoTag.name == tag.name) {
+          setModalText("ERROR : Can't delete tag because it is used in a todo")
+          return
+        }
+    }
     const { data, error } = await supabase.from('tag').delete().eq('id', tag.id)
     if (error) {
       console.log(error)
-      setModalText(error.message)
+      setModalText('ERROR : ' + error.message)
+      return
     }
+    setTags(tags.filter((e) => e.id != tag.id))
   }
 
   return (
