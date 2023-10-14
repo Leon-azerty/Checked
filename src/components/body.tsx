@@ -1,5 +1,5 @@
 import Card from '@/components/card'
-import { getTodosContext } from '@/context/todosContext'
+import { useTodosContext } from '@/context/todosContext'
 import CardLoader from '@/components/cardLoader'
 import DeleteBar from '@/components/deleteBar'
 import { Todo } from '@/dto/todos.types'
@@ -17,7 +17,7 @@ export default function Body({
   isLoading: boolean
   filter: string[]
 }) {
-  const [todos] = getTodosContext()
+  const [todos] = useTodosContext()
   let todosFiltered: Todo[] = todos
 
   function getNameTags(tags: TagType) {

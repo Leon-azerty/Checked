@@ -1,16 +1,16 @@
 import Button from '@/components/button'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { getTodosToDeleteContext } from '@/context/todoToDeleteContext'
+import { useTodosToDeleteContext } from '@/context/todoToDeleteContext'
 import TodosToDelete from '@/components/todosToDelete'
-import { getTodosContext } from '@/context/todosContext'
+import { useTodosContext } from '@/context/todosContext'
 import { Todo } from '@/dto/todos.types'
-import { getModalContext } from '@/context/modalTextContext'
+import { useModalContext } from '@/context/modalTextContext'
 
 export default function DeleteBar() {
   const supabase = createClientComponentClient()
-  const [todosToDelete, setTodosToDelete] = getTodosToDeleteContext()
-  const [todos, setTodos] = getTodosContext()
-  const [, setModalText] = getModalContext()
+  const [todosToDelete, setTodosToDelete] = useTodosToDeleteContext()
+  const [todos, setTodos] = useTodosContext()
+  const [, setModalText] = useModalContext()
 
   const deleteTodoTags = async (todo: Todo) => {
     let { data, error } = await supabase

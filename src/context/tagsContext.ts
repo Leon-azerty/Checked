@@ -6,7 +6,7 @@ type TagsContextType = [TagType[], Dispatch<SetStateAction<TagType[]>>]
 
 export const TagsContext = createContext<TagsContextType | undefined>(undefined)
 
-export const getTagsContext = () => {
+export const useTagsContext = () => {
   const context = useContext(TagsContext)
   if (context === undefined) {
     throw new Error('TagsContext must be used within a TagsProvider')

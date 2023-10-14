@@ -10,7 +10,7 @@ import type { Tag as TagType } from '@/dto/tag.types'
 import { TodosToDeleteContext } from '@/context/todoToDeleteContext'
 import { useRouter } from 'next/navigation'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { getModalContext } from '@/context/modalTextContext'
+import { useModalContext } from '@/context/modalTextContext'
 import Header from '@/components/header'
 import Create from '@/components/create'
 
@@ -24,7 +24,12 @@ export default function Home() {
   const router = useRouter()
   const supabase = createClientComponentClient()
   const [showMenu, setShowMenu] = useState<boolean>(true)
-  const [, setModalText] = getModalContext()
+  const [, setModalText] = useModalContext()
+
+  useEffect(() => {
+    userIsLogged()
+    fetchData()
+  }, [])
 
   const fetchData = async () => {
     const { data, error } = await fetchTags()
@@ -52,11 +57,6 @@ export default function Home() {
       router.push('/login')
     }
   }
-
-  useEffect(() => {
-    userIsLogged()
-    fetchData()
-  }, [])
 
   return (
     <div className="w-screen h-full min-h-screen flex text-black">

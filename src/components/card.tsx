@@ -3,9 +3,9 @@ import '@/components/card.css'
 import { LeftContent } from '@/components/leftContent'
 import { RightContent } from '@/components/rightContent'
 import { Star } from '@/components/star'
-import { getTodosToDeleteContext } from '@/context/todoToDeleteContext'
+import { useTodosToDeleteContext } from '@/context/todoToDeleteContext'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { getModalContext } from '@/context/modalTextContext'
+import { useModalContext } from '@/context/modalTextContext'
 import { Todo } from '@/dto/todos.types'
 
 export default function Card({
@@ -21,8 +21,8 @@ export default function Card({
   const [is_favorite, setIs_favorite] = useState(todo.is_favorite)
   const [is_deleted, setIs_deleted] = useState(todo.is_deleted)
   const supabase = createClientComponentClient()
-  const [todosToDelete, setTodosToDelete] = getTodosToDeleteContext()
-  const [, setModalText] = getModalContext()
+  const [todosToDelete, setTodosToDelete] = useTodosToDeleteContext()
+  const [, setModalText] = useModalContext()
 
   const handleTodoState = async () => {
     const { data, error } = await supabase

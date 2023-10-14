@@ -8,12 +8,12 @@ import { RiDeleteBin6Line } from 'react-icons/ri'
 import { BsListNested } from 'react-icons/bs'
 import { gray_700, starYellow } from '@/const/colors'
 import IconButton from '@/components/iconButton'
-import { getTagsContext } from '@/context/tagsContext'
+import { useTagsContext } from '@/context/tagsContext'
 import Tag from './tag'
 import type { Tag as TagType } from '@/dto/tag.types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { getModalContext } from '@/context/modalTextContext'
-import { getTodosContext } from '@/context/todosContext'
+import { useModalContext } from '@/context/modalTextContext'
+import { useTodosContext } from '@/context/todosContext'
 
 export default function Menu({
   tab,
@@ -26,9 +26,9 @@ export default function Menu({
   filter: string[]
   setFilter: (filter: string[]) => void
 }) {
-  const [tags, setTags] = getTagsContext()
-  const [, setModalText] = getModalContext()
-  const [todos, setTodos] = getTodosContext()
+  const [tags, setTags] = useTagsContext()
+  const [, setModalText] = useModalContext()
+  const [todos, setTodos] = useTodosContext()
 
   const handleCreateTodo = () => {
     setTab('create')

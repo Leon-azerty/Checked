@@ -7,7 +7,7 @@ export const TodosToDeleteContext = createContext<
   TodosToDeleteType | undefined
 >(undefined)
 
-export const getTodosToDeleteContext = () => {
+export const useTodosToDeleteContext = () => {
   const context = useContext(TodosToDeleteContext)
   if (context === undefined) {
     throw new Error(

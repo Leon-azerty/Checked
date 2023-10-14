@@ -3,7 +3,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Input from '@/components/input'
-import { getModalContext } from '@/context/modalTextContext'
+import { useModalContext } from '@/context/modalTextContext'
 
 export default function Form() {
   const [email, setEmail] = useState('')
@@ -14,7 +14,7 @@ export default function Form() {
   const [waitResForm, setWaitResForm] = useState(false)
   const router = useRouter()
   const supabase = createClientComponentClient()
-  const [, setModalText] = getModalContext()
+  const [, setModalText] = useModalContext()
 
   const SignIn = async ({
     email,

@@ -8,7 +8,7 @@ export const TodosContext = createContext<TodosContextType | undefined>(
   undefined
 )
 
-export const getTodosContext = () => {
+export const useTodosContext = () => {
   const context = useContext(TodosContext)
   if (context === undefined) {
     throw new Error('TodosContext must be used within a TodosProvider')

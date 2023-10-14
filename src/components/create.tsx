@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { IconContext } from 'react-icons'
-import { getTodosContext } from '@/context/todosContext'
+import { useTodosContext } from '@/context/todosContext'
 import Tag from '@/components/tag'
 import { HexColorPicker } from 'react-colorful'
 import type { Tag as TagType } from '@/dto/tag.types'
@@ -9,8 +9,8 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import Input from '@/components/input'
 import Textarea from '@/components/textarea'
 import Button from '@/components/button'
-import { getModalContext } from '@/context/modalTextContext'
-import { getTagsContext } from '@/context/tagsContext'
+import { useModalContext } from '@/context/modalTextContext'
+import { useTagsContext } from '@/context/tagsContext'
 import Deadline from './deadline'
 
 export default function Create({
@@ -29,9 +29,9 @@ export default function Create({
   const [time, setTime] = useState<string>('')
   const [isDeadline, setIsDeadline] = useState<boolean>(false)
   const [deadlineType, setDeadlineType] = useState<string>('')
-  const [existantTags, setExistantTags] = getTagsContext()
-  const [todos, setTodos] = getTodosContext()
-  const [, setModalText] = getModalContext()
+  const [existantTags, setExistantTags] = useTagsContext()
+  const [todos, setTodos] = useTodosContext()
+  const [, setModalText] = useModalContext()
 
   const insertTodo = async () => {
     const id = (await supabase.auth.getUser()).data.user?.id
