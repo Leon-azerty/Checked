@@ -106,7 +106,6 @@ export default function Create({
       return
     }
     const author_id = (await supabase.auth.getUser()).data.user?.id
-    //vérifier si le tag existe déjà dans la liste des tags de l'user
     const { data, error } = await supabase
       .from('tag')
       .insert({
