@@ -45,10 +45,9 @@ export default function Body({
       </div>
       {isLoading && <CardLoader />}
       {tab == 'listDeleted' && <DeleteBar />}
-      {todosFiltered.length == 0 ||
-        (todos.length === 0 && !isLoading && (
-          <NoTodoToDisplay setTab={setTab} />
-        ))}
+      {(todosFiltered.length == 0 || (todos.length === 0 && !isLoading)) && (
+        <NoTodoToDisplay setTab={setTab} />
+      )}
       {todosFiltered.length > 0 &&
         todosFiltered.map((e, i) => (
           <Card todo={e} id={i} key={e.id} tab={tab} />
