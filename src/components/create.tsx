@@ -12,6 +12,7 @@ import Button from '@/components/button'
 import { useModalContext } from '@/context/modalTextContext'
 import { useTagsContext } from '@/context/tagsContext'
 import Deadline from './deadline'
+import IconButton from './iconButton'
 
 export default function Create({
   setTab,
@@ -132,14 +133,16 @@ export default function Create({
 
   return (
     <div className="pt-4 animate-wiggle">
-      <div
-        className="flex flex-row-reverse mr-5"
-        onClick={() => {
-          setTab('ListAll')
-        }}
-      >
+      <div className="w-20 ml-auto mr-5" data-testid="close">
         <IconContext.Provider value={{ size: '32' }}>
-          <AiOutlineCloseCircle />
+          <IconButton
+            icon={<AiOutlineCloseCircle />}
+            iconColor="black"
+            onClick={() => {
+              setTab('ListAll')
+            }}
+            text=""
+          />
         </IconContext.Provider>
       </div>
       <form className="ml-2 p-2">
@@ -206,7 +209,11 @@ export default function Create({
         <Textarea onChange={(e) => setDescription(e.target.value)} />
         <div className="flex justify-between mr-6 max-w-full">
           <div></div>
-          <Button type="submit" onClick={(e) => createTodo(e)} text="Valider" />
+          <Button
+            type="submit"
+            onClick={(e) => createTodo(e)}
+            text="Validate"
+          />
         </div>
       </form>
     </div>

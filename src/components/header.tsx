@@ -29,7 +29,7 @@ export default function Header({
 
   return (
     <div className="flex justify-between items-center w-96 md:w-full">
-      <div className="w-20">
+      <div className="ml-2 w-20">
         {showMenu ? (
           <IconButton
             icon={<AiOutlineMenuFold />}
@@ -47,7 +47,7 @@ export default function Header({
         )}
       </div>
       <Title />
-      <div className="w-20">
+      <div className="w-20 mr-5">
         <IconButton
           icon={<RiLogoutBoxRLine />}
           text=""
