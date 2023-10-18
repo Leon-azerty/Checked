@@ -82,7 +82,7 @@ export default function Menu({
   }
 
   return (
-    <aside className="bg-white w-72 border-white-500 border-solid border-r-4 ">
+    <aside className="bg-white w-72 border-white-500 border-solid border-r-4 animate-slide_to_right">
       <IconButton
         icon={<AiOutlinePlusCircle />}
         text="Create Todo"

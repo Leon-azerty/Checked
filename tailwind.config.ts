@@ -28,11 +28,16 @@ const config: Config = {
           '0%': { transform: 'translate(0, 0)' },
           '50%': { transform: 'translate(0, 30px) ' },
           '100%': { transform: 'translate(0,, 0)' },
-        }
+        },
+        slide_to_right: {
+          '0%': { transform: 'translate(-80%)' },
+          '50%': { transform: 'translate(0%)' },
+        },
       },
       animation: {
         wiggle: 'wiggle 1s',
         tinyBounce: 'tinyBounce 6s infinite',
+        slide_to_right: 'slide_to_right 1s',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
