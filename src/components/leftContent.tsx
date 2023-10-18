@@ -78,7 +78,7 @@ export function LeftContent({ todo }: { todo: Todo }) {
       </div>
       <div className="flex flex-wrap">
         {tags.map((e, i) => (
-          <Tag key={i} tag={e} onClick={removeTag} />
+          <Tag key={i} tag={e} onClick={() => {}} removeTag={removeTag} />
         ))}
       </div>
 
