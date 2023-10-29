@@ -1,3 +1,9 @@
+import { gray_700 } from '@/const/colors'
+import { IconContext } from 'react-icons'
+import { BsDot } from 'react-icons/bs'
+
+const DotSize = '48'
+
 export default function FeatureRight({
   setSide,
 }: {
@@ -5,14 +11,10 @@ export default function FeatureRight({
 }) {
   return (
     <section
-      className="flex w-10/12 md:w-7/12 text-xl md:ml-14 
-  bg-gray-200 rounded-lg py-10 hover:before:bg-red items-center 
-  justify-between cursor-pointer "
+      className="flex w-10/12 md:w-7/12 text-xl md:ml-14 bg-gray-200 
+      rounded-lg py-10 items-center justify-between shadow-lg	"
     >
-      <div className="ml-4" onClick={() => setSide('left')}>
-        &lt;
-      </div>
-      <div className="flex flex-col ml-2 mr-6">
+      <div className="flex flex-col ml-6">
         <p>
           {' '}
           The real magic happens when you want to sort and access your tasks.
@@ -36,6 +38,14 @@ export default function FeatureRight({
             align with your unique needs and preferences.
           </li>
         </ul>
+        <div className="flex justify-center cursor-pointer">
+          <IconContext.Provider value={{ size: DotSize, color: gray_700 }}>
+            <BsDot onClick={() => setSide('left')} />
+          </IconContext.Provider>
+          <IconContext.Provider value={{ size: DotSize }}>
+            <BsDot onClick={() => setSide('right')} />
+          </IconContext.Provider>
+        </div>
       </div>
     </section>
   )
