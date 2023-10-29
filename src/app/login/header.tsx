@@ -10,7 +10,7 @@ export default function Header() {
         height="300"
         alt="title"
       />
-      <p className="md:ml-4 text-2xl ">Dit it, Checked it</p>
+      <p className="md:ml-4 text-2xl ">Did it, Checked it</p>
     </div>
   )
 }
