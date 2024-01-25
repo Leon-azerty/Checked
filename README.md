@@ -12,6 +12,10 @@ I have choosen to develop Checked because I'm a huge fan of Notion's application
 Then a todo app is typically a good idea to learn a techno as it was my situation.
 
 ## Run Checked
+Install Dependancies
+```bash
+pnpm i
+```
 
 You can run the development server with :
 ```bash
