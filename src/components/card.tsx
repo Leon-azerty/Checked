@@ -1,12 +1,12 @@
-import { useState } from 'react'
 import '@/components/card.css'
 import { LeftContent } from '@/components/leftContent'
 import { RightContent } from '@/components/rightContent'
 import { Star } from '@/components/star'
+import { useToasterContext } from '@/context/toasterTextContext'
 import { useTodosToDeleteContext } from '@/context/todoToDeleteContext'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { useModalContext } from '@/context/modalTextContext'
 import { Todo } from '@/dto/todos.types'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { useState } from 'react'
 
 export default function Card({
   todo,
@@ -22,7 +22,7 @@ export default function Card({
   const [is_deleted, setIs_deleted] = useState(todo.is_deleted)
   const supabase = createClientComponentClient()
   const [todosToDelete, setTodosToDelete] = useTodosToDeleteContext()
-  const [, setModalText] = useModalContext()
+  const [, setToasterText] = useToasterContext()
 
   const handleTodoState = async () => {
     const { data, error } = await supabase
@@ -32,7 +32,7 @@ export default function Card({
       })
       .eq('id', todo.id)
     if (error) {
-      setModalText('ERROR : ' + error.message)
+      setToasterText('ERROR : ' + error.message)
       return console.log(error)
     }
     setIs_finished(!is_finished)
@@ -45,7 +45,7 @@ export default function Card({
       .update({ is_deleted: true })
       .eq('id', todo.id)
     if (error) {
-      setModalText('ERROR : ' + error.message)
+      setToasterText('ERROR : ' + error.message)
       return console.log(error)
     }
   }
@@ -58,7 +58,7 @@ export default function Card({
       })
       .eq('id', todo.id)
     if (error) {
-      setModalText('ERROR : ' + error.message)
+      setToasterText('ERROR : ' + error.message)
       return console.log('error ', error)
     }
     setIs_favorite(!is_favorite)
@@ -77,7 +77,7 @@ export default function Card({
       })
       .eq('id', todo.id)
     if (error) {
-      setModalText('ERROR : ' + error.message)
+      setToasterText('ERROR : ' + error.message)
       return console.log(error)
     }
     setIs_deleted(false)

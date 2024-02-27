@@ -1,16 +1,16 @@
 import Button from '@/components/button'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { useTodosToDeleteContext } from '@/context/todoToDeleteContext'
 import TodosToDelete from '@/components/todosToDelete'
+import { useToasterContext } from '@/context/toasterTextContext'
+import { useTodosToDeleteContext } from '@/context/todoToDeleteContext'
 import { useTodosContext } from '@/context/todosContext'
 import { Todo } from '@/dto/todos.types'
-import { useModalContext } from '@/context/modalTextContext'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
 export default function DeleteBar() {
   const supabase = createClientComponentClient()
   const [todosToDelete, setTodosToDelete] = useTodosToDeleteContext()
   const [todos, setTodos] = useTodosContext()
-  const [, setModalText] = useModalContext()
+  const [, setToasterText] = useToasterContext()
 
   const deleteTodoTags = async (todo: Todo) => {
     let { data, error } = await supabase
@@ -18,7 +18,7 @@ export default function DeleteBar() {
       .delete()
       .eq('todo_id', todo.id)
     if (error) {
-      setModalText('ERROR : ' + error.message)
+      setToasterText('ERROR : ' + error.message)
       return console.log(error)
     }
   }
@@ -29,7 +29,7 @@ export default function DeleteBar() {
       .delete()
       .eq('id', todo_id)
     if (error) {
-      setModalText('ERROR : ' + error.message)
+      setToasterText('ERROR : ' + error.message)
       return console.log(error)
     }
   }

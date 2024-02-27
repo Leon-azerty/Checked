@@ -1,9 +1,9 @@
 import Button from '@/components/button'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import Input from '@/components/input'
-import { useModalContext } from '@/context/modalTextContext'
+import { useToasterContext } from '@/context/toasterTextContext'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
 export default function Form() {
   const [email, setEmail] = useState('')
@@ -14,7 +14,7 @@ export default function Form() {
   const [waitResForm, setWaitResForm] = useState(false)
   const router = useRouter()
   const supabase = createClientComponentClient()
-  const [, setModalText] = useModalContext()
+  const [, setToasterText] = useToasterContext()
 
   const SignIn = async ({
     email,
@@ -32,7 +32,7 @@ export default function Form() {
       router.push('/')
     } else {
       console.log('error', error)
-      setModalText('ERROR : ' + error.message)
+      setToasterText('ERROR : ' + error.message)
     }
   }
 
@@ -49,10 +49,10 @@ export default function Form() {
       options: { emailRedirectTo: 'https://checkd.online/' },
     })
     if (!error) {
-      setModalText('Please check your email to confirm your account')
+      setToasterText('Please check your email to confirm your account')
     } else {
       console.log('error', error)
-      setModalText('ERROR : ' + error.message)
+      setToasterText('ERROR : ' + error.message)
     }
   }
 

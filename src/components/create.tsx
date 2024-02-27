@@ -1,16 +1,16 @@
-import { useState } from 'react'
-import { AiOutlineCloseCircle } from 'react-icons/ai'
-import { IconContext } from 'react-icons'
-import { useTodosContext } from '@/context/todosContext'
+import Button from '@/components/button'
+import Input from '@/components/input'
 import Tag from '@/components/tag'
-import { HexColorPicker } from 'react-colorful'
+import Textarea from '@/components/textarea'
+import { useTagsContext } from '@/context/tagsContext'
+import { useToasterContext } from '@/context/toasterTextContext'
+import { useTodosContext } from '@/context/todosContext'
 import type { Tag as TagType } from '@/dto/tag.types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import Input from '@/components/input'
-import Textarea from '@/components/textarea'
-import Button from '@/components/button'
-import { useModalContext } from '@/context/modalTextContext'
-import { useTagsContext } from '@/context/tagsContext'
+import { useState } from 'react'
+import { HexColorPicker } from 'react-colorful'
+import { IconContext } from 'react-icons'
+import { AiOutlineCloseCircle } from 'react-icons/ai'
 import Deadline from './deadline'
 import IconButton from './iconButton'
 
@@ -32,7 +32,7 @@ export default function Create({
   const [deadlineType, setDeadlineType] = useState<string>('')
   const [existantTags, setExistantTags] = useTagsContext()
   const [todos, setTodos] = useTodosContext()
-  const [, setModalText] = useModalContext()
+  const [, setToasterText] = useToasterContext()
 
   const insertTodo = async () => {
     const id = (await supabase.auth.getUser()).data.user?.id
@@ -50,7 +50,7 @@ export default function Create({
       })
       .select('id')
     if (error) {
-      setModalText('ERROR : ' + error.message)
+      setToasterText('ERROR : ' + error.message)
       return console.log(error)
     }
     return data[0].id
@@ -62,7 +62,7 @@ export default function Create({
       tag_id,
     })
     if (error) {
-      setModalText('ERROR : ' + error.message)
+      setToasterText('ERROR : ' + error.message)
       return console.log(error)
     }
   }
@@ -103,7 +103,7 @@ export default function Create({
 
   const addTag = async () => {
     if (existantTags.find((e) => e.name === tagName) !== undefined) {
-      setModalText('ERROR : Tag already exist')
+      setToasterText('ERROR : Tag already exist')
       return
     }
     const author_id = (await supabase.auth.getUser()).data.user?.id
@@ -116,7 +116,7 @@ export default function Create({
       })
       .select('id')
     if (error) {
-      setModalText('ERROR : ' + error.message)
+      setToasterText('ERROR : ' + error.message)
       return console.log(error)
     }
     setTags([...tags, { id: data[0].id, name: tagName, color }])

@@ -4,8 +4,8 @@ import Body from '@/components/body'
 import Create from '@/components/create'
 import Header from '@/components/header'
 import Menu from '@/components/menu'
-import { useModalContext } from '@/context/modalTextContext'
 import { TagsContext } from '@/context/tagsContext'
+import { useToasterContext } from '@/context/toasterTextContext'
 import { TodosToDeleteContext } from '@/context/todoToDeleteContext'
 import { TodosContext } from '@/context/todosContext'
 import type { Tag as TagType } from '@/dto/tag.types'
@@ -24,7 +24,7 @@ export default function Home() {
   const router = useRouter()
   const supabase = createClientComponentClient()
   const [showMenu, setShowMenu] = useState<boolean>(true)
-  const [, setModalText] = useModalContext()
+  const [, setToasterText] = useToasterContext()
 
   useEffect(() => {
     fetchData()
@@ -33,7 +33,7 @@ export default function Home() {
   const fetchData = async () => {
     const { data, error } = await fetchTags()
     if (error) {
-      setModalText('ERROR : ' + error.message)
+      setToasterText('ERROR : ' + error.message)
       console.error('error', error)
       return []
     }
@@ -43,7 +43,7 @@ export default function Home() {
       setTodos(allTodos)
     } catch (error: string | any) {
       if (typeof error === 'string') {
-        setModalText(error)
+        setToasterText(error)
       }
       console.log('catch error : ' + error)
     }

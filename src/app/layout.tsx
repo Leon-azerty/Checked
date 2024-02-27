@@ -1,10 +1,10 @@
 'use client'
 import '@/app/globals.css'
+import Toaster from '@/components/toaster'
+import { ToasterContext } from '@/context/toasterTextContext'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { ModalContext } from '@/context/modalTextContext'
 import { useState } from 'react'
-import Modal from '@/components/modal'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,7 +18,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const [modalText, setModalText] = useState<string>('')
+  const [toasterText, setToasterText] = useState<string>('')
   const infoMessageColor = 'text-info'
   const errorMessageColor = 'text-red'
 
@@ -26,18 +26,18 @@ export default function RootLayout({
     <html lang="en">
       <title>Checked, Todo app</title>
       <body className={inter.className}>
-        <ModalContext.Provider value={[modalText, setModalText]}>
-          {modalText != '' && (
-            <Modal
+        <ToasterContext.Provider value={[toasterText, setToasterText]}>
+          {toasterText != '' && (
+            <Toaster
               color={
-                modalText.includes('ERROR')
+                toasterText.includes('ERROR')
                   ? errorMessageColor
                   : infoMessageColor
               }
             />
           )}
           {children}
-        </ModalContext.Provider>
+        </ToasterContext.Provider>
       </body>
     </html>
   )

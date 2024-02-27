@@ -1,19 +1,19 @@
-import {
-  AiOutlinePlusCircle,
-  AiFillStar,
-  AiFillCheckSquare,
-  AiTwotoneCheckSquare,
-} from 'react-icons/ai'
-import { RiDeleteBin6Line } from 'react-icons/ri'
-import { BsListNested } from 'react-icons/bs'
-import { gray_700, starYellow } from '@/const/colors'
 import IconButton from '@/components/iconButton'
+import { gray_700, starYellow } from '@/const/colors'
 import { useTagsContext } from '@/context/tagsContext'
-import Tag from './tag'
+import { useToasterContext } from '@/context/toasterTextContext'
+import { useTodosContext } from '@/context/todosContext'
 import type { Tag as TagType } from '@/dto/tag.types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { useModalContext } from '@/context/modalTextContext'
-import { useTodosContext } from '@/context/todosContext'
+import {
+  AiFillCheckSquare,
+  AiFillStar,
+  AiOutlinePlusCircle,
+  AiTwotoneCheckSquare,
+} from 'react-icons/ai'
+import { BsListNested } from 'react-icons/bs'
+import { RiDeleteBin6Line } from 'react-icons/ri'
+import Tag from './tag'
 
 export default function Menu({
   tab,
@@ -27,7 +27,7 @@ export default function Menu({
   setFilter: (filter: string[]) => void
 }) {
   const [tags, setTags] = useTagsContext()
-  const [, setModalText] = useModalContext()
+  const [, setToasterText] = useToasterContext()
   const [todos, setTodos] = useTodosContext()
 
   const handleCreateTodo = () => {
@@ -68,14 +68,16 @@ export default function Menu({
     for (const todo of todos) {
       for (const todoTag of todo.tags)
         if (todoTag.name == tag.name) {
-          setModalText("ERROR : Can't delete tag because it is used in a todo")
+          setToasterText(
+            "ERROR : Can't delete tag because it is used in a todo"
+          )
           return
         }
     }
     const { data, error } = await supabase.from('tag').delete().eq('id', tag.id)
     if (error) {
       console.log(error)
-      setModalText('ERROR : ' + error.message)
+      setToasterText('ERROR : ' + error.message)
       return
     }
     setTags(tags.filter((e) => e.id != tag.id))

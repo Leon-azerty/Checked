@@ -1,10 +1,10 @@
-import Title from '@/components/title'
-import { RiLogoutBoxRLine } from 'react-icons/ri'
-import { AiOutlineMenuFold, AiOutlineMenuUnfold } from 'react-icons/ai'
 import IconButton from '@/components/iconButton'
+import Title from '@/components/title'
+import { useToasterContext } from '@/context/toasterTextContext'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/navigation'
-import { useModalContext } from '@/context/modalTextContext'
+import { AiOutlineMenuFold, AiOutlineMenuUnfold } from 'react-icons/ai'
+import { RiLogoutBoxRLine } from 'react-icons/ri'
 
 export default function Header({
   showMenu,
@@ -15,12 +15,12 @@ export default function Header({
 }) {
   const supabase = createClientComponentClient()
   const router = useRouter()
-  const [, setModalText] = useModalContext()
+  const [, setToasterText] = useToasterContext()
 
   const logOut = async () => {
     const { error } = await supabase.auth.signOut()
     if (error) {
-      setModalText('ERROR : ' + error.message)
+      setToasterText('ERROR : ' + error.message)
       console.log(error)
     } else {
       router.push('/login')
