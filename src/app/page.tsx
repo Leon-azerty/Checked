@@ -1,18 +1,18 @@
 'use client'
-import Menu from '@/components/menu'
-import Body from '@/components/body'
-import { useEffect, useState } from 'react'
-import { Todo } from '@/dto/todos.types'
-import { TagsContext } from '@/context/tagsContext'
-import { TodosContext } from '@/context/todosContext'
 import { fetchTags, fetchTodos } from '@/Supabase/fetchData'
-import type { Tag as TagType } from '@/dto/tag.types'
-import { TodosToDeleteContext } from '@/context/todoToDeleteContext'
-import { useRouter } from 'next/navigation'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { useModalContext } from '@/context/modalTextContext'
-import Header from '@/components/header'
+import Body from '@/components/body'
 import Create from '@/components/create'
+import Header from '@/components/header'
+import Menu from '@/components/menu'
+import { useModalContext } from '@/context/modalTextContext'
+import { TagsContext } from '@/context/tagsContext'
+import { TodosToDeleteContext } from '@/context/todoToDeleteContext'
+import { TodosContext } from '@/context/todosContext'
+import type { Tag as TagType } from '@/dto/tag.types'
+import { Todo } from '@/dto/todos.types'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([])
@@ -27,7 +27,6 @@ export default function Home() {
   const [, setModalText] = useModalContext()
 
   useEffect(() => {
-    userIsLogged()
     fetchData()
   }, [])
 
@@ -49,13 +48,6 @@ export default function Home() {
       console.log('catch error : ' + error)
     }
     setIsLoading(false)
-  }
-
-  const userIsLogged = async () => {
-    const { data, error } = await supabase.auth.getSession()
-    if (data.session === null) {
-      router.push('/login')
-    }
   }
 
   return (
