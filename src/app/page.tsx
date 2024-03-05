@@ -1,9 +1,9 @@
 'use client'
 import { fetchTags, fetchTodos } from '@/Supabase/fetchData'
-import Body from '@/components/body'
 import Create from '@/components/create'
 import Header from '@/components/header'
 import Menu from '@/components/menu'
+import TodoList from '@/components/todoList'
 import { TagsContext } from '@/context/tagsContext'
 import { useToasterContext } from '@/context/toasterTextContext'
 import { TodosToDeleteContext } from '@/context/todoToDeleteContext'
@@ -27,28 +27,28 @@ export default function Home() {
   const [, setToasterText] = useToasterContext()
 
   useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await fetchTags()
+      if (error) {
+        setToasterText({ message: error.message, type: 'ERROR' })
+        console.error('error', error)
+        return []
+      }
+      setTags(data!)
+      try {
+        const allTodos = await fetchTodos(data!)
+        setTodos(allTodos)
+      } catch (error: string | any) {
+        if (typeof error === 'string') {
+          setToasterText({ message: error, type: 'ERROR' })
+        }
+        console.log('catch error : ' + error)
+      }
+      setIsLoading(false)
+    }
+
     fetchData()
   }, [])
-
-  const fetchData = async () => {
-    const { data, error } = await fetchTags()
-    if (error) {
-      setToasterText({ message: error.message, type: 'ERROR' })
-      console.error('error', error)
-      return []
-    }
-    setTags(data!)
-    try {
-      const allTodos = await fetchTodos(data!)
-      setTodos(allTodos)
-    } catch (error: string | any) {
-      if (typeof error === 'string') {
-        setToasterText({ message: error, type: 'ERROR' })
-      }
-      console.log('catch error : ' + error)
-    }
-    setIsLoading(false)
-  }
 
   return (
     <div className="w-screen h-full min-h-screen flex text-black bg-white">
@@ -68,7 +68,7 @@ export default function Home() {
             <div className="flex-col bg-white w-full h-full min-h-screen max-w-screen">
               <Header setShowMenu={setShowMenu} showMenu={showMenu} />
               {tab == 'create' && <Create setTab={setTab} />}
-              <Body
+              <TodoList
                 tab={tab}
                 setTab={setTab}
                 isLoading={isLoading}

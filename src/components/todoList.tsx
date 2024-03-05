@@ -1,12 +1,12 @@
 import Card from '@/components/card'
-import { useTodosContext } from '@/context/todosContext'
 import CardLoader from '@/components/cardLoader'
 import DeleteBar from '@/components/deleteBar'
-import { Todo } from '@/dto/todos.types'
+import { useTodosContext } from '@/context/todosContext'
 import type { Tag as TagType } from '@/dto/tag.types'
+import { Todo } from '@/dto/todos.types'
 import NoTodoToDisplay from './noTodoToDisplay'
 
-export default function Body({
+export default function TodoList({
   tab,
   setTab,
   isLoading,
