@@ -33,7 +33,7 @@ export default function Home() {
   const fetchData = async () => {
     const { data, error } = await fetchTags()
     if (error) {
-      setToasterText('ERROR : ' + error.message)
+      setToasterText({ message: error.message, type: 'ERROR' })
       console.error('error', error)
       return []
     }
@@ -43,7 +43,7 @@ export default function Home() {
       setTodos(allTodos)
     } catch (error: string | any) {
       if (typeof error === 'string') {
-        setToasterText(error)
+        setToasterText({ message: error, type: 'ERROR' })
       }
       console.log('catch error : ' + error)
     }

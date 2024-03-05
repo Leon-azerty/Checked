@@ -32,7 +32,7 @@ export default function Card({
       })
       .eq('id', todo.id)
     if (error) {
-      setToasterText('ERROR : ' + error.message)
+      setToasterText({ message: error.message, type: 'ERROR' })
       return console.log(error)
     }
     setIs_finished(!is_finished)
@@ -45,7 +45,7 @@ export default function Card({
       .update({ is_deleted: true })
       .eq('id', todo.id)
     if (error) {
-      setToasterText('ERROR : ' + error.message)
+      setToasterText({ message: error.message, type: 'ERROR' })
       return console.log(error)
     }
   }
@@ -58,7 +58,7 @@ export default function Card({
       })
       .eq('id', todo.id)
     if (error) {
-      setToasterText('ERROR : ' + error.message)
+      setToasterText({ message: error.message, type: 'ERROR' })
       return console.log('error ', error)
     }
     setIs_favorite(!is_favorite)
@@ -77,7 +77,7 @@ export default function Card({
       })
       .eq('id', todo.id)
     if (error) {
-      setToasterText('ERROR : ' + error.message)
+      setToasterText({ message: error.message, type: 'ERROR' })
       return console.log(error)
     }
     setIs_deleted(false)

@@ -1,6 +1,9 @@
 import { createContext, Dispatch, SetStateAction, useContext } from 'react'
 
-type ToasterContextType = [string, Dispatch<SetStateAction<string>>]
+type ToasterContextType = [
+  { type: string; message: string },
+  Dispatch<SetStateAction<{ type: string; message: string }>>
+]
 
 export const ToasterContext = createContext<ToasterContextType | undefined>(
   undefined

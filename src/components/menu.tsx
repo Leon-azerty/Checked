@@ -68,16 +68,17 @@ export default function Menu({
     for (const todo of todos) {
       for (const todoTag of todo.tags)
         if (todoTag.name == tag.name) {
-          setToasterText(
-            "ERROR : Can't delete tag because it is used in a todo"
-          )
+          setToasterText({
+            message: "Can't delete tag because it is used in a todo",
+            type: 'ERROR',
+          })
           return
         }
     }
     const { data, error } = await supabase.from('tag').delete().eq('id', tag.id)
     if (error) {
       console.log(error)
-      setToasterText('ERROR : ' + error.message)
+      setToasterText({ message: error.message, type: 'ERROR' })
       return
     }
     setTags(tags.filter((e) => e.id != tag.id))

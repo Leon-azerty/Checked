@@ -50,7 +50,7 @@ export default function Create({
       })
       .select('id')
     if (error) {
-      setToasterText('ERROR : ' + error.message)
+      setToasterText({ message: error.message, type: 'ERROR' })
       return console.log(error)
     }
     return data[0].id
@@ -62,7 +62,7 @@ export default function Create({
       tag_id,
     })
     if (error) {
-      setToasterText('ERROR : ' + error.message)
+      setToasterText({ message: error.message, type: 'ERROR' })
       return console.log(error)
     }
   }
@@ -103,7 +103,7 @@ export default function Create({
 
   const addTag = async () => {
     if (existantTags.find((e) => e.name === tagName) !== undefined) {
-      setToasterText('ERROR : Tag already exist')
+      setToasterText({ type: 'ERROR', message: 'Tag already exist' })
       return
     }
     const author_id = (await supabase.auth.getUser()).data.user?.id
@@ -116,7 +116,7 @@ export default function Create({
       })
       .select('id')
     if (error) {
-      setToasterText('ERROR : ' + error.message)
+      setToasterText({ message: error.message, type: 'ERROR' })
       return console.log(error)
     }
     setTags([...tags, { id: data[0].id, name: tagName, color }])

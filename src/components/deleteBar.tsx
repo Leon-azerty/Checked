@@ -18,7 +18,7 @@ export default function DeleteBar() {
       .delete()
       .eq('todo_id', todo.id)
     if (error) {
-      setToasterText('ERROR : ' + error.message)
+      setToasterText({ message: error.message, type: 'ERROR' })
       return console.log(error)
     }
   }
@@ -29,7 +29,7 @@ export default function DeleteBar() {
       .delete()
       .eq('id', todo_id)
     if (error) {
-      setToasterText('ERROR : ' + error.message)
+      setToasterText({ message: error.message, type: 'ERROR' })
       return console.log(error)
     }
   }

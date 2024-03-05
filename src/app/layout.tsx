@@ -1,15 +1,12 @@
-'use client'
 import '@/app/globals.css'
-import Toaster from '@/components/toaster'
-import { ToasterContext } from '@/context/toasterTextContext'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { useState } from 'react'
+import ToastWrapper from './toastWrapper'
 
 const inter = Inter({ subsets: ['latin'] })
 
-const metadata: Metadata = {
-  title: 'Checked',
+export const metadata: Metadata = {
+  title: 'Checked, Todo-app',
   description: 'Checked Todo-app',
 }
 
@@ -18,26 +15,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const [toasterText, setToasterText] = useState<string>('')
-  const infoMessageColor = 'text-info'
-  const errorMessageColor = 'text-red'
-
   return (
-    <html lang="en">
-      <title>Checked, Todo app</title>
+    <html lang="en</html>">
       <body className={inter.className}>
-        <ToasterContext.Provider value={[toasterText, setToasterText]}>
-          {toasterText != '' && (
-            <Toaster
-              color={
-                toasterText.includes('ERROR')
-                  ? errorMessageColor
-                  : infoMessageColor
-              }
-            />
-          )}
-          {children}
-        </ToasterContext.Provider>
+        <ToastWrapper>{children}</ToastWrapper>
       </body>
     </html>
   )

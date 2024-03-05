@@ -32,7 +32,7 @@ export default function Form() {
       router.push('/')
     } else {
       console.log('error', error)
-      setToasterText('ERROR : ' + error.message)
+      setToasterText({ message: error.message, type: 'ERROR' })
     }
   }
 
@@ -49,10 +49,13 @@ export default function Form() {
       options: { emailRedirectTo: 'https://checkd.online/' },
     })
     if (!error) {
-      setToasterText('Please check your email to confirm your account')
+      setToasterText({
+        message: 'Please check your email to confirm your account',
+        type: 'INFO',
+      })
     } else {
       console.log('error', error)
-      setToasterText('ERROR : ' + error.message)
+      setToasterText({ message: error.message, type: 'ERROR' })
     }
   }
 

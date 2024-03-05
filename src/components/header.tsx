@@ -20,7 +20,7 @@ export default function Header({
   const logOut = async () => {
     const { error } = await supabase.auth.signOut()
     if (error) {
-      setToasterText('ERROR : ' + error.message)
+      setToasterText({ message: error.message, type: 'ERROR' })
       console.log(error)
     } else {
       router.push('/login')
