@@ -1,3 +1,4 @@
+'use client'
 import { IconContext } from 'react-icons'
 import { AiFillGithub, AiFillLinkedin } from 'react-icons/ai'
 

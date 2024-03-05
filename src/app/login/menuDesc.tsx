@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 import FeatureLeft from './featureLeftDesc'
 import FeatureRight from './featureRightDesc'

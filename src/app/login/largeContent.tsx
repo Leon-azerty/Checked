@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react'
+'use client'
+
+import CheckedDesc from '@/app/login/checkedDesc'
 import Form from '@/app/login/form'
 import Image from 'next/image'
-import CheckedDesc from '@/app/login/checkedDesc'
+import { useEffect, useState } from 'react'
 
 export default function LargeContent() {
   const [windowSize, setWindow] = useState<{ width?: number; height?: number }>(
