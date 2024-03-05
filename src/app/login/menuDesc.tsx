@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import FeatureLeft from './featureLeftDesc'
-import FeatureRight from './featureRightDesc'
+import FeatureLeft from './Description/featureLeftDesc'
+import FeatureRight from './Description/featureRightDesc'
 
 export default function MenuDesc() {
   const [side, setSide] = useState('left')
