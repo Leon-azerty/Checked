@@ -1,9 +1,8 @@
 'use client'
 import { fetchTags, fetchTodos } from '@/Supabase/fetchData'
-import Create from '@/components/create'
+import Create from '@/app/create'
 import Header from '@/components/header'
-import Menu from '@/components/menu'
-import TodoList from '@/components/todoList'
+import Menu from '@/components/navBar'
 import { TagsContext } from '@/context/tagsContext'
 import { useToasterContext } from '@/context/toasterTextContext'
 import { TodosToDeleteContext } from '@/context/todoToDeleteContext'
@@ -13,6 +12,7 @@ import { Todo } from '@/dto/todos.types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import TodoList from './todoList'
 
 export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([])
@@ -23,7 +23,7 @@ export default function Home() {
   const [todosToDelete, setTodosToDelete] = useState<Todo[]>([])
   const router = useRouter()
   const supabase = createClientComponentClient()
-  const [showMenu, setShowMenu] = useState<boolean>(true)
+  const [showNavBar, setShowNavBar] = useState<boolean>(true)
   const [, setToasterText] = useToasterContext()
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export default function Home() {
           <TodosToDeleteContext.Provider
             value={[todosToDelete, setTodosToDelete]}
           >
-            {showMenu && (
+            {showNavBar && (
               <Menu
                 tab={tab}
                 setTab={setTab}
@@ -66,7 +66,7 @@ export default function Home() {
               />
             )}
             <div className="flex-col bg-white w-full h-full min-h-screen max-w-screen">
-              <Header setShowMenu={setShowMenu} showMenu={showMenu} />
+              <Header setShowNavBar={setShowNavBar} showNavBar={showNavBar} />
               {tab == 'create' && <Create setTab={setTab} />}
               <TodoList
                 tab={tab}

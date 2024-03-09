@@ -1,6 +1,6 @@
+import { LeftContent } from '@/app/leftContent'
+import { RightContent } from '@/app/rightContent'
 import '@/components/card.css'
-import { LeftContent } from '@/components/leftContent'
-import { RightContent } from '@/components/rightContent'
 import { Star } from '@/components/star'
 import { useToasterContext } from '@/context/toasterTextContext'
 import { useTodosToDeleteContext } from '@/context/todoToDeleteContext'

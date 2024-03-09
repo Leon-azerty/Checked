@@ -1,10 +1,10 @@
 import Button from '@/components/button'
-import TodosToDelete from '@/components/todosToDelete'
 import { useToasterContext } from '@/context/toasterTextContext'
 import { useTodosToDeleteContext } from '@/context/todoToDeleteContext'
 import { useTodosContext } from '@/context/todosContext'
 import { Todo } from '@/dto/todos.types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import TodosToDelete from './todosToDelete'
 
 export default function DeleteBar() {
   const supabase = createClientComponentClient()

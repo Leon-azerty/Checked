@@ -11,8 +11,8 @@ import { useState } from 'react'
 import { HexColorPicker } from 'react-colorful'
 import { IconContext } from 'react-icons'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
+import IconButton from '../components/iconButton'
 import Deadline from './deadline'
-import IconButton from './iconButton'
 
 export default function Create({
   setTab,

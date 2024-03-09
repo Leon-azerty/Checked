@@ -15,7 +15,7 @@ import { BsListNested } from 'react-icons/bs'
 import { RiDeleteBin6Line } from 'react-icons/ri'
 import Tag from './tag'
 
-export default function Menu({
+export default function NavBar({
   tab,
   setTab,
   filter,

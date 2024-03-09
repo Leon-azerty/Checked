@@ -7,11 +7,11 @@ import { AiOutlineMenuFold, AiOutlineMenuUnfold } from 'react-icons/ai'
 import { RiLogoutBoxRLine } from 'react-icons/ri'
 
 export default function Header({
-  showMenu,
-  setShowMenu,
+  showNavBar,
+  setShowNavBar,
 }: {
-  showMenu: boolean
-  setShowMenu: (showMenu: boolean) => void
+  showNavBar: boolean
+  setShowNavBar: (showNavBar: boolean) => void
 }) {
   const supabase = createClientComponentClient()
   const router = useRouter()
@@ -30,17 +30,17 @@ export default function Header({
   return (
     <div className="flex justify-between items-center w-96 md:w-full">
       <div className="ml-2 w-20">
-        {showMenu ? (
+        {showNavBar ? (
           <IconButton
             icon={<AiOutlineMenuFold />}
-            onClick={() => setShowMenu(false)}
+            onClick={() => setShowNavBar(false)}
             text=""
             iconColor="black"
           />
         ) : (
           <IconButton
             icon={<AiOutlineMenuUnfold />}
-            onClick={() => setShowMenu(true)}
+            onClick={() => setShowNavBar(true)}
             text=""
             iconColor="black"
           />

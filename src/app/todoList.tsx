@@ -1,6 +1,6 @@
+import DeleteBar from '@/app/deleteBar'
 import Card from '@/components/card'
 import CardLoader from '@/components/cardLoader'
-import DeleteBar from '@/components/deleteBar'
 import { useTodosContext } from '@/context/todosContext'
 import type { Tag as TagType } from '@/dto/tag.types'
 import { Todo } from '@/dto/todos.types'
