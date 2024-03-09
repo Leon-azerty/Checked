@@ -1,6 +1,7 @@
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import TitleImage from '/public/C/Title_blue_black.png'
 
 export default function Title() {
   const supabase = createClientComponentClient()
@@ -16,14 +17,7 @@ export default function Title() {
 
   return (
     <div className="mt-4 flex flex-col items-center justify-center">
-      <Image
-        src="/C/Title_blue_black.png"
-        priority
-        className="w-auto"
-        width="300"
-        height="300"
-        alt="title"
-      />
+      <Image src={TitleImage} priority className="w-auto" alt="title" />
       <div>{name}</div>
     </div>
   )

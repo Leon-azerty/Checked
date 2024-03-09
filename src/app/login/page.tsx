@@ -8,21 +8,13 @@ import '@/app/login/scrollbar.css'
 import Title from '@/app/login/title'
 import Image from 'next/image'
 import { Suspense } from 'react'
-
-const IMAGE_WIDTH = 200
-const IMAGE_HEIGHT = 200
+import TagsImage from '/public/menu_tags.png'
 
 function ImageWithDesc() {
   return (
     <div className="flex flex-col items-center justify-center md:flex-row">
       <Suspense fallback={<div>Loading image...</div>}>
-        <Image
-          src="/menu_tags.png"
-          className="w-auto"
-          width={IMAGE_WIDTH}
-          height={IMAGE_HEIGHT}
-          alt="menu"
-        />
+        <Image src={TagsImage} className="w-auto" alt="menu" />
       </Suspense>
       <MenuDesc />
     </div>
