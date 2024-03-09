@@ -14,7 +14,7 @@ const IMAGE_HEIGHT = 200
 
 function ImageWithDesc() {
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center">
+    <div className="flex flex-col items-center justify-center md:flex-row">
       <Suspense fallback={<div>Loading image...</div>}>
         <Image
           src="/menu_tags.png"
@@ -32,7 +32,7 @@ function ImageWithDesc() {
 export default function Login() {
   return (
     <div className="no-scrollbar overflow-y-auto text-black">
-      <div className="flex flex-col w-screen bg-white">
+      <div className="flex w-screen flex-col bg-white">
         <Header />
         <div className="flex flex-col justify-center">
           <Title />

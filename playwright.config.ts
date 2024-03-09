@@ -1,7 +1,6 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test'
 
 export default defineConfig({
-
   projects: [
     // Setup project
     { name: 'setup', testMatch: /.*\.setup\.ts/ },
@@ -37,4 +36,4 @@ export default defineConfig({
   use: {
     baseURL: 'http://127.0.0.1:3000',
   },
-});
+})

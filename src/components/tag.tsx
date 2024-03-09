@@ -18,7 +18,7 @@ export default function Tag({
     isHover = true
   }
   return (
-    <article ref={hoverRef} className="flex items-center h-8 my-1">
+    <article ref={hoverRef} className="my-1 flex h-8 items-center">
       <div
         style={{ backgroundColor: tag.color }}
         className="mx-1 rounded-lg px-2"

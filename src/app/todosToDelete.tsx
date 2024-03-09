@@ -12,7 +12,7 @@ export default function TodosToDelete({ name }: { name: string }) {
   }
   return (
     <div className="flex items-center">
-      <p className="bg-gray-200 p-2 rounded-lg m-2">{name}</p>
+      <p className="m-2 rounded-lg bg-gray-200 p-2">{name}</p>
       <IconContext.Provider value={{ size: '20' }}>
         <div onClick={deleteTodoInDeleteQueue} className="hover:scale-150">
           <ImCancelCircle />

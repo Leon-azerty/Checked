@@ -26,8 +26,8 @@ export function RightContent({
 
   return (
     <div
-      className="w-36 border-gray-200 border-solid border-l-2 flex flex-col 
-  justify-between items-center"
+      className="flex w-36 flex-col items-center justify-between border-l-2 
+  border-solid border-gray-200"
     >
       <IconContext.Provider value={{ size: IconSizeInPx, color: gray_700 }}>
         <a onClick={() => handleTodoState()} href={`#card-${id}`}>

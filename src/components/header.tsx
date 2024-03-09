@@ -28,7 +28,7 @@ export default function Header({
   }
 
   return (
-    <div className="flex justify-between items-center w-96 md:w-full">
+    <div className="flex w-96 items-center justify-between md:w-full">
       <div className="ml-2 w-20">
         {showNavBar ? (
           <IconButton
@@ -47,7 +47,7 @@ export default function Header({
         )}
       </div>
       <Title />
-      <div className="w-20 mr-5">
+      <div className="mr-5 w-20">
         <IconButton
           icon={<RiLogoutBoxRLine />}
           text=""

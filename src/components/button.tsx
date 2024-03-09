@@ -19,12 +19,12 @@ export default function Button({
       type={type}
       disabled={step == 'loading' ? true : false}
       onClick={onClick}
-      className={`${className} w-28 text-white
-  bg-gradient-to-r from-black to-gray-700
-  hover:bg-gradient-to-br focus:ring-4 focus:outline-none 
-  focus:ring-blue-300 dark:focus:ring-blue-800 
-  font-medium rounded-lg text-sm px-5 py-2.5 
-  text-center  mr-4 mt-2 flex justify-center`}
+      className={`${className} mr-4 mt-2
+  flex w-28 justify-center
+  rounded-lg bg-gradient-to-r from-black 
+  to-gray-700 px-5 
+  py-2.5 text-center text-sm font-medium text-white 
+  hover:bg-gradient-to-br  focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800`}
     >
       {text}
       {step == 'loading' ? <Spinner /> : ''}

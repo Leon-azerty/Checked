@@ -94,8 +94,8 @@ export default function Card({
       id={`card-${id}`}
       onClick={addTodoToDelete}
       className={` 
-  rounded-3xl p-6 m-6 border-gray-200 border-solid border-4 flex flex-col hover:pl-4 
-  transition-all ease-in duration-500 animate-wiggle hover:scale-y-110
+  m-6 flex animate-wiggle flex-col rounded-3xl border-4 border-solid border-gray-200 p-6 
+  transition-all duration-500 ease-in hover:scale-y-110 hover:pl-4
   ${is_finished ? 'background-gradient-left-to-right border-green' : ''} 
   ${is_favorite ? `border-star-yellow` : ``} 
   ${is_deleted ? `border-red` : ``}

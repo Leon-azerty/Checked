@@ -43,11 +43,11 @@ export function LeftContent({ todo }: { todo: Todo }) {
   }
 
   return (
-    <div className="w-full hover:pl-4 duration-300">
-      <div ref={hoverRef} className="flex items-center w-full">
-        <div className="flex w-full justify-between flex-col md:flex-row">
+    <div className="w-full duration-300 hover:pl-4">
+      <div ref={hoverRef} className="flex w-full items-center">
+        <div className="flex w-full flex-col justify-between md:flex-row">
           <div className="flex items-center">
-            <p className="text-3xl font-bold flex flex-wrap">{todo.title}</p>
+            <p className="flex flex-wrap text-3xl font-bold">{todo.title}</p>
             {!isDebug && (
               <IconContext.Provider
                 value={{ size: IconSizeInPx, color: gray_700 }}
@@ -64,12 +64,12 @@ export function LeftContent({ todo }: { todo: Todo }) {
           </div>
           <div className="flex flex-col md:flex-row">
             {todo.deadline_type && (
-              <p className="flex bg-gray-300 rounded-xl items-center px-3 m-1 w-fit">
+              <p className="m-1 flex w-fit items-center rounded-xl bg-gray-300 px-3">
                 {todo.deadline_type}
               </p>
             )}
             {todo.deadline && (
-              <p className="flex bg-gray-300 rounded-xl items-center px-3 m-1 w-fit">
+              <p className="m-1 flex w-fit items-center rounded-xl bg-gray-300 px-3">
                 {todo.deadline}
               </p>
             )}

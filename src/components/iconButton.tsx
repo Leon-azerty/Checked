@@ -19,11 +19,11 @@ export default function IconButton({
     <button
       type="button"
       onClick={onClick}
-      className="w-full 
-  hover:bg-gray-700 focus:outline-none font-medium rounded-lg text-sm px-5 
-  py-2.5 text-center inline-flex items-center my-2"
+      className="my-2 
+  inline-flex w-full items-center rounded-lg px-5 py-2.5 
+  text-center text-sm font-medium hover:bg-gray-700 focus:outline-none"
     >
-      <div className="w-10 flex justify-center">
+      <div className="flex w-10 justify-center">
         <IconContext.Provider value={{ size: IconSizeInPx, color: iconColor }}>
           {icon}
         </IconContext.Provider>

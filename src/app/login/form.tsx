@@ -85,28 +85,28 @@ export default function Form() {
 
   return (
     <div
-      className="w-80 h-70 lg:w-96 flex flex-col items-center 
-  bg-gray-200 rounded-xl mb-4"
+      className="h-70 mb-4 flex w-80 flex-col items-center 
+  rounded-xl bg-gray-200 lg:w-96"
     >
-      <div className="flex w-full h-12 items-center border-b border-gray-500">
+      <div className="flex h-12 w-full items-center border-b border-gray-500">
         <span
           onClick={() => setIsLogIn(true)}
-          className={`cursor-pointer w-6/12 h-full flex 
-      items-center justify-center border-r	border-gray-500 rounded-tl-xl
+          className={`flex h-full w-6/12 cursor-pointer 
+      items-center justify-center rounded-tl-xl	border-r border-gray-500
       ${isLogIn ? 'bg-gray-700' : ''}`}
         >
           <p>Log In</p>
         </span>
         <span
           onClick={() => setIsLogIn(false)}
-          className={`cursor-pointer w-6/12 h-full flex 
-      items-center justify-center border-l border-gray-500 rounded-tr-xl
+          className={`flex h-full w-6/12 cursor-pointer 
+      items-center justify-center rounded-tr-xl border-l border-gray-500
       ${isLogIn ? '' : 'bg-gray-700'}`}
         >
           <p>Sign Up</p>
         </span>
       </div>
-      <div className="flex flex-col w-60 justify-around items-center">
+      <div className="flex w-60 flex-col items-center justify-around">
         <form className="flex flex-col items-center pt-2">
           <Input
             type="email"
@@ -128,7 +128,7 @@ export default function Form() {
               setPassword(e.target.value)
             }}
           />
-          <div className="flex justify-around my-4">
+          <div className="my-4 flex justify-around">
             <Button
               type="submit"
               text={isLogIn ? 'Log in' : 'Create an account'}

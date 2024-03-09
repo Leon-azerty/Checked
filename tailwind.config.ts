@@ -9,15 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "star-yellow": "#FFC700",
-        "gray-100": "#EAEAEA",
-        "gray-200": "#D9D9D9",
-        "gray-500": "#adadad",
-        "gray-700": "#7E7E7E",
-        "green": "#22c55e",
-        "red": "#e21414",
-        "info": "#046c94",
-
+        'star-yellow': '#FFC700',
+        'gray-100': '#EAEAEA',
+        'gray-200': '#D9D9D9',
+        'gray-500': '#adadad',
+        'gray-700': '#7E7E7E',
+        green: '#22c55e',
+        red: '#e21414',
+        info: '#046c94',
       },
       keyframes: {
         wiggle: {

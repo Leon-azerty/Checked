@@ -36,9 +36,9 @@ export default function TodoList({
 
   return (
     <main>
-      <div className="flex w-full mt-4">
+      <div className="mt-4 flex w-full">
         {filter.map((e, i) => (
-          <p className="mx-1 bg-slate-400 rounded-lg px-2" key={i}>
+          <p className="mx-1 rounded-lg bg-slate-400 px-2" key={i}>
             {e}
           </p>
         ))}

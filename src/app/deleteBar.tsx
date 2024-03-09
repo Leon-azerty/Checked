@@ -47,7 +47,7 @@ export default function DeleteBar() {
   }
 
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex items-center justify-between">
       <div className="flex">
         {todosToDelete.map((e, i) => (
           <TodosToDelete key={i} name={e.title} />

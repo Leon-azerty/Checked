@@ -85,7 +85,7 @@ export default function NavBar({
   }
 
   return (
-    <aside className="bg-white w-72 border-white-500 border-solid border-r-4 animate-slide_to_right">
+    <aside className="border-white-500 w-72 animate-slide_to_right border-r-4 border-solid bg-white">
       <IconButton
         icon={<AiOutlinePlusCircle />}
         text="Create Todo"
@@ -128,8 +128,8 @@ export default function NavBar({
         iconColor={gray_700}
         className={`${tab == 'listTrash' ? 'font-bold' : ''}`}
       />
-      <hr className="border-gray-400 border-solid border-b-2 rounded-lg mx-8"></hr>
-      <div className="flex flex-wrap mt-2">
+      <hr className="mx-8 rounded-lg border-b-2 border-solid border-gray-400"></hr>
+      <div className="mt-2 flex flex-wrap">
         {tags.length > 0 &&
           tags.map((e, i) => (
             <Tag

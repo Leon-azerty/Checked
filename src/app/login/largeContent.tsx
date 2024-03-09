@@ -13,44 +13,41 @@ export default function LargeContent() {
     setWindow({ width: window.innerWidth, height: window.innerHeight })
   }, [])
 
-  if (windowSize.width! < 1024) {
-    return (
-      <div className="flex flex-col items-center">
-        <div className="w-11/12 ">
-          <Image
-            priority
-            className="animate-tinyBounce w-auto"
-            loading="eager"
-            src="/todos.png"
-            width="500"
-            height="100"
-            alt="todos"
-          />
-        </div>
-        <div className="h-8"></div>
-        <Form />
-        <CheckedDesc />
+  return (
+    <div className="flex flex-col items-center lg:flex-row lg:justify-around">
+      <div className="w-11/12 lg:flex lg:justify-center">
+        <Image
+          priority
+          className="w-auto animate-tinyBounce"
+          loading="eager"
+          src="/todos.png"
+          width="500"
+          height="100"
+          alt="todos"
+        />
       </div>
-    )
-  } else {
-    return (
-      <div className="flex justify-around">
-        <div className="w-7/12 lg:w-10/12 flex justify-center">
-          <Image
-            priority
-            className="animate-tinyBounce w-auto"
-            loading="eager"
-            src="/todos.png"
-            width="700"
-            height="700"
-            alt="todos"
-          />
-        </div>
-        <div className="flex flex-col w-full md:w-10/12 md:h-5/12 justify-around items-center">
-          <Form />
-          <CheckedDesc />
-        </div>
-      </div>
-    )
-  }
+      <div className="h-8 lg:flex lg:w-full lg:flex-col lg:items-center lg:justify-around"></div>
+      <Form />
+      <CheckedDesc />
+    </div>
+  )
+  // return (
+  //   <div className="flex justify-around">
+  //     <div className="w-7/12 lg:w-10/12 flex justify-center">
+  //       <Image
+  //         priority
+  //         className="animate-tinyBounce w-auto"
+  //         loading="eager"
+  //         src="/todos.png"
+  //         width="700"
+  //         height="700"
+  //         alt="todos"
+  //       />
+  //     </div>
+  //     <div className="flex flex-col w-full md:w-10/12 md:h-5/12 justify-around items-center">
+  //       <Form />
+  //       <CheckedDesc />
+  //     </div>
+  //   </div>
+  // )
 }

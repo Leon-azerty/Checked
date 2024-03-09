@@ -4,9 +4,9 @@ import { AiFillGithub, AiFillLinkedin } from 'react-icons/ai'
 
 export default function Footer() {
   return (
-    <div className="flex my-8">
+    <div className="my-8 flex">
       <div className="w-5/12 md:w-8/12"></div>
-      <div className="flex justify-around items-center">
+      <div className="flex items-center justify-around">
         <address className="md:mx-4">Created by @Leon</address>
         <IconContext.Provider
           value={{

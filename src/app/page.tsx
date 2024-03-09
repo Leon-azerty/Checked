@@ -51,7 +51,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="w-screen h-full min-h-screen flex text-black bg-white">
+    <div className="flex h-full min-h-screen w-screen bg-white text-black">
       <TodosContext.Provider value={[todos, setTodos]}>
         <TagsContext.Provider value={[tags, setTags]}>
           <TodosToDeleteContext.Provider
@@ -65,7 +65,7 @@ export default function Home() {
                 setFilter={setFilter}
               />
             )}
-            <div className="flex-col bg-white w-full h-full min-h-screen max-w-screen">
+            <div className="max-w-screen h-full min-h-screen w-full flex-col bg-white">
               <Header setShowNavBar={setShowNavBar} showNavBar={showNavBar} />
               {tab == 'create' && <Create setTab={setTab} />}
               <TodoList

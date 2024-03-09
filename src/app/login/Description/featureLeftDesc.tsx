@@ -11,10 +11,10 @@ export default function FeatureLeft({
 }) {
   return (
     <section
-      className="flex w-10/12 md:w-7/12 text-xl md:ml-14 bg-gray-200 
-      rounded-lg py-10 items-center justify-between shadow-lg	"
+      className="flex w-10/12 items-center justify-between rounded-lg bg-gray-200 
+      py-10 text-xl shadow-lg md:ml-14 md:w-7/12	"
     >
-      <div className="flex flex-col ml-6">
+      <div className="ml-6 flex flex-col">
         <p>
           Simplify your life with Checked&apos; intuitive menu for todo sorting.
           With just a few clicks, you can effortlessly organize your tasks based
@@ -46,7 +46,7 @@ export default function FeatureLeft({
           stay efficient, and stay on top of your tasks with Checked.
         </p>
 
-        <div className="flex justify-center cursor-pointer">
+        <div className="flex cursor-pointer justify-center">
           <IconContext.Provider value={{ size: DotSize }}>
             <BsDot onClick={() => setSide('left')} />
           </IconContext.Provider>

@@ -132,8 +132,8 @@ export default function Create({
   }
 
   return (
-    <div className="pt-4 animate-wiggle">
-      <div className="w-20 ml-auto mr-5" data-testid="close">
+    <div className="animate-wiggle pt-4">
+      <div className="ml-auto mr-5 w-20" data-testid="close">
         <IconContext.Provider value={{ size: '32' }}>
           <IconButton
             icon={<AiOutlineCloseCircle />}
@@ -191,7 +191,7 @@ export default function Create({
               className="w-6/12"
               onChange={setColor}
             />
-            <div className="h-full w-6/12 flex flex-wrap justify-start">
+            <div className="flex h-full w-6/12 flex-wrap justify-start">
               {tags.length > 0 &&
                 tags.map((e, i) => (
                   <Tag
@@ -207,7 +207,7 @@ export default function Create({
           </div>
         </div>
         <Textarea onChange={(e) => setDescription(e.target.value)} />
-        <div className="flex justify-between mr-6 max-w-full">
+        <div className="mr-6 flex max-w-full justify-between">
           <div></div>
           <Button
             type="submit"

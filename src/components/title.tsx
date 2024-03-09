@@ -15,7 +15,7 @@ export default function Title() {
   }, [])
 
   return (
-    <div className="flex justify-center items-center mt-4 flex-col">
+    <div className="mt-4 flex flex-col items-center justify-center">
       <Image
         src="/C/Title_blue_black.png"
         priority

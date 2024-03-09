@@ -6,8 +6,8 @@ export default function NoTodoToDisplay({
   setTab: (tab: string) => void
 }) {
   return (
-    <div className="flex justify-center items-center h-96">
-      <div className="flex flex-col items-center justify-between h-20">
+    <div className="flex h-96 items-center justify-center">
+      <div className="flex h-20 flex-col items-center justify-between">
         <p className="text-gray-600">No Todo ? Create your first one </p>
         <Button
           text="Create"

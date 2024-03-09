@@ -15,8 +15,8 @@ export default function Toaster() {
 
   return (
     <div
-      className="fixed right-0 top-10 z-[1] flex justify-between items-start p-2 h-34 w-96 
-    bg-gray-200 overflow-auto rounded-lg border-gray-700 border-2 mr-2"
+      className="h-34 fixed right-0 top-10 z-[1] mr-2 flex w-96 items-start justify-between 
+    overflow-auto rounded-lg border-2 border-gray-700 bg-gray-200 p-2"
     >
       <div className="flex items-center space-x-1">
         <IconContext.Provider value={{ color: 'black' }}>
