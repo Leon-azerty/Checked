@@ -32,7 +32,7 @@ export default function Create({
   const [deadlineType, setDeadlineType] = useState<string>('')
   const [existantTags, setExistantTags] = useTagsContext()
   const [todos, setTodos] = useTodosContext()
-  const [, setToasterText] = useToasterContext()
+  const [, setToaster] = useToasterContext()
 
   const insertTodo = async () => {
     const id = (await supabase.auth.getUser()).data.user?.id
@@ -50,7 +50,7 @@ export default function Create({
       })
       .select('id')
     if (error) {
-      setToasterText({ message: error.message, type: 'ERROR' })
+      setToaster({ message: error.message, type: 'ERROR' })
       return console.log(error)
     }
     return data[0].id
@@ -62,7 +62,7 @@ export default function Create({
       tag_id,
     })
     if (error) {
-      setToasterText({ message: error.message, type: 'ERROR' })
+      setToaster({ message: error.message, type: 'ERROR' })
       return console.log(error)
     }
   }
@@ -103,7 +103,7 @@ export default function Create({
 
   const addTag = async () => {
     if (existantTags.find((e) => e.name === tagName) !== undefined) {
-      setToasterText({ type: 'ERROR', message: 'Tag already exist' })
+      setToaster({ type: 'ERROR', message: 'Tag already exist' })
       return
     }
     const author_id = (await supabase.auth.getUser()).data.user?.id
@@ -116,7 +116,7 @@ export default function Create({
       })
       .select('id')
     if (error) {
-      setToasterText({ message: error.message, type: 'ERROR' })
+      setToaster({ message: error.message, type: 'ERROR' })
       return console.log(error)
     }
     setTags([...tags, { id: data[0].id, name: tagName, color }])

@@ -27,7 +27,7 @@ export default function NavBar({
   setFilter: (filter: string[]) => void
 }) {
   const [tags, setTags] = useTagsContext()
-  const [, setToasterText] = useToasterContext()
+  const [, setToaster] = useToasterContext()
   const [todos, setTodos] = useTodosContext()
 
   const handleCreateTodo = () => {
@@ -68,7 +68,7 @@ export default function NavBar({
     for (const todo of todos) {
       for (const todoTag of todo.tags)
         if (todoTag.name == tag.name) {
-          setToasterText({
+          setToaster({
             message: "Can't delete tag because it is used in a todo",
             type: 'ERROR',
           })
@@ -78,7 +78,7 @@ export default function NavBar({
     const { data, error } = await supabase.from('tag').delete().eq('id', tag.id)
     if (error) {
       console.log(error)
-      setToasterText({ message: error.message, type: 'ERROR' })
+      setToaster({ message: error.message, type: 'ERROR' })
       return
     }
     setTags(tags.filter((e) => e.id != tag.id))

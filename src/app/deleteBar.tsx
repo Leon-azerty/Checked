@@ -10,7 +10,7 @@ export default function DeleteBar() {
   const supabase = createClientComponentClient()
   const [todosToDelete, setTodosToDelete] = useTodosToDeleteContext()
   const [todos, setTodos] = useTodosContext()
-  const [, setToasterText] = useToasterContext()
+  const [, setToaster] = useToasterContext()
 
   const deleteTodoTags = async (todo: Todo) => {
     let { data, error } = await supabase
@@ -18,7 +18,7 @@ export default function DeleteBar() {
       .delete()
       .eq('todo_id', todo.id)
     if (error) {
-      setToasterText({ message: error.message, type: 'ERROR' })
+      setToaster({ message: error.message, type: 'ERROR' })
       return console.log(error)
     }
   }
@@ -29,7 +29,7 @@ export default function DeleteBar() {
       .delete()
       .eq('id', todo_id)
     if (error) {
-      setToasterText({ message: error.message, type: 'ERROR' })
+      setToaster({ message: error.message, type: 'ERROR' })
       return console.log(error)
     }
   }

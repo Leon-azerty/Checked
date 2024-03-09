@@ -15,12 +15,12 @@ export default function Header({
 }) {
   const supabase = createClientComponentClient()
   const router = useRouter()
-  const [, setToasterText] = useToasterContext()
+  const [, setToaster] = useToasterContext()
 
   const logOut = async () => {
     const { error } = await supabase.auth.signOut()
     if (error) {
-      setToasterText({ message: error.message, type: 'ERROR' })
+      setToaster({ message: error.message, type: 'ERROR' })
       console.log(error)
     } else {
       router.push('/login')

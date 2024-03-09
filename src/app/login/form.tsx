@@ -16,7 +16,7 @@ export default function Form() {
   const [waitResForm, setWaitResForm] = useState(false)
   const router = useRouter()
   const supabase = createClientComponentClient()
-  const [, setToasterText] = useToasterContext()
+  const [, setToaster] = useToasterContext()
 
   const SignIn = async ({
     email,
@@ -34,7 +34,7 @@ export default function Form() {
       router.push('/')
     } else {
       console.log('error', error)
-      setToasterText({ message: error.message, type: 'ERROR' })
+      setToaster({ message: error.message, type: 'ERROR' })
     }
   }
 
@@ -51,13 +51,13 @@ export default function Form() {
       options: { emailRedirectTo: 'https://checkd.online/' },
     })
     if (!error) {
-      setToasterText({
+      setToaster({
         message: 'Please check your email to confirm your account',
         type: 'INFO',
       })
     } else {
       console.log('error', error)
-      setToasterText({ message: error.message, type: 'ERROR' })
+      setToaster({ message: error.message, type: 'ERROR' })
     }
   }
 

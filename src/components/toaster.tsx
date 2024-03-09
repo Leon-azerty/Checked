@@ -1,6 +1,13 @@
 import { useToasterContext } from '@/context/toasterTextContext'
 import { IconContext } from 'react-icons'
-import { MdCheckCircle, MdClose, MdError } from 'react-icons/md'
+import {
+  MdCheckCircle,
+  MdClose,
+  MdError,
+  MdInfo,
+  MdQuestionMark,
+  MdWarning,
+} from 'react-icons/md'
 
 export default function Toaster() {
   const [toaster, setToaster] = useToasterContext()
@@ -9,8 +16,14 @@ export default function Toaster() {
 
   if (toaster.type == 'ERROR') {
     icon = <MdError />
-  } else {
+  } else if (toaster.type == 'SUCCESS') {
     icon = <MdCheckCircle />
+  } else if (toaster.type == 'INFO') {
+    icon = <MdInfo />
+  } else if (toaster.type == 'WARNING') {
+    icon = <MdWarning />
+  } else {
+    icon = <MdQuestionMark />
   }
 
   return (
