@@ -1,7 +1,7 @@
 export default function CheckedDesc() {
   return (
-    <section className="flex w-full justify-center p-2 md:w-10/12">
-      <div className="w-full text-xl ">
+    <section className="flex w-full justify-center px-10 sm:px-20 md:w-10/12 lg:px-2">
+      <div className="w-full text-xl">
         <p>Take control of your daily tasks and boost your productivity.</p>
         <br />
         <p>

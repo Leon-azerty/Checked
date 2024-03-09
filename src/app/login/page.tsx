@@ -4,7 +4,6 @@ import Header from '@/app/login/header'
 import LargeContent from '@/app/login/largeContent'
 import MenuDesc from '@/app/login/menuDesc'
 import MenuTitle from '@/app/login/menuTitle'
-import '@/app/login/scrollbar.css'
 import Title from '@/app/login/title'
 import Image from 'next/image'
 import { Suspense } from 'react'
@@ -23,7 +22,7 @@ function ImageWithDesc() {
 
 export default function Login() {
   return (
-    <div className="no-scrollbar overflow-y-auto text-black">
+    <div className="overflow-hidden text-black">
       <div className="flex w-screen flex-col bg-white">
         <Header />
         <div className="flex flex-col justify-center">
