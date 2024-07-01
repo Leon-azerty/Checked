@@ -12,7 +12,7 @@ export default function Footer() {
             size: '44',
           }}
         >
-          <a href="https://github.com/leon3108" target="_blank">
+          <a href="https://github.com/Leon-azerty" target="_blank">
             <AiFillGithub className="mx-4" />
           </a>
           <a
